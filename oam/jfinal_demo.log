@@ -3647,3 +3647,580 @@ java.lang.NullPointerException
 	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
 	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
 	at java.lang.Thread.run(Unknown Source)
+
+2018-06-21 22:13:15
+[ERROR]-[Thread: main]-[com.jfinal.core.Config.startPlugins()]: Plugin start error: com.jfinal.plugin.activerecord.ActiveRecordPlugin. 
+java.sql.SQLException: [SQLITE_ERROR] SQL error or missing database (no such table: user)
+com.jfinal.plugin.activerecord.ActiveRecordException: java.sql.SQLException: [SQLITE_ERROR] SQL error or missing database (no such table: user)
+	at com.jfinal.plugin.activerecord.TableBuilder.build(TableBuilder.java:55)
+	at com.jfinal.plugin.activerecord.ActiveRecordPlugin.start(ActiveRecordPlugin.java:226)
+	at com.jfinal.core.Config.startPlugins(Config.java:128)
+	at com.jfinal.core.Config.configPluginWithOrder(Config.java:71)
+	at com.jfinal.core.Config.configJFinal(Config.java:56)
+	at com.jfinal.core.JFinal.init(JFinal.java:63)
+	at com.jfinal.core.JFinalFilter.init(JFinalFilter.java:49)
+	at org.eclipse.jetty.servlet.FilterHolder.doStart(FilterHolder.java:119)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:724)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:277)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServer.doStart(JettyServer.java:133)
+	at com.jfinal.server.JettyServer.start(JettyServer.java:70)
+	at com.jfinal.core.JFinal.start(JFinal.java:162)
+	at com.xxx.oam.test.TestOam.main(TestOam.java:8)
+Caused by: java.sql.SQLException: [SQLITE_ERROR] SQL error or missing database (no such table: user)
+	at org.sqlite.DB.newSQLException(DB.java:383)
+	at org.sqlite.DB.newSQLException(DB.java:387)
+	at org.sqlite.DB.throwex(DB.java:374)
+	at org.sqlite.NativeDB.prepare(Native Method)
+	at org.sqlite.DB.prepare(DB.java:123)
+	at org.sqlite.Stmt.executeQuery(Stmt.java:121)
+	at com.alibaba.druid.pool.DruidPooledStatement.executeQuery(DruidPooledStatement.java:140)
+	at com.jfinal.plugin.activerecord.TableBuilder.doBuild(TableBuilder.java:71)
+	at com.jfinal.plugin.activerecord.TableBuilder.build(TableBuilder.java:47)
+	... 21 more
+
+2018-06-21 22:13:16
+[ERROR]-[Thread: main]-[com.jfinal.kit.LogKit.error()]: Plugin start error: com.jfinal.plugin.activerecord.ActiveRecordPlugin. 
+java.sql.SQLException: [SQLITE_ERROR] SQL error or missing database (no such table: user)
+java.lang.RuntimeException: Plugin start error: com.jfinal.plugin.activerecord.ActiveRecordPlugin. 
+java.sql.SQLException: [SQLITE_ERROR] SQL error or missing database (no such table: user)
+	at com.jfinal.core.Config.startPlugins(Config.java:137)
+	at com.jfinal.core.Config.configPluginWithOrder(Config.java:71)
+	at com.jfinal.core.Config.configJFinal(Config.java:56)
+	at com.jfinal.core.JFinal.init(JFinal.java:63)
+	at com.jfinal.core.JFinalFilter.init(JFinalFilter.java:49)
+	at org.eclipse.jetty.servlet.FilterHolder.doStart(FilterHolder.java:119)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:724)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:277)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServer.doStart(JettyServer.java:133)
+	at com.jfinal.server.JettyServer.start(JettyServer.java:70)
+	at com.jfinal.core.JFinal.start(JFinal.java:162)
+	at com.xxx.oam.test.TestOam.main(TestOam.java:8)
+Caused by: com.jfinal.plugin.activerecord.ActiveRecordException: java.sql.SQLException: [SQLITE_ERROR] SQL error or missing database (no such table: user)
+	at com.jfinal.plugin.activerecord.TableBuilder.build(TableBuilder.java:55)
+	at com.jfinal.plugin.activerecord.ActiveRecordPlugin.start(ActiveRecordPlugin.java:226)
+	at com.jfinal.core.Config.startPlugins(Config.java:128)
+	... 19 more
+Caused by: java.sql.SQLException: [SQLITE_ERROR] SQL error or missing database (no such table: user)
+	at org.sqlite.DB.newSQLException(DB.java:383)
+	at org.sqlite.DB.newSQLException(DB.java:387)
+	at org.sqlite.DB.throwex(DB.java:374)
+	at org.sqlite.NativeDB.prepare(Native Method)
+	at org.sqlite.DB.prepare(DB.java:123)
+	at org.sqlite.Stmt.executeQuery(Stmt.java:121)
+	at com.alibaba.druid.pool.DruidPooledStatement.executeQuery(DruidPooledStatement.java:140)
+	at com.jfinal.plugin.activerecord.TableBuilder.doBuild(TableBuilder.java:71)
+	at com.jfinal.plugin.activerecord.TableBuilder.build(TableBuilder.java:47)
+	... 21 more
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: init datasource error, url: jdbc:sqlite:D:JAVAsqlite	est.db
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:734)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1060)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1056)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:104)
+	at com.jfinal.plugin.activerecord.TableBuilder.build(TableBuilder.java:43)
+	at com.jfinal.plugin.activerecord.ActiveRecordPlugin.start(ActiveRecordPlugin.java:226)
+	at com.jfinal.core.Config.startPlugins(Config.java:128)
+	at com.jfinal.core.Config.configPluginWithOrder(Config.java:71)
+	at com.jfinal.core.Config.configJFinal(Config.java:56)
+	at com.jfinal.core.JFinal.init(JFinal.java:63)
+	at com.jfinal.core.JFinalFilter.init(JFinalFilter.java:49)
+	at org.eclipse.jetty.servlet.FilterHolder.doStart(FilterHolder.java:119)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:724)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:277)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServer.doStart(JettyServer.java:133)
+	at com.jfinal.server.JettyServer.start(JettyServer.java:70)
+	at com.jfinal.core.JFinal.start(JFinal.java:162)
+	at com.xxx.oam.test.TestOam.main(TestOam.java:8)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} init error
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:734)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1060)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1056)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:104)
+	at com.jfinal.plugin.activerecord.TableBuilder.build(TableBuilder.java:43)
+	at com.jfinal.plugin.activerecord.ActiveRecordPlugin.start(ActiveRecordPlugin.java:226)
+	at com.jfinal.core.Config.startPlugins(Config.java:128)
+	at com.jfinal.core.Config.configPluginWithOrder(Config.java:71)
+	at com.jfinal.core.Config.configJFinal(Config.java:56)
+	at com.jfinal.core.JFinal.init(JFinal.java:63)
+	at com.jfinal.core.JFinalFilter.init(JFinalFilter.java:49)
+	at org.eclipse.jetty.servlet.FilterHolder.doStart(FilterHolder.java:119)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:724)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:277)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServer.doStart(JettyServer.java:133)
+	at com.jfinal.server.JettyServer.start(JettyServer.java:70)
+	at com.jfinal.core.JFinal.start(JFinal.java:162)
+	at com.xxx.oam.test.TestOam.main(TestOam.java:8)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: main]-[com.jfinal.core.Config.startPlugins()]: Plugin start error: com.jfinal.plugin.activerecord.ActiveRecordPlugin. 
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+com.jfinal.plugin.activerecord.ActiveRecordException: java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at com.jfinal.plugin.activerecord.TableBuilder.build(TableBuilder.java:55)
+	at com.jfinal.plugin.activerecord.ActiveRecordPlugin.start(ActiveRecordPlugin.java:226)
+	at com.jfinal.core.Config.startPlugins(Config.java:128)
+	at com.jfinal.core.Config.configPluginWithOrder(Config.java:71)
+	at com.jfinal.core.Config.configJFinal(Config.java:56)
+	at com.jfinal.core.JFinal.init(JFinal.java:63)
+	at com.jfinal.core.JFinalFilter.init(JFinalFilter.java:49)
+	at org.eclipse.jetty.servlet.FilterHolder.doStart(FilterHolder.java:119)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:724)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:277)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServer.doStart(JettyServer.java:133)
+	at com.jfinal.server.JettyServer.start(JettyServer.java:70)
+	at com.jfinal.core.JFinal.start(JFinal.java:162)
+	at com.xxx.oam.test.TestOam.main(TestOam.java:8)
+Caused by: java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:734)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1060)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1056)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:104)
+	at com.jfinal.plugin.activerecord.TableBuilder.build(TableBuilder.java:43)
+	... 21 more
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: main]-[com.jfinal.kit.LogKit.error()]: Plugin start error: com.jfinal.plugin.activerecord.ActiveRecordPlugin. 
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+java.lang.RuntimeException: Plugin start error: com.jfinal.plugin.activerecord.ActiveRecordPlugin. 
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at com.jfinal.core.Config.startPlugins(Config.java:137)
+	at com.jfinal.core.Config.configPluginWithOrder(Config.java:71)
+	at com.jfinal.core.Config.configJFinal(Config.java:56)
+	at com.jfinal.core.JFinal.init(JFinal.java:63)
+	at com.jfinal.core.JFinalFilter.init(JFinalFilter.java:49)
+	at org.eclipse.jetty.servlet.FilterHolder.doStart(FilterHolder.java:119)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:724)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:277)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServer.doStart(JettyServer.java:133)
+	at com.jfinal.server.JettyServer.start(JettyServer.java:70)
+	at com.jfinal.core.JFinal.start(JFinal.java:162)
+	at com.xxx.oam.test.TestOam.main(TestOam.java:8)
+Caused by: com.jfinal.plugin.activerecord.ActiveRecordException: java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at com.jfinal.plugin.activerecord.TableBuilder.build(TableBuilder.java:55)
+	at com.jfinal.plugin.activerecord.ActiveRecordPlugin.start(ActiveRecordPlugin.java:226)
+	at com.jfinal.core.Config.startPlugins(Config.java:128)
+	... 19 more
+Caused by: java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:734)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1060)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1056)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:104)
+	at com.jfinal.plugin.activerecord.TableBuilder.build(TableBuilder.java:43)
+	... 21 more
+
+2018-06-21 22:15:06
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1415157681]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:JAVAsqlite	est.db, errorCode 0, state null
+java.sql.SQLException: opening db: 'D:JAVAsqlite	est.db': 文件名、目录名或卷标语法不正确。
+	at org.sqlite.Conn.open(Conn.java:114)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
