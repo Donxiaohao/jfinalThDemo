@@ -19,7 +19,7 @@ public class LoginValidator extends Validator{
 			addError("passwordMsg", "请输入用密码");
 		}else if(!user.getStr("name").equals(controller.getPara("name"))) {
 			addError("nameMsg", "用户名不存在");
-		}else if(!user.getStr("age").equals(controller.getPara("password"))){
+		}else if(!user.getStr("password").equals(controller.getPara("password"))){
 			addError("passwordMsg", "密码错误");
 		}
 	}

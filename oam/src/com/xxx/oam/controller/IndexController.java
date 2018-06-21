@@ -23,7 +23,7 @@ import com.xxx.oam.validator.LoginValidator;
  * 
  * IndexController
  */
-@Before(OamInterceptor.class)
+//@Before(OamInterceptor.class)
 public class IndexController extends Controller {
 	public void index() {
 		//测试页面生成二维码
@@ -31,7 +31,7 @@ public class IndexController extends Controller {
 		render("index.html");
 	}
 	
-	@Before(LoginValidator.class)
+	@Before({LoginValidator.class,OamInterceptor.class})
 	public void login() {
 		setSessionAttr("loginUser", User.dao.findById(1));
 		renderText("login success");

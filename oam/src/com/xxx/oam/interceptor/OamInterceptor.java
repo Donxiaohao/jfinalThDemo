@@ -10,9 +10,11 @@ public class OamInterceptor implements Interceptor{
 	@Override
 	public void intercept(Invocation inv) {
 		inv.invoke();
-		if(inv.getActionKey().equals("/login")) {
+		if(inv.getActionKey()!=null&&inv.getActionKey().equals("/login")) {
 			User user = (User)inv.getController().getSessionAttr("loginUser");
-			System.out.println(user.getStr("name")+"在"+DateUtil.getNowDate()+"登录成功");
+//			if(user!=null) {
+				System.out.println(user.getStr("name")+"在"+DateUtil.getNowDate()+"登录成功");
+//			}
 		}
 	}
 	
