@@ -13,6 +13,7 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.xxx.oam.controller.IndexController;
+import com.xxx.oam.controller.LoginController;
 import com.xxx.oam.entity.User;
 
 public class BaseConfig extends JFinalConfig{
@@ -35,7 +36,8 @@ public class BaseConfig extends JFinalConfig{
 	public void configRoute(Routes me) {
 		// 设置视图渲染路径
 		me.setBaseViewPath("/html");
-		me.add("/", IndexController.class);
+		me.add("/", LoginController.class);
+		me.add("/index", IndexController.class);
 	}
 
 	@Override

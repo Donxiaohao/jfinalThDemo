@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>登陆丨OAM</title>
+<link rel="stylesheet" href="css/style.css">
+<body>
+
+<div class="login-container">
+	<h1>O A M</h1>
+	
+	<div class="connect">
+		<p>后台开发测试系统.</p>
+	</div>
+	
+	<form action="/login" method="post" id="loginForm">
+		<div>
+			<input type="text" name="name" class="name" placeholder="请输入账号" autocomplete="off" value='#(name)'/><span style="color:red;font-size:3px">#(nameMsg)</span>
+		</div>
+		<div>
+			<input type="password" name="password" class="password" placeholder="请输入密码" oncontextmenu="return false" onpaste="return false" value='#(password)' /><span style="color:red;font-size:3px">#(passwordMsg)</span>
+		</div>
+		<button id="submit" type="submit">登 陆</button>
+	</form>
+</div>
+
+</body>
+<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="js/common.js"></script>
+<!--背景图片自动更换-->
+<script src="js/supersized.3.2.7.min.js"></script>
+<script src="js/supersized-init.js"></script>
+<!--表单验证
+<script src="js/jquery.validate.min.js?var1.14.0"></script>
+-->
+</html>
