@@ -10,8 +10,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/druid-1.0.29.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/google-zxing-core-3.2.1.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/google-zxing-javase-3.2.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jcommander-1.48.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jetty-server-8.1.8.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jfinal-3.4-bin-with-src.jar"/>

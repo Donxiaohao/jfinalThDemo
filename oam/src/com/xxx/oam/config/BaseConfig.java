@@ -9,12 +9,15 @@ import com.jfinal.config.Routes;
 import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.cron4j.Cron4jPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.xxx.oam.controller.IndexController;
 import com.xxx.oam.controller.LoginController;
 import com.xxx.oam.entity.User;
+import com.xxx.oam.interceptor.LoginInterceptor;
+import com.xxx.oam.task.RemoveTask;
 
 public class BaseConfig extends JFinalConfig{
 	/**
@@ -35,8 +38,8 @@ public class BaseConfig extends JFinalConfig{
 	@Override
 	public void configRoute(Routes me) {
 		// 设置视图渲染路径
-		me.setBaseViewPath("/html");
-		me.add("/", LoginController.class);
+//		me.setBaseViewPath("/html");    这个很尴尬
+		me.add("/login", LoginController.class);
 		me.add("/index", IndexController.class);
 	}
 
@@ -60,12 +63,15 @@ public class BaseConfig extends JFinalConfig{
 	    me.add(arp);
 	    arp.addMapping("user", User.class);
 		
+	    //配置定时器
+//	    Cron4jPlugin cp = new Cron4jPlugin();
+//	    cp.addTask("*/1 * * * *", new RemoveTask());
+//	    me.add(cp);
 	}
 
 	@Override
 	public void configInterceptor(Interceptors me) {
-		// TODO Auto-generated method stub
-		
+		me.add(new LoginInterceptor());
 	}
 
 	@Override

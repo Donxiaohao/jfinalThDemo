@@ -26,14 +26,16 @@ import com.xxx.oam.validator.LoginValidator;
 //@Before(OamInterceptor.class)
 public class LoginController extends Controller {
 	public void index() {
+		System.out.println("进入LoginController index方法");
 		//测试页面生成二维码
 //		renderQrCode("TH", 100, 100);
-		render("login.html");
+		render("/html/login.html");
 	}
 	
 	@Before({LoginValidator.class,OamInterceptor.class})
 	public void login() {
 		setSessionAttr("loginUser", User.dao.findById(1));
+		System.out.println("进入login");
 		redirect("/index");
 	}
 }

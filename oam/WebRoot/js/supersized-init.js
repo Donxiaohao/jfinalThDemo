@@ -20,9 +20,9 @@ jQuery(function($){
         // ���
         slide_links        : 'blank',    // ���𻷽�Ϊÿ�Żõ�Ƭ��ѡ��ٵģ�'��'��'��'��'��'��
         slides             : [    // �õ�ƬӰ��
-                                 {image : './image/1.jpg'},
-                                 {image : './image/2.jpg'},
-                                 {image : './image/3.jpg'}
+                                 {image : '/image/1.jpg'},
+                                 {image : '/image/2.jpg'},
+                                 {image : '/image/3.jpg'}
                        ]
 
     });

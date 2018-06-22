@@ -1,5 +1,8 @@
 package com.xxx.oam.validator;
 
+import java.lang.reflect.Method;
+
+import com.jfinal.aop.Interceptor;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.StrKit;
 import com.jfinal.validate.Validator;
@@ -9,9 +12,7 @@ public class LoginValidator extends Validator{
 
 	@Override
 	protected void validate(Controller c) {
-		 //校验输入的信息是否为空  
- /*     validateRequiredString("name", "nameMsg", "请输入用户名"); 
-		validateRequiredString("password", "passwordMsg", "请输入密码");  */
+		System.out.println("进入登录验证");
 		User user = User.dao.findById(1);
 		if (StrKit.isBlank(controller.getPara("name"))) {
 			addError("nameMsg", "请输入用户名");
@@ -23,12 +24,12 @@ public class LoginValidator extends Validator{
 			addError("passwordMsg", "密码错误");
 		}
 	}
-
 	@Override
 	protected void handleError(Controller c) {
 		c.keepPara("name");
 		c.keepPara("password");
-		c.render("index.html");
+		c.render("/html/login.html");
+		System.out.println("------------------------");
 	}
 
 }
