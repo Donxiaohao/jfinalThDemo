@@ -34,6 +34,6 @@ public class IndexController extends Controller {
 	@Before({LoginValidator.class,OamInterceptor.class})
 	public void login() {
 		setSessionAttr("loginUser", User.dao.findById(1));
-		renderText("login success");
+		render("layout.html");
 	}
 }
