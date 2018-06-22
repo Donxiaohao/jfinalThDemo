@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Class-Path: ./lib/jetty-server-8.1.8.jar 
+ ./lib/jfinal-3.4-bin-with-src.jar 
+ ./lib/druid-1.0.29.jar 
+ ./lib/log4j-1.2.16.jar 
+ ./lib/sqlite-jdbc-3.7.2.jar 
+ ./lib/jcommander-1.48.jar 
+Main-Class: com.xxx.oam.test.TestOam
