@@ -1,5 +1,10 @@
 package com.xxx.oam.config;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -18,6 +23,7 @@ import com.xxx.oam.controller.LoginController;
 import com.xxx.oam.entity.User;
 import com.xxx.oam.interceptor.LoginInterceptor;
 import com.xxx.oam.task.RemoveTask;
+import com.xxx.oam.util.LogTimerTask;
 
 public class BaseConfig extends JFinalConfig{
 	/**
@@ -79,5 +85,12 @@ public class BaseConfig extends JFinalConfig{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	@Override
+	public void afterJFinalStart(){
+		System.out.println("任务启动了  我也运行了~~~");
+		Timer timer = new Timer();
+		LogTimerTask logTimerTask = new LogTimerTask(timer);
+		timer.schedule(logTimerTask, 2000);
+	}
 }
