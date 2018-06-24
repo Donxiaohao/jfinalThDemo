@@ -78,3 +78,11 @@ Caused by: java.sql.SQLException: [SQLITE_ERROR] SQL error or missing database (
 	at com.jfinal.plugin.activerecord.TableBuilder.doBuild(TableBuilder.java:71)
 	at com.jfinal.plugin.activerecord.TableBuilder.build(TableBuilder.java:47)
 	... 21 more
+
+2018-06-24 16:06:17
+[ERROR]-[Thread: main]-[com.jfinal.kit.LogKit.error()]: port: 8989 already in use!
+java.lang.IllegalStateException: port: 8989 already in use!
+	at com.jfinal.server.JettyServer.doStart(JettyServer.java:87)
+	at com.jfinal.server.JettyServer.start(JettyServer.java:70)
+	at com.jfinal.core.JFinal.start(JFinal.java:162)
+	at com.xxx.oam.test.TestOam.main(TestOam.java:10)
