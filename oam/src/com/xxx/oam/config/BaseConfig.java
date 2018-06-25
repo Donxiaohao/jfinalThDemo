@@ -20,7 +20,7 @@ import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.xxx.oam.controller.IndexController;
 import com.xxx.oam.controller.LoginController;
-import com.xxx.oam.entity.User;
+import com.xxx.oam.entity.TestUser;
 import com.xxx.oam.interceptor.LoginInterceptor;
 import com.xxx.oam.task.RemoveTask;
 import com.xxx.oam.util.LogTimerTask;
@@ -67,7 +67,7 @@ public class BaseConfig extends JFinalConfig{
 	    me.add(dp);
 	    ActiveRecordPlugin arp = new ActiveRecordPlugin(dp);
 	    me.add(arp);
-	    arp.addMapping("user", User.class);
+	    arp.addMapping("user", TestUser.class);
 		
 	    //配置定时器
 //	    Cron4jPlugin cp = new Cron4jPlugin();

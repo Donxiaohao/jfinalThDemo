@@ -12,7 +12,7 @@ public class IndexController extends Controller{
 }*/
 import com.jfinal.core.Controller;
 import com.jfinal.kit.StrKit;
-import com.xxx.oam.entity.User;
+import com.xxx.oam.entity.TestUser;
 import com.xxx.oam.interceptor.OamInterceptor;
 import com.xxx.oam.validator.LoginValidator;
 
@@ -34,7 +34,7 @@ public class LoginController extends Controller {
 	
 	@Before({LoginValidator.class,OamInterceptor.class})
 	public void login() {
-		setSessionAttr("loginUser", User.dao.findById(1));
+		setSessionAttr("loginUser", TestUser.dao.findById(1));
 		System.out.println("进入login");
 		redirect("/index");
 	}

@@ -6,14 +6,14 @@ import com.jfinal.aop.Interceptor;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.StrKit;
 import com.jfinal.validate.Validator;
-import com.xxx.oam.entity.User;
+import com.xxx.oam.entity.TestUser;
 
 public class LoginValidator extends Validator{
 
 	@Override
 	protected void validate(Controller c) {
 		System.out.println("进入登录验证");
-		User user = User.dao.findById(1);
+		TestUser user = TestUser.dao.findById(1);
 		if (StrKit.isBlank(controller.getPara("name"))) {
 			addError("nameMsg", "请输入用户名");
 		}else if(StrKit.isBlank(controller.getPara("password"))) {

@@ -86,3 +86,500 @@ java.lang.IllegalStateException: port: 8989 already in use!
 	at com.jfinal.server.JettyServer.start(JettyServer.java:70)
 	at com.jfinal.core.JFinal.start(JFinal.java:162)
 	at com.xxx.oam.test.TestOam.main(TestOam.java:10)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: init datasource error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:734)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1060)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1056)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:104)
+	at com.jfinal.plugin.activerecord.TableBuilder.build(TableBuilder.java:43)
+	at com.jfinal.plugin.activerecord.ActiveRecordPlugin.start(ActiveRecordPlugin.java:226)
+	at com.jfinal.core.Config.startPlugins(Config.java:128)
+	at com.jfinal.core.Config.configPluginWithOrder(Config.java:71)
+	at com.jfinal.core.Config.configJFinal(Config.java:56)
+	at com.jfinal.core.JFinal.init(JFinal.java:63)
+	at com.jfinal.core.JFinalFilter.init(JFinalFilter.java:49)
+	at org.eclipse.jetty.servlet.FilterHolder.doStart(FilterHolder.java:119)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:724)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:277)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServer.doStart(JettyServer.java:133)
+	at com.jfinal.server.JettyServer.start(JettyServer.java:70)
+	at com.jfinal.core.JFinal.start(JFinal.java:162)
+	at com.xxx.oam.test.TestOam.main(TestOam.java:33)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} init error
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:734)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1060)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1056)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:104)
+	at com.jfinal.plugin.activerecord.TableBuilder.build(TableBuilder.java:43)
+	at com.jfinal.plugin.activerecord.ActiveRecordPlugin.start(ActiveRecordPlugin.java:226)
+	at com.jfinal.core.Config.startPlugins(Config.java:128)
+	at com.jfinal.core.Config.configPluginWithOrder(Config.java:71)
+	at com.jfinal.core.Config.configJFinal(Config.java:56)
+	at com.jfinal.core.JFinal.init(JFinal.java:63)
+	at com.jfinal.core.JFinalFilter.init(JFinalFilter.java:49)
+	at org.eclipse.jetty.servlet.FilterHolder.doStart(FilterHolder.java:119)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:724)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:277)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServer.doStart(JettyServer.java:133)
+	at com.jfinal.server.JettyServer.start(JettyServer.java:70)
+	at com.jfinal.core.JFinal.start(JFinal.java:162)
+	at com.xxx.oam.test.TestOam.main(TestOam.java:33)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: main]-[com.jfinal.core.Config.startPlugins()]: Plugin start error: com.jfinal.plugin.activerecord.ActiveRecordPlugin. 
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+com.jfinal.plugin.activerecord.ActiveRecordException: java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at com.jfinal.plugin.activerecord.TableBuilder.build(TableBuilder.java:55)
+	at com.jfinal.plugin.activerecord.ActiveRecordPlugin.start(ActiveRecordPlugin.java:226)
+	at com.jfinal.core.Config.startPlugins(Config.java:128)
+	at com.jfinal.core.Config.configPluginWithOrder(Config.java:71)
+	at com.jfinal.core.Config.configJFinal(Config.java:56)
+	at com.jfinal.core.JFinal.init(JFinal.java:63)
+	at com.jfinal.core.JFinalFilter.init(JFinalFilter.java:49)
+	at org.eclipse.jetty.servlet.FilterHolder.doStart(FilterHolder.java:119)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:724)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:277)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServer.doStart(JettyServer.java:133)
+	at com.jfinal.server.JettyServer.start(JettyServer.java:70)
+	at com.jfinal.core.JFinal.start(JFinal.java:162)
+	at com.xxx.oam.test.TestOam.main(TestOam.java:33)
+Caused by: java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:734)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1060)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1056)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:104)
+	at com.jfinal.plugin.activerecord.TableBuilder.build(TableBuilder.java:43)
+	... 21 more
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: Druid-ConnectionPool-Create-1684015092]-[com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run()]: create connection error, url: jdbc:sqlite:D:/JAVA/sqlite/test.db, errorCode 0, state null
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2100)
+
+2018-06-25 11:23:04
+[ERROR]-[Thread: main]-[com.jfinal.kit.LogKit.error()]: Plugin start error: com.jfinal.plugin.activerecord.ActiveRecordPlugin. 
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+java.lang.RuntimeException: Plugin start error: com.jfinal.plugin.activerecord.ActiveRecordPlugin. 
+java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at com.jfinal.core.Config.startPlugins(Config.java:137)
+	at com.jfinal.core.Config.configPluginWithOrder(Config.java:71)
+	at com.jfinal.core.Config.configJFinal(Config.java:56)
+	at com.jfinal.core.JFinal.init(JFinal.java:63)
+	at com.jfinal.core.JFinalFilter.init(JFinalFilter.java:49)
+	at org.eclipse.jetty.servlet.FilterHolder.doStart(FilterHolder.java:119)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:724)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:277)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServer.doStart(JettyServer.java:133)
+	at com.jfinal.server.JettyServer.start(JettyServer.java:70)
+	at com.jfinal.core.JFinal.start(JFinal.java:162)
+	at com.xxx.oam.test.TestOam.main(TestOam.java:33)
+Caused by: com.jfinal.plugin.activerecord.ActiveRecordException: java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at com.jfinal.plugin.activerecord.TableBuilder.build(TableBuilder.java:55)
+	at com.jfinal.plugin.activerecord.ActiveRecordPlugin.start(ActiveRecordPlugin.java:226)
+	at com.jfinal.core.Config.startPlugins(Config.java:128)
+	... 19 more
+Caused by: java.sql.SQLException: path to 'D:/JAVA/sqlite/test.db': 'D:\' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+	at org.sqlite.JDBC.connect(JDBC.java:64)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1461)
+	at com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1525)
+	at com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:734)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1060)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1056)
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:104)
+	at com.jfinal.plugin.activerecord.TableBuilder.build(TableBuilder.java:43)
+	... 21 more
