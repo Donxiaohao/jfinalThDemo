@@ -11,6 +11,7 @@ import com.jfinal.config.Interceptors;
 import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
+import com.jfinal.i18n.I18nInterceptor;
 import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
@@ -22,6 +23,7 @@ import com.xxx.oam.controller.IndexController;
 import com.xxx.oam.controller.LoginController;
 import com.xxx.oam.entity.TestUser;
 import com.xxx.oam.interceptor.LoginInterceptor;
+import com.xxx.oam.plugin.I18NPlugin;
 import com.xxx.oam.task.RemoveTask;
 import com.xxx.oam.util.LogTimerTask;
 
@@ -35,7 +37,10 @@ public class BaseConfig extends JFinalConfig{
 		// 配置是否在控制台 打印输出 可在配置文件内进行动态更改
 		me.setDevMode(PropKit.getBoolean("devMode", false));
 		me.setViewType(ViewType.JFINAL_TEMPLATE);
+//		me.setViewType(ViewType.FREE_MARKER);
 		me.setUrlParaSeparator("&");
+		//设置国际化
+		me.setI18nDefaultBaseName("i18n");
 	}
 	
 	/**
@@ -69,6 +74,9 @@ public class BaseConfig extends JFinalConfig{
 	    me.add(arp);
 	    arp.addMapping("user", TestUser.class);
 		
+	    //国际化键值对加载
+//	    me.add(new I18NPlugin());
+	    
 	    //配置定时器
 //	    Cron4jPlugin cp = new Cron4jPlugin();
 //	    cp.addTask("*/1 * * * *", new RemoveTask());
@@ -77,7 +85,10 @@ public class BaseConfig extends JFinalConfig{
 
 	@Override
 	public void configInterceptor(Interceptors me) {
+		//登录拦截器验证
 		me.add(new LoginInterceptor());
+		//国际化拦截器
+		me.add(new I18nInterceptor());
 	}
 
 	@Override
@@ -88,9 +99,9 @@ public class BaseConfig extends JFinalConfig{
 	
 	@Override
 	public void afterJFinalStart(){
-		System.out.println("任务启动了  我也运行了~~~");
+		/*System.out.println("任务启动了  我也运行了~~~");
 		Timer timer = new Timer();
 		LogTimerTask logTimerTask = new LogTimerTask(timer);
-		timer.schedule(logTimerTask, 2000);
+		timer.schedule(logTimerTask, 2000);*/
 	}
 }
