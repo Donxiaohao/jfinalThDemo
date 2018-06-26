@@ -50,7 +50,7 @@ public class BaseConfig extends JFinalConfig{
 	public void configRoute(Routes me) {
 		// 设置视图渲染路径
 //		me.setBaseViewPath("/html");    这个很尴尬
-		me.add("/login", LoginController.class);
+		me.add("/", LoginController.class,"/login");
 		me.add("/index", IndexController.class);
 	}
 

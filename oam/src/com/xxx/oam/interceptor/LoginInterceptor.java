@@ -10,11 +10,11 @@ public class LoginInterceptor implements Interceptor{
 	public void intercept(Invocation inv) {
 		System.out.println("全局拦截器开始"+inv.getActionKey()+"-----"
 							+inv.getControllerKey()+"-----"+inv.getMethodName());
-		if(!inv.getControllerKey().equals("/login")) {
+		if(!inv.getControllerKey().equals("/")) {
 			TestUser user = inv.getController().getSessionAttr("loginUser");
 			if(user==null) {
 				System.out.println("用户非法访问 返回登录页面");
-				inv.getController().redirect("/login");
+				inv.getController().redirect("/");
 			}else {
 				inv.invoke();
 			}

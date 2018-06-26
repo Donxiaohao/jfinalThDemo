@@ -30,6 +30,6 @@ public class TestOam {
             // eclipse 启动是4个参数    
         }
 		//启动项目 进行测试
-		JFinal.start("WebRoot", 8989, "/",5);
+		JFinal.start("WebRoot", 8989, "/");
 	}
 }

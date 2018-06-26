@@ -32,7 +32,7 @@ public class LoginController extends Controller {
 		render("/html/login.html");
 	}
 	
-	@Before({LoginValidator.class,OamInterceptor.class})
+	@Before(LoginValidator.class)
 	public void login() {
 		setSessionAttr("loginUser", TestUser.dao.findById(1));
 		System.out.println("进入login");

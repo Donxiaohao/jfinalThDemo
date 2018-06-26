@@ -9,11 +9,11 @@
 	<h1>O A M</h1>
 	
 	<div class="connect">
-		<p>后台开发测试系统.#(_res.get("msg"))</p>
-		<p>#(_res.get("admin.common.choice"))***#(_res.get("admin.common.close"))***#(_res.get("admin.common.delete"))***#(_res.get("admin.common.export"))</p>
+		<p>后台开发测试系统.<!-- #(_res.get("msg")) --></p>
+		<!-- <p>#(_res.get("admin.common.choice"))***#(_res.get("admin.common.close"))***#(_res.get("admin.common.delete"))***#(_res.get("admin.common.export"))</p> -->
 	</div>
 	
-	<form action="/login/login" method="post" id="loginForm">
+	<form action="/login" method="post" id="loginForm">
 		<div>
 			<input type="text" name="name" class="name" placeholder="请输入账号" autocomplete="off" value='#(name)'/><span style="color:red;font-size:3px">#(nameMsg)</span>
 		</div>
