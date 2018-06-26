@@ -38,4 +38,8 @@ public class LoginController extends Controller {
 		System.out.println("进入login");
 		redirect("/index");
 	}
+	
+	public void save() {
+		System.out.println("只有登录的用户才能打印哦~~~");
+	}
 }
