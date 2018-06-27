@@ -1,5 +1,7 @@
 package com.xxx.oam.controller;
 
+import java.util.List;
+
 import com.jfinal.aop.Before;
 /*import com.jfinal.core.Controller;
 
@@ -12,6 +14,8 @@ public class IndexController extends Controller{
 }*/
 import com.jfinal.core.Controller;
 import com.jfinal.kit.StrKit;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 import com.xxx.oam.entity.TestUser;
 import com.xxx.oam.interceptor.OamInterceptor;
 import com.xxx.oam.validator.LoginValidator;
@@ -29,6 +33,11 @@ public class LoginController extends Controller {
 		System.out.println("进入LoginController index方法");
 		//测试页面生成二维码
 //		renderQrCode("TH", 100, 100);
+		/*测试多表查询映射问题
+		List<Record> find = Db.find("select * from user u ,user_message um where u.id=um.user_id");
+		for (Record record2 : find) {
+			System.out.println(record2.toString());
+		}*/
 		render("/html/login.html");
 	}
 	
