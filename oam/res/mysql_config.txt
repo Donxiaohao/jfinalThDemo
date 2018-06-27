@@ -1,6 +1,6 @@
-## jdbcUrl = jdbc:mysql://localhost/------?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+jdbcUrl = jdbc:mysql://localhost/test?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
 ##jdbcUrl = jdbc:sqlite:D:/JAVA/sqlite/test.db 
-jdbcUrl = jdbc:sqlite:E:/test.db 
-user = 
-password = 
+##jdbcUrl = jdbc:sqlite:E:/test.db 
+user = root
+password = root
 devMode = true

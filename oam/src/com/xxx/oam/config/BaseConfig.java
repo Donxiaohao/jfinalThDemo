@@ -68,7 +68,7 @@ public class BaseConfig extends JFinalConfig{
                 p.get("user"),
                 p.get("password"));
 		//设置sqlite驱动程序
-		dp.setDriverClass("org.sqlite.JDBC");
+//		dp.setDriverClass("org.sqlite.JDBC");
 	    me.add(dp);
 	    ActiveRecordPlugin arp = new ActiveRecordPlugin(dp);
 	    me.add(arp);
