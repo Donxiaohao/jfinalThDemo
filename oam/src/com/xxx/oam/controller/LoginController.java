@@ -39,7 +39,8 @@ public class LoginController extends Controller {
 		redirect("/index");
 	}
 	
-	public void save() {
+	public void exit() {
 		System.out.println("只有登录的用户才能打印哦~~~");
+		redirect("www.baidu.com");
 	}
 }
