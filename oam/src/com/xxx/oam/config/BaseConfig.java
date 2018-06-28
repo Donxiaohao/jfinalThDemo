@@ -89,6 +89,8 @@ public class BaseConfig extends JFinalConfig{
 		me.add(new LoginInterceptor());
 		//国际化拦截器
 		me.add(new I18nInterceptor());
+		//添加控制层全局拦截器
+//		me.addGlobalActionInterceptor(new GlobalActionInterceptor());
 	}
 
 	@Override
