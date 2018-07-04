@@ -1,6 +1,6 @@
 
-2018-07-04 13:38:01
-[ERROR]-[Thread: qtp553871028-24]-[com.jfinal.core.ActionHandler.handle()]: /login
+2018-07-04 13:39:04
+[ERROR]-[Thread: qtp553871028-26]-[com.jfinal.core.ActionHandler.handle()]: /login
 java.lang.NullPointerException
 	at com.xxx.oam.validator.LoginValidator.validate(LoginValidator.java:21)
 	at com.jfinal.validate.Validator.intercept(Validator.java:77)
