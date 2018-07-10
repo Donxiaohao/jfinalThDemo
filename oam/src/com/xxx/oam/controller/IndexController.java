@@ -7,4 +7,8 @@ public class IndexController extends Controller{
 	public void index() {
 		render("/html/jtopo.html");
 	}
+	
+	public void link() {
+		render("/html/jtopo2.html");
+	}
 }

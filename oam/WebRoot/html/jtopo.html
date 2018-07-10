@@ -3,17 +3,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>登陆丨OAM</title>
 <link rel="stylesheet" href="/css/style.css">
-<body>
-<canvas width="800" height="500" id="canvas" style=" background-color:#EEEEEE; border:1px solid #444;">
+<style>
 
+</style>
+
+<body>
+<div id="content">
+	<canvas width="800" height="500" id="canvas" style=" background-color:#EEEEEE; border:1px solid #444;">
+</div>
+<div onclick='removeSence();'>removeSence</div>
 </body>
 <script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="/js/jtopo-0.4.8-min.js"></script>
+<script src="/js/toolbar.js"></script>
 <script>
+var canvas = document.getElementById('canvas'); 
+var stage = new JTopo.Stage(canvas); // 创建一个舞台对象
+var scene = new JTopo.Scene(stage); // 创建一个场景对象
 	$(function (){
-		var canvas = document.getElementById('canvas'); 
+		/* var canvas = document.getElementById('canvas'); 
 		var stage = new JTopo.Stage(canvas); // 创建一个舞台对象
-		var scene = new JTopo.Scene(stage); // 创建一个场景对象
+		var scene = new JTopo.Scene(stage); // 创建一个场景对象 */
 		
 		/* var node = new JTopo.Node("Hello");    // 创建一个节点
 		node.setLocation(300,200);    // 设置节点坐标          
@@ -24,27 +34,45 @@
 		//node.setImage('/image/Tips.png'); // 设置图片
 		//scene.add(node); // 放入到场景中
 		
+		//显示工具栏
+//		showJTopoToobar(stage);
+
 		
-		
-		 
 	    // 节点
 	    function newNode(x, y, w, h, text){
 	        var node = new JTopo.Node(text);
+//	        node.setImage('/image/Tips.png',false);
 	        node.setLocation(x, y);
 	        node.setSize(w, h);
+	        node.fillColor='255,128,0';
+	        node.fontColor='rgba(0, 0, 0,1 )';
+	        //单纯的单击事件
+	       /*  node.click(function(event){
+		    	console.log(event);
+		    }); */
+		    
+		    //可根据第一个参数绑定任何事件 
+		    //click,dbclick,mousedown,mouseup,mouseover,mouseout,mousemove,mousedrag
+		    node.addEventListener("mousedrag",function(node){
+		    	console.log(node);
+		    })
 	        scene.add(node);
 	        return node;
 	    }
 	 
 	    // 简单连线
-	    function newLink(nodeA, nodeZ, text, dashedPattern){
+	    function newLink(nodeA, nodeZ, text, dashedPattern,arrowsRadius){
 	        var link = new JTopo.Link(nodeA, nodeZ, text);
-	        link.lineWidth = 3; // 线宽
+	        link.lineWidth = 2; // 线宽
 	        link.dashedPattern = dashedPattern; // 虚线
 	        link.bundleOffset = 60; // 折线拐角处的长度
 	        link.bundleGap = 20; // 线条之间的间隔
 	        link.textOffsetY = 3; // 文本偏移量（向下3个像素）
-	        link.strokeColor = '0,200,255';
+	        link.strokeColor = '0,250,0';
+	        link.fontColor='0,0,0';
+	        if(arrowsRadius){
+	        	link.arrowsRadius = 10;
+	        }  
 	        scene.add(link);
 	        return link;
 	    }
@@ -58,8 +86,9 @@
 	        link.bundleOffset = 60; // 折线拐角处的长度
 	        link.bundleGap = 20; // 线条之间的间隔
 	        link.textOffsetY = 3; // 文本偏移量（向下3个像素）
-	        link.strokeColor = JTopo.util.randomColor(); // 线条颜色随机
 	        link.dashedPattern = dashedPattern;
+	        link.strokeColor = '0,250,0';
+	        link.arrowsRadius = 10;   
 	        scene.add(link);
 	        return link;
 	    }
@@ -71,7 +100,7 @@
 	        link.arrowsRadius = 10;
 	        link.lineWidth = 3; // 线宽
 	        link.offsetGap = 35;
-	        link.bundleGap = 15; // 线条之间的间隔
+	        link.bundleGap = 20; // 线条之间的间隔
 	        link.textOffsetY = 10; // 文本偏移量（向下15个像素）
 	        link.strokeColor = '0,250,0';
 	        link.dashedPattern = dashedPattern;
@@ -86,13 +115,91 @@
 	        scene.add(link);
 	        return link;
 	    }
-	 
-	    var from = newNode(100, 60, 30, 30);
-	    var to = newNode(300, 60, 30, 30);
-	    var link = newLink(from, to, 'Arrow', 5);
-	    link.arrowsRadius = 10;
-	 
-	    var from = newNode(100, 120, 30, 30);
+	 	
+	    //容器
+	    function newContainer(){
+	    	var container=new JTopo.Container();
+	    	container.setSize(100,100);
+	    }
+	     
+	    
+	    var node1 = newNode(737, 36, 30, 30,'node1');
+	    var node2 = newNode(737,116,30,30,'node2');
+	    var node3 = newNode(737,299,30,30,'node3');
+	    var node1To3 = newNode(543, 81, 30, 30,'node1To3');
+	    var link1 = newLink(node1, node1To3, 'link1');
+	    var link2 = newLink(node2,node1To3,'link2');
+	    var link3 = newLink(node3,node1To3,'link3');
+	    
+	    
+	    var node4 = newNode(575,177, 30, 30,'node4');
+	    var node5 = newNode(575,226,30,30,'node5');
+	    var node6 = newNode(575,276,30,30,'node6');
+	    var node7 = newNode(575,326,30,30,'node7');
+	    var node8 = newNode(575,376,30,30,'node8');
+	    var node4to8 = newNode(450,276,30,30,'node4to8');
+ 		var link4 = newLink(node4, node4to8, 'link4'); 
+	    var link5 = newLink(node5,node4to8,'link5');
+	    var link6 = newLink(node6,node4to8,'link6');
+	    var link7 = newLink(node7,node4to8,'link7');
+	    var link8 = newLink(node8,node4to8,'link8');
+	    
+	    var node10 = newNode(530,426,30,30,'node10');
+	    var node11 = newNode(450,426,30,30,'node11');
+	    var link11 =newLink(node10, node11, 'link11'); 
+	   
+	    
+	    var node9 = newNode(350,276,30,30,'node9');
+	    var link9 = newLink(node1To3, node9, 'link9'); 
+	    var link10 =newLink(node4to8, node9, 'link10'); 
+	    
+	    var node12 = newNode(190,359,30,30,'node12');
+	    var node13 = newNode(354,359,30,30,'node13');
+	    var node14 = newNode(304,359,30,30,'node14');
+	    var node15 = newNode(254,359,30,30,'node15');
+	    
+	    var link12 = newLink(node11, node9, 'link12');
+	    
+	    var link13 = newLink(node12, node9, 'link13');
+	    var link14 = newLink(node13, node9, 'link14');
+	    var link15 = newLink(node14, node9, 'link15');
+	    var link16 = newLink(node15, node9, 'link16');
+	    
+	    var node16 = newNode(190,276,30,30,'node16');
+	    var node17 = newNode(190,177,30,30,'node17');
+	    var node18 = newNode(190,36,30,30,'node18');
+	    var node19 = newNode(281,84,30,30,'node19');
+	    var node20 = newNode(281,15,30,30,'node20');
+	    var node21 = newNode(483, 81, 30, 30,'node21');
+	    var node22 = newNode(420, 81, 30, 30,'node22');
+	    
+	    var link17 = newLink(node9,node16,'link17');
+	    var link18 = newLink(node21,node22,'link18');
+	    var link19 = newLink(node22,node18,'link19',null,1);
+	    var link20 = newLink(node22,node20,'link20');
+	    var link21 = newLink(node22,node19,'link21');
+	    var link22 = newLink(node20,node18,'link22');
+	    var link23 = newLink(node19,node18,'link23');
+	    var link24 = newLink(node9,node22,'link24');
+	    var link25 = newLink(node22,node17,'link25',null,1);
+	    
+	    var node22 = newNode(110,177,30,30,'node22');
+	    var link26 = newLink(node17,node22,'link26',null,1);
+	    var node23 = newNode(110,36,30,30,'node23');
+	    var link27 = newLink(node18,node23,'link27',null);
+	    
+	    var node24 = newNode(110,252,30,30,'node24');
+	    var node25 = newNode(110,302,30,30,'node25');
+	    var node26 = newNode(20,107,30,30,'node26');
+	    var node27 = newNode(20,177,30,30,'node27');
+	    var node28 = newNode(20,247,30,30,'node28');
+	    var link28 = newLink(node16,node24,'link28',null);
+	    var link29 = newLink(node16,node25,'link29',null);
+	    var link30 = newLink(node22,node26,'link30',null);
+	    var link31 = newLink(node22,node27,'link31',null);
+	    var link32 = newLink(node22,node28,'link32',null);
+//	    var link9 = newFoldLink(node2, node9, 'link9'); 
+	    /* var from = newNode(100, 120, 30, 30);
 	    var to = newNode(300, 120, 30, 30);
 	    var link = newLink(from, to, 'Link');
 	 
@@ -118,9 +225,116 @@
 	 
 	    var from = newNode(550, 400, 30, 30);
 	    var to = newNode(650, 300, 30, 30);
-	    var link = newCurveLink(from, to, 'curve');
+	    var link = newCurveLink(from, to, 'curve'); */
+
+		/* to.alarm='告警文字'
+			to.paintAlarmText = function(a) {
+//          console.log(this)
+            if (null != this.alarm && "" != this.alarm) {
+                var b = this.alarmColor || "255,0,0",
+                    c = this.alarmAlpha || .5;
+                a.beginPath(),
+                a.font = this.alarmFont || "10px 微软雅黑";
+
+                var textArray = this.alarm.split('\n');
+                var rowCnt = textArray.length;
+                var i = 0, maxLength = 0, maxText = textArray[0];
+                for(;i<rowCnt;i++){
+                     var nowText = textArray[i],textLength = nowText.length;
+                     if(textLength >=maxLength){
+                         maxLength = textLength;
+                         maxText = nowText;
+                     }
+                }
+                var maxWidth = a.measureText(maxText).width;
+                var lineHeight = 16; // 字体大小 + 6
+                // alarm框的宽度
+                var d =( (a.measureText(this.alarm).width/rowCnt +6) > maxWidth? (a.measureText(this.alarm).width/rowCnt +6) : maxWidth);
+                var e =(lineHeight)*(rowCnt), // alarm 框高度 行高*行数
+                    f = this.width / 2 - d / 2 , // alarm 框横向位置
+                    g = - this.height /2  - e - 20; // alarm 纵横向位置
+//
+                //绘制alarm框
+                a.strokeStyle = "rgba(" + b + ", " + c + ")",
+                a.fillStyle = "rgba(" + b + ", " + c + ")",
+                a.lineCap = "round",
+                a.lineWidth = 1,
+                a.moveTo(f -10, g - 10), // 左上  这些10是调整 alarm 边框离文字的距离
+                a.lineTo(f + d +10, g - 10), // 右上
+                a.lineTo(f + d +10, g + e + 10), // 右下
+                a.lineTo(f + d / 2 + 6, g + e  + 10),
+                a.lineTo(f + d / 2, g + e + 8  + 10),
+                a.lineTo(f + d / 2 - 6, g + e  + 10),
+                a.lineTo(f - 10, g + e  + 10), // 左下
+                a.lineTo(f -10, g -10),
+                a.fill(),
+                a.stroke(),
+                a.closePath(),
+                a.beginPath(),
+                a.strokeStyle = "rgba(" + this.fontColor + ", " + this.alpha + ")",
+                a.fillStyle = "rgba(" + this.fontColor + ", " + this.alpha + ")",
+                (function(a,b,x,y,textArray){
+                     for(var j= 0;j<textArray.length;j++){
+                         var words = textArray[j];
+                         a.fillText(words,x ,y);
+                         y+= lineHeight;
+                     }
+                })(a,this,f,g+8,textArray),
+                a.closePath()
+            }
+        } */
+				
+		//		scene.alpha=1;  //透明度
+				
+		//		stage.mode='drag';
+				//设置mode为select时 鼠标可以进行框选
+		//		stage.mode='select';
+		//		选中节点时可以通过6个控制点来调整节点的宽、高
+		//		stage.mode='edit';
 		
+		//      鹰眼模式
+		//		stage.eagleEye.visible = true
+		//		鼠标滚轮滑动 舞台缩小或者放大  可以配合鹰眼使用
+		//		stage.wheelZoom = 0.85;
+	    //得到舞台中所有元素位置确定的边界大小（left、top、right、bottom）
+	    /*   var bound = stage.getBound();
+	    console.log(bound); 
+	    //导出成PNG图片（在新打开的浏览器Tab页中）
+	    stage.saveImageInfo();
+	    */
+	    
+		/* var node = new JTopo.Node("自定义");                
+        node.percent = 0.8;
+        node.beginDegree = 0;
+        node.width = node.height = 60;
+        node.setLocation(275, 210);
+        node.paint = function(g){
+            g.beginPath();
+            g.moveTo(0,0);
+            g.fillStyle = 'rgba(0,255,0,' + this.alpha + ')';
+            g.arc(0, 0, this.width/2, this.beginDegree, this.beginDegree + 2*Math.PI*this.percent);
+            g.fill();                
+            g.closePath();
+            
+            g.save();                
+            g.beginPath();
+            g.fillStyle = 'rgba(255,255,0,' + this.alpha + ')';
+            g.moveTo(0,0);
+            g.arc(0, 0, this.width/2-10, this.beginDegree, this.beginDegree + 2*Math.PI);                
+            g.fill();
+            g.closePath();                                
+            g.restore();
+                            
+            this.paintText(g);
+           
+        };  
+        scene.add(node);
+        node.alarm="1111"
+        console.log('node')
+        console.log(node)
+       */
 	})
+
 	
 </script>
 </html>
