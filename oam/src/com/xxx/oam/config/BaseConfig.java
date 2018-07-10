@@ -22,6 +22,9 @@ import com.jfinal.template.Engine;
 import com.xxx.oam.controller.IndexController;
 import com.xxx.oam.controller.LoginController;
 import com.xxx.oam.entity.TestUser;
+import com.xxx.oam.entity.TopoImg;
+import com.xxx.oam.entity.TopoLineInfo;
+import com.xxx.oam.entity.TopoNodeInfo;
 import com.xxx.oam.interceptor.LoginInterceptor;
 import com.xxx.oam.plugin.I18NPlugin;
 import com.xxx.oam.task.RemoveTask;
@@ -73,7 +76,9 @@ public class BaseConfig extends JFinalConfig{
 	    ActiveRecordPlugin arp = new ActiveRecordPlugin(dp);
 	    me.add(arp);
 	    arp.addMapping("user", TestUser.class);
-		
+		arp.addMapping("topo_node_info", TopoNodeInfo.class);
+		arp.addMapping("topo_line_info", TopoLineInfo.class);
+		arp.addMapping("topo_img", TopoImg.class);
 	    //国际化键值对加载
 //	    me.add(new I18NPlugin());
 	    

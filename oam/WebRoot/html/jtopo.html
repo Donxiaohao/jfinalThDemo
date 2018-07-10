@@ -39,9 +39,9 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
 
 		
 	    // 节点
-	    function newNode(x, y, w, h, text){
+	    function newNode(x, y, w, h, text,img){
 	        var node = new JTopo.Node(text);
-//	        node.setImage('/image/Tips.png',false);
+	        node.setImage('/image/'+img,true);
 	        node.setLocation(x, y);
 	        node.setSize(w, h);
 	        node.fillColor='255,128,0';
@@ -123,7 +123,7 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
 	    }
 	     
 	    
-	    var node1 = newNode(737, 36, 30, 30,'node1');
+	    /* var node1 = newNode(737, 36, 30, 30,'node1');
 	    var node2 = newNode(737,116,30,30,'node2');
 	    var node3 = newNode(737,299,30,30,'node3'); 
 	    var node4 = newNode(575,177, 30, 30,'node4');
@@ -153,9 +153,15 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
 	    var node28 = newNode(20,247,30,30,'node28');
 	    var node29 = newNode(110,177,30,30,'node29');
 	    var node30 = newNode(543, 81, 30, 30,'node30');
-	    var node31 = newNode(450,276,30,30,'node31');  
+	    var node31 = newNode(450,276,30,30,'node31');   */
+	    #for(node:topoNodeInfos)
+	    	var node#(node.id) = newNode(#(node.x),#(node.y),#(node.width),#(node.height),'#(node.text)','#(node.name)');
+	    #end
 	    
-	    var link1 = newLink(node1, node30, 'link1');
+	    #for(line:topoLineInfos)
+	    	var link#(line.id)=newLink(node#(line.src),node#(line.dest),'#(line.text)');
+	    #end
+	    /* var link1 = newLink(node1, node30, 'link1');
 	    var link2 = newLink(node2,node30,'link2');
 	    var link3 = newLink(node3,node30,'link3');
  		var link4 = newLink(node4, node31, 'link4'); 
@@ -186,7 +192,7 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
 	    var link29 = newLink(node16,node25,'link29',null);
 	    var link30 = newLink(node29,node26,'link30',null);
 	    var link31 = newLink(node29,node27,'link31',null);
-	    var link32 = newLink(node29,node28,'link32',null);
+	    var link32 = newLink(node29,node28,'link32',null); */
 //	    var link9 = newFoldLink(node2, node9, 'link9'); 
 	    /* var from = newNode(100, 120, 30, 30);
 	    var to = newNode(300, 120, 30, 30);
