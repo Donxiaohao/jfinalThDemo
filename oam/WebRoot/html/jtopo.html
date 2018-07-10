@@ -126,53 +126,51 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
 	    var node1 = newNode(737, 36, 30, 30,'node1');
 	    var node2 = newNode(737,116,30,30,'node2');
 	    var node3 = newNode(737,299,30,30,'node3');
-	    var node1To3 = newNode(543, 81, 30, 30,'node1To3');
-	    var link1 = newLink(node1, node1To3, 'link1');
-	    var link2 = newLink(node2,node1To3,'link2');
-	    var link3 = newLink(node3,node1To3,'link3');
-	    
-	    
+	    var node1To3 = newNode(543, 81, 30, 30,'node1To3');    
 	    var node4 = newNode(575,177, 30, 30,'node4');
 	    var node5 = newNode(575,226,30,30,'node5');
 	    var node6 = newNode(575,276,30,30,'node6');
 	    var node7 = newNode(575,326,30,30,'node7');
 	    var node8 = newNode(575,376,30,30,'node8');
-	    var node4to8 = newNode(450,276,30,30,'node4to8');
- 		var link4 = newLink(node4, node4to8, 'link4'); 
-	    var link5 = newLink(node5,node4to8,'link5');
-	    var link6 = newLink(node6,node4to8,'link6');
-	    var link7 = newLink(node7,node4to8,'link7');
-	    var link8 = newLink(node8,node4to8,'link8');
-	    
+	    var node4to8 = newNode(450,276,30,30,'node4to8');    
+	    var node9 = newNode(350,276,30,30,'node9');	 
 	    var node10 = newNode(530,426,30,30,'node10');
-	    var node11 = newNode(450,426,30,30,'node11');
-	    var link11 =newLink(node10, node11, 'link11'); 
-	   
-	    
-	    var node9 = newNode(350,276,30,30,'node9');
-	    var link9 = newLink(node1To3, node9, 'link9'); 
-	    var link10 =newLink(node4to8, node9, 'link10'); 
-	    
+	    var node11 = newNode(450,426,30,30,'node11');          
 	    var node12 = newNode(190,359,30,30,'node12');
 	    var node13 = newNode(354,359,30,30,'node13');
 	    var node14 = newNode(304,359,30,30,'node14');
-	    var node15 = newNode(254,359,30,30,'node15');
-	    
-	    var link12 = newLink(node11, node9, 'link12');
-	    
-	    var link13 = newLink(node12, node9, 'link13');
-	    var link14 = newLink(node13, node9, 'link14');
-	    var link15 = newLink(node14, node9, 'link15');
-	    var link16 = newLink(node15, node9, 'link16');
-	    
+	    var node15 = newNode(254,359,30,30,'node15');       
 	    var node16 = newNode(190,276,30,30,'node16');
 	    var node17 = newNode(190,177,30,30,'node17');
 	    var node18 = newNode(190,36,30,30,'node18');
 	    var node19 = newNode(281,84,30,30,'node19');
 	    var node20 = newNode(281,15,30,30,'node20');
 	    var node21 = newNode(483, 81, 30, 30,'node21');
-	    var node22 = newNode(420, 81, 30, 30,'node22');
+	    var node22 = newNode(420, 81, 30, 30,'node22'); 	   
+	    var node23 = newNode(110,36,30,30,'node23');       
+	    var node24 = newNode(110,252,30,30,'node24');
+	    var node25 = newNode(110,302,30,30,'node25');
+	    var node26 = newNode(20,107,30,30,'node26');
+	    var node27 = newNode(20,177,30,30,'node27');
+	    var node28 = newNode(20,247,30,30,'node28');
+	    var node29 = newNode(110,177,30,30,'node29');
 	    
+	    var link1 = newLink(node1, node1To3, 'link1');
+	    var link2 = newLink(node2,node1To3,'link2');
+	    var link3 = newLink(node3,node1To3,'link3');
+ 		var link4 = newLink(node4, node4to8, 'link4'); 
+	    var link5 = newLink(node5,node4to8,'link5');
+	    var link6 = newLink(node6,node4to8,'link6');
+	    var link7 = newLink(node7,node4to8,'link7');
+	    var link8 = newLink(node8,node4to8,'link8');
+	    var link9 = newLink(node1To3, node9, 'link9'); 
+	    var link10 =newLink(node4to8, node9, 'link10'); 
+	    var link11 =newLink(node10, node11, 'link11'); 
+	    var link12 = newLink(node11, node9, 'link12');   
+	    var link13 = newLink(node12, node9, 'link13');
+	    var link14 = newLink(node13, node9, 'link14');
+	    var link15 = newLink(node14, node9, 'link15');
+	    var link16 = newLink(node15, node9, 'link16');
 	    var link17 = newLink(node9,node16,'link17');
 	    var link18 = newLink(node21,node22,'link18');
 	    var link19 = newLink(node22,node18,'link19',null,1);
@@ -182,22 +180,13 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
 	    var link23 = newLink(node19,node18,'link23');
 	    var link24 = newLink(node9,node22,'link24');
 	    var link25 = newLink(node22,node17,'link25',null,1);
-	    
-	    var node22 = newNode(110,177,30,30,'node22');
-	    var link26 = newLink(node17,node22,'link26',null,1);
-	    var node23 = newNode(110,36,30,30,'node23');
+	    var link26 = newLink(node17,node29,'link26',null,1);
 	    var link27 = newLink(node18,node23,'link27',null);
-	    
-	    var node24 = newNode(110,252,30,30,'node24');
-	    var node25 = newNode(110,302,30,30,'node25');
-	    var node26 = newNode(20,107,30,30,'node26');
-	    var node27 = newNode(20,177,30,30,'node27');
-	    var node28 = newNode(20,247,30,30,'node28');
 	    var link28 = newLink(node16,node24,'link28',null);
 	    var link29 = newLink(node16,node25,'link29',null);
-	    var link30 = newLink(node22,node26,'link30',null);
-	    var link31 = newLink(node22,node27,'link31',null);
-	    var link32 = newLink(node22,node28,'link32',null);
+	    var link30 = newLink(node29,node26,'link30',null);
+	    var link31 = newLink(node29,node27,'link31',null);
+	    var link32 = newLink(node29,node28,'link32',null);
 //	    var link9 = newFoldLink(node2, node9, 'link9'); 
 	    /* var from = newNode(100, 120, 30, 30);
 	    var to = newNode(300, 120, 30, 30);
