@@ -21,75 +21,32 @@ var canvas = document.getElementById('canvas');
 var stage = new JTopo.Stage(canvas); // 创建一个舞台对象
 var scene = new JTopo.Scene(stage); // 创建一个场景对象
 	 $(function (){
+		 CanvasRenderingContext2D.prototype.wrapText = function(str,x,y){
+			 var textArray = str.split('\n');
+			 if(textArray==undefined||textArray==null)return false;
+			 var rowCnt = textArray.length;
+			 var i = 0,imax = rowCnt,maxLength = 0;maxText = textArray[0];
+			 for(;i<imax;i++){
+				 var nowText = textArray[i],textLength = nowText.length;
+				 if(textLength >=maxLength){
+					 maxLength = textLength;
+					 maxText = nowText;
+				 }
+			 }
+			 var maxWidth = this.measureText(maxText).width;
+			 var lineHeight = this.measureText("元").width;
+			 x-= lineHeight*2;
+			 for(var j= 0;j<textArray.length;j++){
+				 var words = textArray[j];
+				 this.fillText(words,-(maxWidth/2),y-textArray.length*lineHeight/100);
+				 y+= lineHeight;
+			 }
+		 };
+
+		 
+		
 		stage.frames = -24;
 	
-		/* // 节点
-	    function newNode(x, y, w, h, text){
-	        var node = new JTopo.Node(text);
-	        node.setLocation(x, y);
-	        node.setSize(w, h);
-	        scene.add(node);
-	        /* node.addEventListener("mousedrag",function(node){
-		    	console.log(link);
-		    }) */
-	    /*    return node;
-	    }
-	    
-	    // 简单连线
-	    function newLink(nodeA, nodeZ, text,dashedPattern){
-	        var link = new JTopo.Link(nodeA, nodeZ, text);        
-	        link.lineWidth = 3; // 线宽
-	        link.bundleOffset = 60; // 折线拐角处的长度
-	        link.bundleGap = 20; // 线条之间的间隔
-	        link.textOffsetY = 3; // 文本偏移量（向下3个像素）
-	        link.strokeColor = JTopo.util.randomColor(); // 线条颜色随机
-	        link.dashedPattern = dashedPattern; 
-	        scene.add(link);
-	        return link;
-	    }
-	    
-	    function newFlexionalLink(nodeA, nodeZ, text, direction, dashedPattern){
-            var link = new JTopo.FlexionalLink(nodeA, nodeZ, text);
-            link.direction = direction || 'horizontal';
-            link.arrowsRadius = 10;
-            link.lineWidth = 3; // 线宽
-            link.offsetGap = 30;
-            link.bundleGap = 15; // 线条之间的间隔
-            link.textOffsetY = 10; // 文本偏移量（向下15个像素）
-            link.strokeColor = '0,250,0';
-            link.dashedPattern = dashedPattern; 
-            scene.add(link);
-            return link;
-        }
-	    
-	    var from = newNode(450, 250, 30, 30);
-        var to = newNode(400, 100, 30, 30);
-        var link = newFlexionalLink(from, to, 'FlexLink1');
-        
-        
-        // 折线
-        function newFoldLink(nodeA, nodeZ, text, direction, dashedPattern){
-            var link = new JTopo.FoldLink(nodeA, nodeZ, text);
-            link.direction = direction || 'horizontal';
-            link.arrowsRadius = 15; //箭头大小
-            link.lineWidth = 3; // 线宽
-            link.bundleOffset = 20; // 折线拐角处的长度
-            link.bundleGap = 10; // 线条之间的间隔
-            link.textOffsetY = 3; // 文本偏移量（向下3个像素）
-            link.dashedPattern = dashedPattern;
-            scene.add(link);
-            link.addEventListener("click",function(node){
-	    	console.log(link);
-	    	}) 
-            return link;
-        }
-        
-        var from = newNode(100, 200, 30, 30);
-        var to = newNode(200, 300, 30, 30);
-        var link = newFoldLink(from, to, 'FoldLink','horizontal');
-        var link = newFoldLink(to, from,'FoldLink', null, 5);
-        var link = newFoldLink(from, to, 'FoldLink','vertical'); */
-		
         // 节点
         function newNode(x, y, w, h, text){
             var node = new JTopo.Node(text);
@@ -114,50 +71,15 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
             scene.add(link);
             return link;
         }
-        
-        function newFlexionalLink(nodeA, nodeZ, text, direction, dashedPattern){
-	        var link = new JTopo.FlexionalLink(nodeA, nodeZ, text);
-	        link.direction = direction || 'horizontal';
-	        link.arrowsRadius = 10;
-	        link.lineWidth = 3; // 线宽
-	        link.offsetGap = 35;
-	        link.bundleGap = 20; // 线条之间的间隔
-	        link.textOffsetY = 10; // 文本偏移量（向下15个像素）
-	        link.strokeColor = '0,250,0';
-	       
-	        scene.add(link);
-	        return link;
-	    }
-        
-        function newFoldLink(nodeA, nodeZ, text, direction, dashedPattern){
-            var link = new JTopo.FoldLink(nodeA, nodeZ, text);
-            link.direction = direction || 'horizontal';
-            link.arrowsRadius = 15; //箭头大小
-            link.lineWidth = 1; // 线宽
-            link.bundleOffset = 20; // 折线拐角处的长度
-            link.bundleGap = 10; // 线条之间的间隔
-            link.textOffsetY = 3; // 文本偏移量（向下3个像素）
-            link.dashedPattern = dashedPattern;
-            scene.add(link);
-            link.addEventListener("click",function(node){
-	    	console.log(link);
-	    	}) 
-            return link;
-        }
-        
-        var fromNode = newNode(100, 80, 60, 60, 'from');
-        var node = newNode(360, 250, 60, 60, 'to');
-        for(var i=0; i<5; i++){
-            var link = newLink(node, fromNode, 'Link' + i);
-            link.arrowsRadius = 10;
-        }
-       var link = newLink(node,fromNode,  'last');
-        link.arrowsRadius =10;
-/*        var node=newNode(260,250,60,60,'to');
-       newFoldLink(node, fromNode, 'last');
-       var node=newNode(460,250,60,60,'to');
-       var link = newFoldLink(node, fromNode, 'last3'); */
-//       link.bundleOffset=400;
+       
+        var node = new JTopo.Node(260,190,30,30,'test\ntest'); // 创建一个节点
+        node.paintText = function(a){
+	        a.beginPath(),
+	        a.font = this.font,
+	        a.wrapText(this.text,this.height/2,this.height);
+	        a.closePath()
+        };
+       
 	}) 
 </script>
 </html>
