@@ -73,7 +73,7 @@
 		this.stroke()
 	},
 	JTopo = {
-		version: "0.4.8",
+		version: "0.4.8_01",
 		zIndex_Container: 1,
 		zIndex_Link: 2,
 		zIndex_Node: 3,
@@ -319,32 +319,32 @@
 		return d += "]",
 		d += "}"
 	}
-	function changeColor(a, b, c, d, e) {
-		var f = canvas.width = b.width,
-		g = canvas.height = b.height;
+	function changeColor(a, b, c) {
+		var d = c.split(","),
+		e = parseInt(d[0]),
+		f = parseInt(d[1]),
+		g = parseInt(d[2]),
+		h = canvas.width = b.width,
+		i = canvas.height = b.height;
 		a.clearRect(0, 0, canvas.width, canvas.height),
 		a.drawImage(b, 0, 0);
-		for (var h = a.getImageData(0, 0, b.width, b.height), i = h.data, j = 0; f > j; j++)
-			for (var k = 0; g > k; k++) {
-				var l = 4 * (j + k * f);
-				0 != i[l + 3] && (null != c && (i[l + 0] += c), null != d && (i[l + 1] += d), null != e && (i[l + 2] += e))
+		for (var j = a.getImageData(0, 0, b.width, b.height), k = j.data, l = 0; h > l; l++)
+			for (var m = 0; i > m; m++) {
+				var n = 4 * (l + m * h);
+				0 != k[n + 3] && (null != e && (k[n + 0] += e), null != f && (k[n + 1] += f), null != g && (k[n + 2] += g))
 			}
-		a.putImageData(h, 0, 0, 0, 0, b.width, b.height);
-		var m = canvas.toDataURL();
-		return alarmImageCache[b.src] = m,
-		m
+		a.putImageData(j, 0, 0, 0, 0, b.width, b.height);
+		var o = canvas.toDataURL();
+		return o
 	}
 	function genImageAlarm(a, b) {
-		null == b && (b = 255);
-		try {
-			if (alarmImageCache[a.src])
-				return alarmImageCache[a.src];
-			var c = new Image;
-			return c.src = changeColor(graphics, a, b),
-			alarmImageCache[a.src] = c,
-			c
-		} catch (d) {}
-		return null
+		var c = a.src + b;
+		if (alarmImageCache[c])
+			return alarmImageCache[c];
+		var d = new Image;
+		return d.src = changeColor(graphics, a, b),
+		alarmImageCache[c] = d,
+		d
 	}
 	function getOffsetPosition(a) {
 		if (!a)
@@ -1716,7 +1716,7 @@
 			if (this.image) {
 				var b = a.globalAlpha;
 				a.globalAlpha = this.alpha,
-				null != this.image.alarm && null != this.alarm ? a.drawImage(this.image.alarm, -this.width / 2, -this.height / 2, this.width, this.height) : a.drawImage(this.image, -this.width / 2, -this.height / 2, this.width, this.height),
+				null != this.alarmImage && null != this.alarm ? a.drawImage(this.alarmImage, -this.width / 2, -this.height / 2, this.width, this.height) : a.drawImage(this.image, -this.width / 2, -this.height / 2, this.width, this.height),
 				a.globalAlpha = b
 			} else
 				a.beginPath(), a.fillStyle = "rgba(" + this.fillColor + "," + this.alpha + ")", null == this.borderRadius || 0 == this.borderRadius ? a.rect(-this.width / 2, -this.height / 2, this.width, this.height) : a.JTopoRoundRect(-this.width / 2, -this.height / 2, this.width, this.height, this.borderRadius), a.fill(), a.closePath();
@@ -1768,20 +1768,18 @@
 				var e = this.getTextPostion(this.textPosition, c, d);
 				a.fillText(b, e.x, e.y),
 				a.closePath()*/
-				
 				a.beginPath(),
 				a.font = this.font;
 				var c = a.measureText(b).width,
 				d = a.measureText("田").width;
 				a.fillStyle = "rgba(" + this.fontColor + ", " + this.alpha + ")";
-				var e = this.getTextPostion(this.textPosition, c, d);
-				
 				var textArray = b.split('\n');
      	    	if(textArray==undefined||textArray==null)return false;
      	    	for(var j= 0;j<textArray.length;j++){
 					var words = textArray[j];
-					a.fillText(words,e.x,e.y-textArray.length*d/100);
-					e.y+= d;
+					var e = this.getTextPostion(this.textPosition, a.measureText(words).width, d);
+					e.y=e.y+j*d;
+					a.fillText(words,e.x,e.y);
      	    	}
 				a.closePath()
 			}
@@ -1800,60 +1798,59 @@
 		this.getTextPostion = function (a, b, c) {
 			var d = null;
 			return null == a || "Bottom_Center" == a ? d = {
-					x: -this.width / 2 + (this.width - b) / 2,
-					y: this.height / 2 + c
-				}
-				 : "Top_Center" == a ? d = {
-					x: -this.width / 2 + (this.width - b) / 2,
-					y: -this.height / 2 - c / 2
-				}
-				 : "Top_Right" == a ? d = {
-					x: this.width / 2,
-					y: -this.height / 2 - c / 2
-				}
-				 : "Top_Left" == a ? d = {
+				x: -this.width / 2 + (this.width - b) / 2,
+				y: this.height / 2 + c
+			}
+			 : "Top_Center" == a ? d = {
+				x: -this.width / 2 + (this.width - b) / 2,
+				y: -this.height / 2 - c / 2
+			}
+			 : "Top_Right" == a ? d = {
+				x: this.width / 2,
+				y: -this.height / 2 - c / 2
+			}
+			 : "Top_Left" == a ? d = {
+				x: -this.width / 2 - b,
+				y: -this.height / 2 - c / 2
+			}
+			 : "Bottom_Right" == a ? d = {
+				x: this.width / 2,
+				y: this.height / 2 + c
+			}
+			 : "Bottom_Left" == a ? d = {
+				x: -this.width / 2 - b,
+				y: this.height / 2 + c
+			}
+			 : "Middle_Center" == a ? d = {
+				x: -this.width / 2 + (this.width - b) / 2,
+				y: c / 2
+			}
+			 : "Middle_Right" == a ? d = {
+				x: this.width / 2,
+				y: c / 2
+			}
+			 : "Middle_Left" == a && (d = {
 					x: -this.width / 2 - b,
-					y: -this.height / 2 - c / 2
-				}
-				 : "Bottom_Right" == a ? d = {
-					x: this.width / 2,
-					y: this.height / 2 + c
-				}
-				 : "Bottom_Left" == a ? d = {
-					x: -this.width / 2 - b,
-					y: this.height / 2 + c
-				}
-				 : "Middle_Center" == a ? d = {
-					x: -this.width / 2 + (this.width - b) / 2,
 					y: c / 2
-				}
-				 : "Middle_Right" == a ? d = {
-					x: this.width / 2,
-					y: c / 2
-				}
-				 : "Middle_Left" == a && (d = {
-						x: -this.width / 2 - b,
-						y: c / 2
-					}),
+				}),
 			null != this.textOffsetX && (d.x += this.textOffsetX),
 			null != this.textOffsetY && (d.y += this.textOffsetY),
 			d
 		},
-		this.setImage = function (b, c) {
-			if (null == b)
+		this.setImage = function (a, b) {
+			if (null == a)
 				throw new Error("Node.setImage(): 参数Image对象为空!");
-			var d = this;
-			if ("string" == typeof b) {
-				var e = j[b];
-				null == e ? (e = new Image, e.src = b, e.onload = function () {
-					j[b] = e,
-					1 == c && d.setSize(e.width, e.height);
-					var f = a.util.genImageAlarm(e);
-					f && (e.alarm = f),
-					d.image = e
-				}) : (c && this.setSize(e.width, e.height), this.image = e)
+			var c = this;
+			if ("string" == typeof a) {
+				var d = j[a];
+				null == d ? (d = new Image, d.src = a, d.onload = function () {
+					j[a] = d,
+					1 == b && c.setSize(d.width, d.height),
+					c.image = d,
+					c.alarmColor = null == c.alarmColor ? "255,0,0" : c.alarmColor
+				}) : (b && this.setSize(d.width, d.height), c.image = d, c.alarmColor = null == c.alarmColor ? "255,0,0" : c.alarmColor)
 			} else
-				this.image = b, 1 == c && this.setSize(b.width, b.height)
+				this.image = a, c.alarmColor = null == c.alarmColor ? "255,0,0" : c.alarmColor, 1 == b && this.setSize(a.width, a.height)
 		},
 		this.removeHandler = function (a) {
 			var b = this;
@@ -2034,6 +2031,19 @@
 	var j = {};
 	b.prototype = new a.EditableElement,
 	c.prototype = new b,
+	Object.defineProperties(c.prototype, {
+		alarmColor: {
+			get: function () {
+				return this._alarmColor
+			},
+			set: function (b) {
+				if (this._alarmColor = b, null != this.image) {
+					var c = a.util.genImageAlarm(this.image, b);
+					c && (this.alarmImage = c)
+				}
+			}
+		}
+	}),
 	d.prototype = new c,
 	e.prototype = new d,
 	f.prototype = new c,

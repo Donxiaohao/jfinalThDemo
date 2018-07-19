@@ -20,6 +20,140 @@
 var canvas = document.getElementById('canvas'); 
 var stage = new JTopo.Stage(canvas); // 创建一个舞台对象
 var scene = new JTopo.Scene(stage); // 创建一个场景对象
+var nodeMap={};
+var k=0;
+
+function test() {
+	  var vars = {};
+	  // 简单的字符串作为变量名
+	  vars['hello'] = "hello, world!";
+	  alert(vars.hello);
+	   
+	  //批量定义
+	  for(var i=0; i<10; i++) {
+	    var varname="var"+i;
+	    vars[varname] = "value"+i;
+	  }
+
+
+	  for(var i=0;i<10;i++){
+		  console.log(vars['var'+1])
+	  }
+	}
+
+// 节点
+function newNode(x, y, w, h, text,img){
+   var node = new JTopo.Node(text);
+   node.setImage('/image/'+img,false);
+   node.setLocation(x, y);
+   node.setSize(w, h);
+   node.fillColor='255,128,0';
+   node.fontColor='rgba(0, 0, 0,1 )';
+   //单纯的单击事件
+  /*  node.click(function(event){
+   	console.log(event);
+   }); */
+   
+   //可根据第一个参数绑定任何事件 
+   //click,dbclick,mousedown,mouseup,mouseover,mouseout,mousemove,mousedrag
+    node.addEventListener("click",function(node){
+    	test()
+   })
+   scene.add(node);
+   nodeMap[k]=node;
+   k++;
+   return node;
+}
+
+// 简单连线
+   function newLink(nodeA, nodeZ, text, dashedPattern,arrowsRadius){
+   var link = new JTopo.Link(nodeA, nodeZ, text);
+   link.lineWidth = 2; // 线宽
+   link.dashedPattern = dashedPattern; // 虚线
+   link.bundleOffset = 60; // 折线拐角处的长度
+   link.bundleGap = 20; // 线条之间的间隔
+   link.textOffsetY = 3; // 文本偏移量（向下3个像素）
+   link.strokeColor = '0,250,0';
+   link.fontColor='0,0,0';
+   if(arrowsRadius){
+   	link.arrowsRadius = 10;
+   }  
+   scene.add(link);
+   return link;
+}
+
+// 折线
+function newFoldLink(nodeA, nodeZ, text, direction, dashedPattern){
+   var link = new JTopo.FoldLink(nodeA, nodeZ, text);
+   link.direction = direction || 'horizontal';
+   link.arrowsRadius = 15; //箭头大小
+   link.lineWidth = 3; // 线宽
+   link.bundleOffset = 60; // 折线拐角处的长度
+   link.bundleGap = 20; // 线条之间的间隔
+   link.textOffsetY = 3; // 文本偏移量（向下3个像素）
+   link.dashedPattern = dashedPattern;
+   link.strokeColor = '0,250,0';
+   link.arrowsRadius = 10;   
+   scene.add(link);
+   return link;
+}
+
+// 二次折线
+function newFlexionalLink(nodeA, nodeZ, text, direction, dashedPattern){
+   var link = new JTopo.FlexionalLink(nodeA, nodeZ, text);
+   link.direction = direction || 'horizontal';
+   link.arrowsRadius = 10;
+   link.lineWidth = 3; // 线宽
+   link.offsetGap = 35;
+   link.bundleGap = 20; // 线条之间的间隔
+   link.textOffsetY = 10; // 文本偏移量（向下15个像素）
+   link.strokeColor = '0,250,0';
+   link.dashedPattern = dashedPattern;
+   scene.add(link);
+   return link;
+}
+
+// 曲线
+function newCurveLink(nodeA, nodeZ, text){
+   var link = new JTopo.CurveLink(nodeA, nodeZ, text);
+   link.lineWidth = 3; // 线宽
+   scene.add(link);
+   return link;
+}
+
+//容器
+function newContainer(){
+	var container=new JTopo.Container();
+	container.setSize(100,100);
+} 
+ 
+
+CanvasRenderingContext2D.prototype.wrapText = function(str,x,y){
+	var textArray = str.split('\n');
+	if(textArray==undefined||textArray==null)return false;
+
+	var rowCnt = textArray.length;
+	var i = 0,imax = rowCnt,maxLength = 0;maxText = textArray[0];
+	for(;i<imax;i++){
+	var nowText = textArray[i],textLength = nowText.length;
+	if(textLength >=maxLength){
+	maxLength = textLength;
+	maxText = nowText;
+	}
+	}
+	var maxWidth = this.measureText(maxText).width;
+	var lineHeight = this.measureText("元").width;
+	x-= lineHeight*2;
+
+	for(var j= 0;j<textArray.length;j++){
+	var words = textArray[j];
+
+	this.fillText(words,-(maxWidth/2),y-textArray.length*lineHeight/100);
+
+	y+= lineHeight;
+	}
+	}
+
 	$(function (){
 		/* var canvas = document.getElementById('canvas'); 
 		var stage = new JTopo.Stage(canvas); // 创建一个舞台对象
@@ -38,272 +172,7 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
 //		showJTopoToobar(stage);
 
 		
-	    // 节点
-	     function newNode(x, y, w, h, text,img){
-	        var node = new JTopo.Node(text);
-	        node.setImage('/image/'+img,true);
-	        node.setLocation(x, y);
-	        node.setSize(w, h);
-	        node.fillColor='255,128,0';
-	        node.fontColor='rgba(0, 0, 0,1 )';
-	        //单纯的单击事件
-	       /*  node.click(function(event){
-		    	console.log(event);
-		    }); */
-		    
-		    //可根据第一个参数绑定任何事件 
-		    //click,dbclick,mousedown,mouseup,mouseover,mouseout,mousemove,mousedrag
-	 	    node.addEventListener("mousedrag",function(node){
-		    	console.log(node);
-		    })
-	        scene.add(node);
-	        return node;
-	    }
-	 
-	    // 简单连线
-	        function newLink(nodeA, nodeZ, text, dashedPattern,arrowsRadius){
-	        var link = new JTopo.Link(nodeA, nodeZ, text);
-	        link.lineWidth = 2; // 线宽
-	        link.dashedPattern = dashedPattern; // 虚线
-	        link.bundleOffset = 60; // 折线拐角处的长度
-	        link.bundleGap = 20; // 线条之间的间隔
-	        link.textOffsetY = 3; // 文本偏移量（向下3个像素）
-	        link.strokeColor = '0,250,0';
-	        link.fontColor='0,0,0';
-	        if(arrowsRadius){
-	        	link.arrowsRadius = 10;
-	        }  
-	        scene.add(link);
-	        return link;
-	    }
-	 
-	    // 折线
-	    function newFoldLink(nodeA, nodeZ, text, direction, dashedPattern){
-	        var link = new JTopo.FoldLink(nodeA, nodeZ, text);
-	        link.direction = direction || 'horizontal';
-	        link.arrowsRadius = 15; //箭头大小
-	        link.lineWidth = 3; // 线宽
-	        link.bundleOffset = 60; // 折线拐角处的长度
-	        link.bundleGap = 20; // 线条之间的间隔
-	        link.textOffsetY = 3; // 文本偏移量（向下3个像素）
-	        link.dashedPattern = dashedPattern;
-	        link.strokeColor = '0,250,0';
-	        link.arrowsRadius = 10;   
-	        scene.add(link);
-	        return link;
-	    }
-	 
-	    // 二次折线
-	    function newFlexionalLink(nodeA, nodeZ, text, direction, dashedPattern){
-	        var link = new JTopo.FlexionalLink(nodeA, nodeZ, text);
-	        link.direction = direction || 'horizontal';
-	        link.arrowsRadius = 10;
-	        link.lineWidth = 3; // 线宽
-	        link.offsetGap = 35;
-	        link.bundleGap = 20; // 线条之间的间隔
-	        link.textOffsetY = 10; // 文本偏移量（向下15个像素）
-	        link.strokeColor = '0,250,0';
-	        link.dashedPattern = dashedPattern;
-	        scene.add(link);
-	        return link;
-	    }
-	 
-	    // 曲线
-	    function newCurveLink(nodeA, nodeZ, text){
-	        var link = new JTopo.CurveLink(nodeA, nodeZ, text);
-	        link.lineWidth = 3; // 线宽
-	        scene.add(link);
-	        return link;
-	    }
-	 	
-	    //容器
-	    function newContainer(){
-	    	var container=new JTopo.Container();
-	    	container.setSize(100,100);
-	    } 
-	      
-	    
-	    CanvasRenderingContext2D.prototype.wrapText = function(str,x,y){
-	    	var textArray = str.split('\n');
-	    	if(textArray==undefined||textArray==null)return false;
-
-	    	var rowCnt = textArray.length;
-	    	var i = 0,imax = rowCnt,maxLength = 0;maxText = textArray[0];
-	    	for(;i<imax;i++){
-	    	var nowText = textArray[i],textLength = nowText.length;
-	    	if(textLength >=maxLength){
-	    	maxLength = textLength;
-	    	maxText = nowText;
-	    	}
-	    	}
-	    	var maxWidth = this.measureText(maxText).width;
-	    	var lineHeight = this.measureText("元").width;
-	    	x-= lineHeight*2;
-	    	for(var j= 0;j<textArray.length;j++){
-	    	var words = textArray[j];
-	    	this.fillText(words,-(maxWidth/2),y-textArray.length*lineHeight/100);
-	    	y+= lineHeight;
-	    	}
-	    	}
-	    
-	    /* var node1 = newNode(737, 36, 30, 30,'node1');
-	    var node2 = newNode(737,116,30,30,'node2');
-	    var node3 = newNode(737,299,30,30,'node3'); 
-	    var node4 = newNode(575,177, 30, 30,'node4');
-	    var node5 = newNode(575,226,30,30,'node5');
-	    var node6 = newNode(575,276,30,30,'node6');
-	    var node7 = newNode(575,326,30,30,'node7');
-	    var node8 = newNode(575,376,30,30,'node8');  
-	    var node9 = newNode(350,276,30,30,'node9');	 
-	    var node10 = newNode(530,426,30,30,'node10');
-	    var node11 = newNode(450,426,30,30,'node11');          
-	    var node12 = newNode(190,359,30,30,'node12');
-	    var node13 = newNode(354,359,30,30,'node13');
-	    var node14 = newNode(304,359,30,30,'node14');
-	    var node15 = newNode(254,359,30,30,'node15');       
-	    var node16 = newNode(190,276,30,30,'node16');
-	    var node17 = newNode(190,177,30,30,'node17');
-	    var node18 = newNode(190,36,30,30,'node18');
-	    var node19 = newNode(281,84,30,30,'node19');
-	    var node20 = newNode(281,15,30,30,'node20');
-	    var node21 = newNode(483, 81, 30, 30,'node21');
-	    var node22 = newNode(420, 81, 30, 30,'node22'); 	   
-	    var node23 = newNode(110,36,30,30,'node23');       
-	    var node24 = newNode(110,252,30,30,'node24');
-	    var node25 = newNode(110,302,30,30,'node25');
-	    var node26 = newNode(20,107,30,30,'node26');
-	    var node27 = newNode(20,177,30,30,'node27');
-	    var node28 = newNode(20,247,30,30,'node28');
-	    var node29 = newNode(110,177,30,30,'node29');
-	    var node30 = newNode(543, 81, 30, 30,'node30');
-	    var node31 = newNode(450,276,30,30,'node31');   */
-	   /*  #for(node:topoNodeInfos)
-	    	var node#(node.id) = newNode(#(node.x),#(node.y),#(node.width),#(node.height),'#(node.text)','#(node.name)');
-	    #end
-	    
-	    #for(line:topoLineInfos)
-	    	var link#(line.id)=newLink(node#(line.src),node#(line.dest),'#(line.text)');
-	    #end
-	    
-	    setInterval(function(){
-	           if(node10.alarm == '二级告警'){
-	               node10.alarm = null;
-	           }else{
-	               node10.alarm = '二级告警'
-	           }
-	    }, 600); */
-	    /* var link1 = newLink(node1, node30, 'link1');
-	    var link2 = newLink(node2,node30,'link2');
-	    var link3 = newLink(node3,node30,'link3');
- 		var link4 = newLink(node4, node31, 'link4'); 
-	    var link5 = newLink(node5,node31,'link5');
-	    var link6 = newLink(node6,node31,'link6');
-	    var link7 = newLink(node7,node31,'link7');
-	    var link8 = newLink(node8,node31,'link8');
-	    var link9 = newLink(node30, node9, 'link9'); 
-	    var link10 =newLink(node31, node9, 'link10'); 
-	    var link11 =newLink(node10, node11, 'link11'); 
-	    var link12 = newLink(node11, node9, 'link12');   
-	    var link13 = newLink(node12, node9, 'link13');
-	    var link14 = newLink(node13, node9, 'link14');
-	    var link15 = newLink(node14, node9, 'link15');
-	    var link16 = newLink(node15, node9, 'link16');
-	    var link17 = newLink(node9,node16,'link17');
-	    var link18 = newLink(node21,node22,'link18');
-	    var link19 = newLink(node22,node18,'link19',null,1);
-	    var link20 = newLink(node22,node20,'link20');
-	    var link21 = newLink(node22,node19,'link21');
-	    var link22 = newLink(node20,node18,'link22');
-	    var link23 = newLink(node19,node18,'link23');
-	    var link24 = newLink(node9,node22,'link24');
-	    var link25 = newLink(node22,node17,'link25',null,1);
-	    var link26 = newLink(node17,node29,'link26',null,1);
-	    var link27 = newLink(node18,node23,'link27',null);
-	    var link28 = newLink(node16,node24,'link28',null);
-	    var link29 = newLink(node16,node25,'link29',null);
-	    var link30 = newLink(node29,node26,'link30',null);
-	    var link31 = newLink(node29,node27,'link31',null);
-	    var link32 = newLink(node29,node28,'link32',null); */
-//	    var link9 = newFoldLink(node2, node9, 'link9'); 
-	    /* var from = newNode(100, 120, 30, 30);
-	    var to = newNode(300, 120, 30, 30);
-	    var link = newLink(from, to, 'Link');
-	 
-	    var from = newNode(100, 200, 30, 30);
-	    var to = newNode(200, 300, 30, 30);
-	    var link = newFoldLink(from, to, 'FoldLink');
-	    var link = newFoldLink(to, from,'FoldLink', 'vertical', 5);
-	 
-	    var from = newNode(100, 300, 30, 30);
-	    var to = newNode(200, 400, 30, 30);
-	    var link = newFoldLink(from, to, 'FoldLink', 'vertical');
-	 
-	    var from = newNode(450, 250, 30, 30);
-	    var to = newNode(400, 100, 30, 30);
-	    var link = newFlexionalLink(from, to, 'FlexLink1');
-	    var from = newNode(600, 100, 30, 30);
-	    var to = newNode(650, 200, 30, 30);
-	    var link = newFlexionalLink(from, to, 'f', 'vertical', 2);
-	 
-	 
-	    var from = newNode(450, 400, 30, 30);
-	    var link = newLink(from, from, 'loop');
-	 
-	    var from = newNode(550, 400, 30, 30);
-	    var to = newNode(650, 300, 30, 30);
-	    var link = newCurveLink(from, to, 'curve'); */
-
-		
-				
-		//		scene.alpha=1;  //透明度
-				
-		//		stage.mode='drag';
-				//设置mode为select时 鼠标可以进行框选
-		//		stage.mode='select';
-		//		选中节点时可以通过6个控制点来调整节点的宽、高
-		//		stage.mode='edit';
-		
-		//      鹰眼模式
-		//		stage.eagleEye.visible = true
-		//		鼠标滚轮滑动 舞台缩小或者放大  可以配合鹰眼使用
-		//		stage.wheelZoom = 0.85;
-	    //得到舞台中所有元素位置确定的边界大小（left、top、right、bottom）
-	    /*   var bound = stage.getBound();
-	    console.log(bound); 
-	    //导出成PNG图片（在新打开的浏览器Tab页中）
-	    stage.saveImageInfo();
-	    */
-	    
-		/* var node = new JTopo.Node("自定义");                
-        node.percent = 0.8;
-        node.beginDegree = 0;
-        node.width = node.height = 60;
-        node.setLocation(275, 210);
-        node.paint = function(g){
-            g.beginPath();
-            g.moveTo(0,0);
-            g.fillStyle = 'rgba(0,255,0,' + this.alpha + ')';
-            g.arc(0, 0, this.width/2, this.beginDegree, this.beginDegree + 2*Math.PI*this.percent);
-            g.fill();                
-            g.closePath();
-            
-            g.save();                
-            g.beginPath();
-            g.fillStyle = 'rgba(255,255,0,' + this.alpha + ')';
-            g.moveTo(0,0);
-            g.arc(0, 0, this.width/2-10, this.beginDegree, this.beginDegree + 2*Math.PI);                
-            g.fill();
-            g.closePath();                                
-            g.restore();
-                            
-            this.paintText(g);
-           
-        };  
-        scene.add(node);
-        node.alarm="1111"
-        console.log('node')
-        console.log(node)
-       */
+	   
       
 		 var ps = ['Top_Left', 'Top_Center', 'Top_Right', 'Middle_Left', 'Middle_Center'
              , 'Middle_Right', 'Bottom_Left', 'Bottom_Center', 'Bottom_Right'];
@@ -312,91 +181,78 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
          for(var i=0; i<3; i++){
              for(var j=0; j<3; j++){
                  var text = position = ps[n++];
-                 console.log(text);
+                 text=text.split('_')[0];
                  var circleNode = new JTopo.Node(text)
                  circleNode.setSize(40, 40);
                  circleNode.fillColor = '0, 0, 255';
                  circleNode.setLocation(120 + j*140, 50 + i* 140);
                  circleNode.textPosition = position;
+                 circleNode.fontColor="255,0,0";
                  scene.add(circleNode);
+                 nodeMap[k]=circleNode;
              }
          }
          
-         var circleNode = new JTopo.CircleNode('左下\n偏移')
+         var circleNode =newNode(650, 200, 40, 40,'123456789','clound.png');
          circleNode.fillColor = '0, 0, 0';
-         circleNode.setLocation(650, 200);
          circleNode.textPosition = 'Middle_Center';
-         
-         circleNode.paintText = function(a){
-        	 a.beginPath(),
-        	 a.font = this.font,
-        	 a.wrapText(this.text,this.height/2,this.height);
-        	 a.closePath()
-        	 };
-
-         
-         
-  /*        circleNode.alarm='告警文字'
+         circleNode.fontColor="255,255,0";
+         circleNode.alpha=0.7;
+         circleNode.alarm='100%'
         	 circleNode.paintAlarmText = function(a) {
-             if (null != this.alarm && "" != this.alarm) {
-                 var b = this.alarmColor || "255,0,0",
-                     c = this.alarmAlpha || .5;
-                 a.beginPath(),
-                 a.font = this.alarmFont || "10px 微软雅黑";
-
-                 var textArray = this.alarm.split('\n');
-                 var rowCnt = textArray.length;
-                 var i = 0, maxLength = 0, maxText = textArray[0];
-                 for(;i<rowCnt;i++){
-                      var nowText = textArray[i],textLength = nowText.length;
-                      if(textLength >=maxLength){
-                          maxLength = textLength;
-                          maxText = nowText;
-                      }
-                 }
-                 var maxWidth = a.measureText(maxText).width;
-                 var lineHeight = 16; // 字体大小 + 6
-                 // alarm框的宽度
-                 var d =( (a.measureText(this.alarm).width/rowCnt +6) > maxWidth? (a.measureText(this.alarm).width/rowCnt +6) : maxWidth);
-                 var e =(lineHeight)*(rowCnt), // alarm 框高度 行高*行数
-                     f = this.width / 2 - d / 2 , // alarm 框横向位置
-                     g = - this.height /2  - e - 20; // alarm 纵横向位置
- //
-                 //绘制alarm框
-                 a.strokeStyle = "rgba(" + b + ", " + c + ")",
-                 a.fillStyle = "rgba(" + b + ", " + c + ")",
-                 a.lineCap = "round",
-                 a.lineWidth = 1,
-                 a.moveTo(f -10, g - 10), // 左上  这些10是调整 alarm 边框离文字的距离
-                 a.lineTo(f + d +10, g - 10), // 右上
-                 a.lineTo(f + d +10, g + e + 10), // 右下
-                 a.lineTo(f + d / 2 + 6, g + e  + 10),
-                 a.lineTo(f + d / 2, g + e + 8  + 10),
-                 a.lineTo(f + d / 2 - 6, g + e  + 10),
-                 a.lineTo(f - 10, g + e  + 10), // 左下
-                 a.lineTo(f -10, g -10),
-                 a.fill(),
-                 a.stroke(),
-                 a.closePath(),
-                 a.beginPath(),
-                 a.strokeStyle = "rgba(" + this.fontColor + ", " + this.alpha + ")",
-                 a.fillStyle = "rgba(" + this.fontColor + ", " + this.alpha + ")",
-                 (function(a,b,x,y,textArray){
-                      for(var j= 0;j<textArray.length;j++){
-                          var words = textArray[j];
-                          a.fillText(words,x ,y);
-                          y+= lineHeight;
-                      }
-                 })(a,this,f,g+8,textArray),
-                 a.closePath()
-             }
-         }  */
-         
-         
-         // 向左偏移 20像素
-         circleNode.textOffsetX = -30;
-         // 向下偏移 25像素
-         circleNode.textOffsetY = 30;
+               if (null != this.alarm && "" != this.alarm) {   
+               //if语句中的代码可以替换源码 实现换行 即以下代码
+                   var b = this.alarmColor || "255,0,0",
+                       c = this.alarmAlpha || .5;
+                   a.beginPath(),
+                   a.font = this.alarmFont || "10px 微软雅黑";
+                   var textArray = this.alarm.split('\n');
+                   var rowCnt = textArray.length;
+                   var i = 0, maxLength = 0, maxText = textArray[0];
+                   for(;i<rowCnt;i++){
+                        var nowText = textArray[i],textLength = nowText.length;
+                        if(textLength >=maxLength){
+                            maxLength = textLength;
+                            maxText = nowText;
+                        }
+                   }
+                   var maxWidth = a.measureText(maxText).width;
+                   var lineHeight = 16; // 字体大小 + 6
+                   // alarm框的宽度
+                   var d =( (a.measureText(this.alarm).width/rowCnt +6) > maxWidth? (a.measureText(this.alarm).width/rowCnt +6) : maxWidth);
+                   var e =(lineHeight)*(rowCnt), // alarm 框高度 行高*行数
+                       f = this.width / 2 - d / 2 , // alarm 框横向位置
+                       g = - this.height /2  - e - 20; // alarm 纵横向位置
+   //
+                   //绘制alarm框
+                   a.strokeStyle = "rgba(" + b + ", " + c + ")",
+                   a.fillStyle = "rgba(" + b + ", " + c + ")",
+                   a.lineCap = "round",
+                   a.lineWidth = 1,
+                   a.moveTo(f -3, g - 3), // 左上  这些10是调整 alarm 边框离文字的距离
+                   a.lineTo(f + d +3, g - 3), // 右上
+                   a.lineTo(f + d +3, g + e + 3), // 右下
+                   a.lineTo(f + d / 2 + 3, g + e  + 3),
+                   a.lineTo(f + d / 2, g + e + 8  + 3),
+                   a.lineTo(f + d / 2 - 3, g + e  + 3),
+                   a.lineTo(f - 3, g + e  + 3), // 左下
+                   a.lineTo(f -3, g -3),
+                   a.fill(),
+                   a.stroke(),
+                   a.closePath(),
+                   a.beginPath(),
+                   a.strokeStyle = "rgba(" + this.fontColor + ", " + this.alpha + ")",
+                   a.fillStyle = "rgba(" + this.fontColor + ", " + this.alpha + ")",
+                   (function(a,b,x,y,textArray){
+                        for(var j= 0;j<textArray.length;j++){
+                            var words = textArray[j];
+                            a.fillText(words,x+2 ,y);
+                            y+= lineHeight;
+                        }
+                   })(a,this,f,g+8,textArray),
+                   a.closePath()
+               }
+         }
          
          scene.add(circleNode);
          
@@ -404,9 +260,51 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
          
          //居中显示
          scene.centerAndZoom();
-   		
-        
-	})
+     
+         
 
+//    	 setInterval("refresh()",10000);
+     	
+	})
+	
+/* 	 function refresh(){
+ 		$.ajax({ 
+ 			url: "/index/testAjax", 
+ 			success: function(){
+ 				stage.clear();
+ 				
+ 				 var ps = ['Top_Left', 'Top_Center', 'Top_Right', 'Middle_Left', 'Middle_Center'
+ 		             , 'Middle_Right', 'Bottom_Left', 'Bottom_Center', 'Bottom_Right'];
+ 		         
+ 		         var n = 0;
+ 		         for(var i=0; i<3; i++){
+ 		             for(var j=0; j<3; j++){
+ 		                 var text = position = ps[n++];
+ 		                 text=text.split('_')[0];
+ 		                 var circleNode = new JTopo.Node(text)
+ 		                 circleNode.setSize(40, 40);
+ 		                 circleNode.fillColor = '0, 0, 255';
+ 		                 circleNode.setLocation(120 + j*140, 50 + i* 140);
+ 		                 circleNode.textPosition = position;
+ 		                 circleNode.fontColor="255,0,0";
+ 		                 scene.add(circleNode);
+ 		                 nodeMap[k]=circleNode;
+ 		             }
+ 		         }
+ 		         
+ 		         var circleNode =newNode(650, 200, 40, 40,'123456789','clound.png');
+ 		         circleNode.fillColor = '0, 0, 0';
+ 		         circleNode.textPosition = 'Middle_Center';
+ 		         circleNode.fontColor="255,0,0";
+ 		         
+ 		        scene.add(circleNode);
+ 		         
+ 		         stage.add(scene);
+ 		         
+ 		         //居中显示
+ 		         scene.centerAndZoom();
+ 	      }});
+ 		
+ 	}  */
 </script>
 </html>

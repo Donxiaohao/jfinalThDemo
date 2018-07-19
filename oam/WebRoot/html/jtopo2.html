@@ -3,6 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>登陆丨OAM</title>
 <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 
 </style>
@@ -11,75 +14,160 @@
 <div id="content">
 	<canvas width="800" height="500" id="canvas" style=" background-color:#EEEEEE; border:1px solid #444;">
 </div>
-<div onclick='removeSence();'>removeSence</div>
+<a type="button" id="contextmenu"  class="btn btn-default" data-toggle="tooltip" data-placement="left" style='display:none'>
+</a>
+
 </body>
-<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
-<script src="/js/jtopo-0.4.8-min.js"></script>
+<!-- <script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script> -->
+<script src="/js/jtopo-0.4.8new-min.js"></script>
 <script src="/js/toolbar.js"></script>
 <script>
-var canvas = document.getElementById('canvas'); 
+ var canvas = document.getElementById('canvas'); 
 var stage = new JTopo.Stage(canvas); // 创建一个舞台对象
 var scene = new JTopo.Scene(stage); // 创建一个场景对象
-	 $(function (){
-		 CanvasRenderingContext2D.prototype.wrapText = function(str,x,y){
-			 var textArray = str.split('\n');
-			 if(textArray==undefined||textArray==null)return false;
-			 var rowCnt = textArray.length;
-			 var i = 0,imax = rowCnt,maxLength = 0;maxText = textArray[0];
-			 for(;i<imax;i++){
-				 var nowText = textArray[i],textLength = nowText.length;
-				 if(textLength >=maxLength){
-					 maxLength = textLength;
-					 maxText = nowText;
-				 }
-			 }
-			 var maxWidth = this.measureText(maxText).width;
-			 var lineHeight = this.measureText("元").width;
-			 x-= lineHeight*2;
-			 for(var j= 0;j<textArray.length;j++){
-				 var words = textArray[j];
-				 this.fillText(words,-(maxWidth/2),y-textArray.length*lineHeight/100);
-				 y+= lineHeight;
-			 }
-		 };
-
-		 
-		
-		stage.frames = -24;
-	
-        // 节点
-        function newNode(x, y, w, h, text){
-            var node = new JTopo.Node(text);
-            node.setLocation(x, y);
-            node.setSize(w, h);
-            scene.add(node);
-            return node;
-        }
-        
-        // 简单连线
-        function newLink(nodeA, nodeZ, text,dashedPattern){
-            var link = new JTopo.Link(nodeA, nodeZ, text);        
-            link.lineWidth = 3; // 线宽
-            link.bundleOffset = 60; // 折线拐角处的长度
-            link.bundleGap = 20; // 线条之间的间隔
-            link.textOffsetY = 3; // 文本偏移量（向下3个像素）
-            link.strokeColor = JTopo.util.randomColor(); // 线条颜色随机
-            link.dashedPattern = dashedPattern; 
-            link.addEventListener("click",function(link){
-		    	console.log(link);
+	$(function (){
+	    // 节点
+	     function newNode(x, y, w, h, text,img){
+	        var node = new JTopo.Node(text);
+	        node.setImage('/image/'+img,false);
+	        node.setLocation(x, y);
+	        node.setSize(w, h);
+	        node.fillColor='255,128,0';
+	        node.fontColor='rgba(0, 0, 0,1 )';
+	        //单纯的单击事件
+	       /*  node.click(function(event){
+		    	console.log(event);
+		    }); */
+		    
+		    //可根据第一个参数绑定任何事件 
+		    //click,dbclick,mousedown,mouseup,mouseover,mouseout,mousemove,mousedrag
+		    node.addEventListener("click",function(node){
+		    	console.log(node);
 		    })
-            scene.add(link);
-            return link;
-        }
-       
-        var node = new JTopo.Node(260,190,30,30,'test\ntest'); // 创建一个节点
-        node.paintText = function(a){
-	        a.beginPath(),
-	        a.font = this.font,
-	        a.wrapText(this.text,this.height/2,this.height);
-	        a.closePath()
-        };
-       
+	        scene.add(node);
+	        return node;
+	    }
+	 
+	    // 简单连线
+	        function newLink(nodeA, nodeZ, text, dashedPattern,arrowsRadius){
+	        var link = new JTopo.Link(nodeA, nodeZ, text);
+	        link.lineWidth = 2; // 线宽
+	        link.dashedPattern = dashedPattern; // 虚线
+	        link.bundleOffset = 60; // 折线拐角处的长度
+	        link.bundleGap = 20; // 线条之间的间隔
+	        link.textOffsetY = 3; // 文本偏移量（向下3个像素）
+	        link.strokeColor = '0,250,0';
+	        link.fontColor='0,0,0';
+	        if(arrowsRadius){
+	        	link.arrowsRadius = 10;
+	        }  
+	        scene.add(link);
+	        return link;
+	    }
+	 
+	    // 折线
+	    function newFoldLink(nodeA, nodeZ, text, direction, dashedPattern){
+	        var link = new JTopo.FoldLink(nodeA, nodeZ, text);
+	        link.direction = direction || 'horizontal';
+	        link.arrowsRadius = 15; //箭头大小
+	        link.lineWidth = 3; // 线宽
+	        link.bundleOffset = 60; // 折线拐角处的长度
+	        link.bundleGap = 20; // 线条之间的间隔
+	        link.textOffsetY = 3; // 文本偏移量（向下3个像素）
+	        link.dashedPattern = dashedPattern;
+	        link.strokeColor = '0,250,0';
+	        link.arrowsRadius = 10;   
+	        scene.add(link);
+	        return link;
+	    }
+	 
+	    // 二次折线
+	    function newFlexionalLink(nodeA, nodeZ, text, direction, dashedPattern){
+	        var link = new JTopo.FlexionalLink(nodeA, nodeZ, text);
+	        link.direction = direction || 'horizontal';
+	        link.arrowsRadius = 10;
+	        link.lineWidth = 3; // 线宽
+	        link.offsetGap = 35;
+	        link.bundleGap = 20; // 线条之间的间隔
+	        link.textOffsetY = 10; // 文本偏移量（向下15个像素）
+	        link.strokeColor = '0,250,0';
+	        link.dashedPattern = dashedPattern;
+	        scene.add(link);
+	        return link;
+	    }
+	 
+	    // 曲线
+	    function newCurveLink(nodeA, nodeZ, text){
+	        var link = new JTopo.CurveLink(nodeA, nodeZ, text);
+	        link.lineWidth = 3; // 线宽
+	        scene.add(link);
+	        return link;
+	    }
+	 	
+	    //容器
+	    function newContainer(){
+	    	var container=new JTopo.Container();
+	    	container.setSize(100,100);
+	    } 
+	    
+	 
+		 var ps = ['Top_Left', 'Top_Center', 'Top_Right', 'Middle_Left', 'Middle_Center'
+             , 'Middle_Right', 'Bottom_Left', 'Bottom_Center', 'Bottom_Right'];
+         
+         var n = 0;
+         for(var i=0; i<3; i++){
+             for(var j=0; j<3; j++){
+                 var text = position = ps[n++];
+                 text=text.split("_")[0];
+                 var circleNode = new JTopo.Node(text)
+                 circleNode.setSize(40, 40);
+                 circleNode.fillColor = '0, 0, 255';
+                 circleNode.setLocation(120 + j*140, 50 + i* 140);
+                 circleNode.textPosition = position;
+                 circleNode.fontColor="255,0,0";
+                 scene.add(circleNode);
+             }
+         }
+         
+         var circleNode =newNode(650, 200, 40, 40,'','clound.png');
+ //	        circleNode.fillColor = '0, 0, 0';
+         circleNode.textPosition = 'Middle_Center';
+         circleNode.fontColor="255,0,0";
+         setInterval(function(){
+	           if(circleNode.alarm == '二级告警'){
+	        	   circleNode.alarm = null;
+	        	   circleNode.alarmColor='0,0,255';
+//	        	   circleNode.imageAlarmColor='0,255,0';
+	           }else{
+	        	   circleNode.alarm = '二级告警'
+	           }
+	     }, 600);
+         scene.add(circleNode);
+         
+         stage.add(scene);
+         
+         //居中显示
+         scene.centerAndZoom();
+         
+       	scene.mousemove(function (e) {
+        	 var element = e.target;
+        	 if (element && element.elementType == 'node') {
+	        	 var width = 20;	
+	        	 $("#contextmenu").html(element.text)
+	        	 $("#contextmenu").css({
+	        		 position:'absolute',
+                     top: e.pageY,
+                     left: e.pageX
+                 }).show();    
+        	 } else {
+        		 $("#contextmenu").hide();
+        	 }
+         });
 	}) 
+
+	$(function () { $("[data-toggle='tooltip']").tooltip('hide'); });
+	
+
+ 
 </script>
 </html>

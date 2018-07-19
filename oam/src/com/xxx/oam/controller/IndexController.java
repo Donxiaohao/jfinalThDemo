@@ -20,4 +20,8 @@ public class IndexController extends Controller{
 	public void link() {
 		render("/html/jtopo2.html");
 	}
+	
+	public void testAjax() {
+		renderNull();
+	}
 }
