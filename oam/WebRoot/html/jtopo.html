@@ -20,291 +20,95 @@
 var canvas = document.getElementById('canvas'); 
 var stage = new JTopo.Stage(canvas); // 创建一个舞台对象
 var scene = new JTopo.Scene(stage); // 创建一个场景对象
-var nodeMap={};
-var k=0;
-
-function test() {
-	  var vars = {};
-	  // 简单的字符串作为变量名
-	  vars['hello'] = "hello, world!";
-	  alert(vars.hello);
-	   
-	  //批量定义
-	  for(var i=0; i<10; i++) {
-	    var varname="var"+i;
-	    vars[varname] = "value"+i;
-	  }
-
-
-	  for(var i=0;i<10;i++){
-		  console.log(vars['var'+1])
-	  }
-	}
-
-// 节点
-function newNode(x, y, w, h, text,img){
-   var node = new JTopo.Node(text);
-   node.setImage('/image/'+img,false);
-   node.setLocation(x, y);
-   node.setSize(w, h);
-   node.fillColor='255,128,0';
-   node.fontColor='rgba(0, 0, 0,1 )';
-   //单纯的单击事件
-  /*  node.click(function(event){
-   	console.log(event);
-   }); */
-   
-   //可根据第一个参数绑定任何事件 
-   //click,dbclick,mousedown,mouseup,mouseover,mouseout,mousemove,mousedrag
-    node.addEventListener("click",function(node){
-    	test()
-   })
-   scene.add(node);
-   nodeMap[k]=node;
-   k++;
-   return node;
-}
-
-// 简单连线
-   function newLink(nodeA, nodeZ, text, dashedPattern,arrowsRadius){
-   var link = new JTopo.Link(nodeA, nodeZ, text);
-   link.lineWidth = 2; // 线宽
-   link.dashedPattern = dashedPattern; // 虚线
-   link.bundleOffset = 60; // 折线拐角处的长度
-   link.bundleGap = 20; // 线条之间的间隔
-   link.textOffsetY = 3; // 文本偏移量（向下3个像素）
-   link.strokeColor = '0,250,0';
-   link.fontColor='0,0,0';
-   if(arrowsRadius){
-   	link.arrowsRadius = 10;
-   }  
-   scene.add(link);
-   return link;
-}
-
-// 折线
-function newFoldLink(nodeA, nodeZ, text, direction, dashedPattern){
-   var link = new JTopo.FoldLink(nodeA, nodeZ, text);
-   link.direction = direction || 'horizontal';
-   link.arrowsRadius = 15; //箭头大小
-   link.lineWidth = 3; // 线宽
-   link.bundleOffset = 60; // 折线拐角处的长度
-   link.bundleGap = 20; // 线条之间的间隔
-   link.textOffsetY = 3; // 文本偏移量（向下3个像素）
-   link.dashedPattern = dashedPattern;
-   link.strokeColor = '0,250,0';
-   link.arrowsRadius = 10;   
-   scene.add(link);
-   return link;
-}
-
-// 二次折线
-function newFlexionalLink(nodeA, nodeZ, text, direction, dashedPattern){
-   var link = new JTopo.FlexionalLink(nodeA, nodeZ, text);
-   link.direction = direction || 'horizontal';
-   link.arrowsRadius = 10;
-   link.lineWidth = 3; // 线宽
-   link.offsetGap = 35;
-   link.bundleGap = 20; // 线条之间的间隔
-   link.textOffsetY = 10; // 文本偏移量（向下15个像素）
-   link.strokeColor = '0,250,0';
-   link.dashedPattern = dashedPattern;
-   scene.add(link);
-   return link;
-}
-
-// 曲线
-function newCurveLink(nodeA, nodeZ, text){
-   var link = new JTopo.CurveLink(nodeA, nodeZ, text);
-   link.lineWidth = 3; // 线宽
-   scene.add(link);
-   return link;
-}
-
-//容器
-function newContainer(){
-	var container=new JTopo.Container();
-	container.setSize(100,100);
-} 
+	$(function (){	
+	    // 节点
+	     function newNode(x, y, w, h, text){
+	        var node = new JTopo.Node(text);
+	        node.setLocation(x, y);
+	        node.setSize(w, h);
+	        node.fillColor='255,128,0';
+	        node.fontColor='rgba(0, 0, 0,1 )';
+	        scene.add(node);
+	        return node;
+	    }
+	 
+	    // 简单连线
+	        function newLink(nodeA, nodeZ, text, dashedPattern,arrowsRadius){
+	        var link = new JTopo.Link(nodeA, nodeZ, text);
+	        link.lineWidth = 2; // 线宽
+	        link.dashedPattern = dashedPattern; // 虚线
+	        link.bundleOffset = 60; // 折线拐角处的长度
+	        link.bundleGap = 20; // 线条之间的间隔
+	        link.textOffsetY = 3; // 文本偏移量（向下3个像素）
+	        link.strokeColor = '0,250,0';
+	        link.fontColor='0,0,0';
+	        if(arrowsRadius){
+	        	link.arrowsRadius = 10;
+	        }  
+	        scene.add(link);
+	        return link;
+	    }
+	 
+	    // 折线
+        function newFoldLink(nodeA, nodeZ, text, direction, dashedPattern){
+               var link = new JTopo.FoldLink(nodeA, nodeZ, text);
+               link.direction = direction || 'horizontal';
+               link.arrowsRadius = 15; //箭头大小
+               link.lineWidth = 3; // 线宽
+               link.bundleOffset = 60; // 折线拐角处的长度
+               link.bundleGap = 10; // 线条之间的间隔
+               link.textOffsetY = 3; // 文本偏移量（向下3个像素）
+               link.fontColor='rgba(255,0,0,1)';
+               link.strokeColor = '0,250,0';
+			   link.fontColor
+               link.dashedPattern = dashedPattern; 
+               
+               scene.add(link);
+               return link;
+        }
+ 
+	    // 二次折线
+	    function newFlexionalLink(nodeA, nodeZ, text, direction, dashedPattern){
+	        var link = new JTopo.FlexionalLink(nodeA, nodeZ, text);
+	        link.direction = direction || 'horizontal';
+	        link.arrowsRadius = 10;
+	        link.lineWidth = 3; // 线宽
+	        link.offsetGap = 35;
+	        link.bundleGap = 20; // 线条之间的间隔
+	        link.textOffsetY = 10; // 文本偏移量（向下15个像素）
+	        link.strokeColor = '0,250,0';
+	        link.dashedPattern = dashedPattern;
+	        scene.add(link);
+	        return link;
+	    }
+	 
+	    // 曲线
+	    function newCurveLink(nodeA, nodeZ, text){
+	        var link = new JTopo.CurveLink(nodeA, nodeZ, text);
+	        link.lineWidth = 3; // 线宽
+	        scene.add(link);
+	        return link;
+	    }
  
 
-CanvasRenderingContext2D.prototype.wrapText = function(str,x,y){
-	var textArray = str.split('\n');
-	if(textArray==undefined||textArray==null)return false;
-
-	var rowCnt = textArray.length;
-	var i = 0,imax = rowCnt,maxLength = 0;maxText = textArray[0];
-	for(;i<imax;i++){
-	var nowText = textArray[i],textLength = nowText.length;
-	if(textLength >=maxLength){
-	maxLength = textLength;
-	maxText = nowText;
-	}
-	}
-	var maxWidth = this.measureText(maxText).width;
-	var lineHeight = this.measureText("元").width;
-	x-= lineHeight*2;
-
-	for(var j= 0;j<textArray.length;j++){
-	var words = textArray[j];
-
-	this.fillText(words,-(maxWidth/2),y-textArray.length*lineHeight/100);
-
-	y+= lineHeight;
-	}
-	}
-
-	$(function (){
-		/* var canvas = document.getElementById('canvas'); 
-		var stage = new JTopo.Stage(canvas); // 创建一个舞台对象
-		var scene = new JTopo.Scene(stage); // 创建一个场景对象 */
-		
-		/* var node = new JTopo.Node("Hello");    // 创建一个节点
-		node.setLocation(300,200);    // 设置节点坐标          
-		node.rotate = Math.random(); // 旋转角度
-		node.scaleX = Math.random(); // 水平方向的缩放
-		node.scaleY = Math.random(); // 垂直方向的缩放
-	    node.alpha = Math.random();  // 透明度 */
-		//node.setImage('/image/Tips.png'); // 设置图片
-		//scene.add(node); // 放入到场景中
-		
-		//显示工具栏
-//		showJTopoToobar(stage);
-
-		
+	    #for(node:topoNodeInfos)
+	    	var node#(node.id) = newNode(#(node.x),#(node.y),#(node.width),#(node.height),'#(node.text)');
+	    #end
+	    
+//	    newLink(node1,node30,'test');
+	    newFoldLink(node1,node30,null,'vertical');
+	    newFlexionalLink(node2,node30,null,'horizontal');
+	    newFoldLink(node3,node30,null,'horizontal');
+	    
+	   /*  #for(line:topoLineInfos)
+	    	var link#(line.id)=newLink(node#(line.src),node#(line.dest),'#(line.text)');
+	    #end */
 	   
-      
-		 var ps = ['Top_Left', 'Top_Center', 'Top_Right', 'Middle_Left', 'Middle_Center'
-             , 'Middle_Right', 'Bottom_Left', 'Bottom_Center', 'Bottom_Right'];
-         
-         var n = 0;
-         for(var i=0; i<3; i++){
-             for(var j=0; j<3; j++){
-                 var text = position = ps[n++];
-                 text=text.split('_')[0];
-                 var circleNode = new JTopo.Node(text)
-                 circleNode.setSize(40, 40);
-                 circleNode.fillColor = '0, 0, 255';
-                 circleNode.setLocation(120 + j*140, 50 + i* 140);
-                 circleNode.textPosition = position;
-                 circleNode.fontColor="255,0,0";
-                 scene.add(circleNode);
-                 nodeMap[k]=circleNode;
-             }
-         }
-         
-         var circleNode =newNode(650, 200, 40, 40,'123456789','clound.png');
-         circleNode.fillColor = '0, 0, 0';
-         circleNode.textPosition = 'Middle_Center';
-         circleNode.fontColor="255,255,0";
-         circleNode.alpha=0.7;
-         circleNode.alarm='100%'
-        	 circleNode.paintAlarmText = function(a) {
-               if (null != this.alarm && "" != this.alarm) {   
-               //if语句中的代码可以替换源码 实现换行 即以下代码
-                   var b = this.alarmColor || "255,0,0",
-                       c = this.alarmAlpha || .5;
-                   a.beginPath(),
-                   a.font = this.alarmFont || "10px 微软雅黑";
-                   var textArray = this.alarm.split('\n');
-                   var rowCnt = textArray.length;
-                   var i = 0, maxLength = 0, maxText = textArray[0];
-                   for(;i<rowCnt;i++){
-                        var nowText = textArray[i],textLength = nowText.length;
-                        if(textLength >=maxLength){
-                            maxLength = textLength;
-                            maxText = nowText;
-                        }
-                   }
-                   var maxWidth = a.measureText(maxText).width;
-                   var lineHeight = 16; // 字体大小 + 6
-                   // alarm框的宽度
-                   var d =( (a.measureText(this.alarm).width/rowCnt +6) > maxWidth? (a.measureText(this.alarm).width/rowCnt +6) : maxWidth);
-                   var e =(lineHeight)*(rowCnt), // alarm 框高度 行高*行数
-                       f = this.width / 2 - d / 2 , // alarm 框横向位置
-                       g = - this.height /2  - e - 20; // alarm 纵横向位置
-   //
-                   //绘制alarm框
-                   a.strokeStyle = "rgba(" + b + ", " + c + ")",
-                   a.fillStyle = "rgba(" + b + ", " + c + ")",
-                   a.lineCap = "round",
-                   a.lineWidth = 1,
-                   a.moveTo(f -3, g - 3), // 左上  这些10是调整 alarm 边框离文字的距离
-                   a.lineTo(f + d +3, g - 3), // 右上
-                   a.lineTo(f + d +3, g + e + 3), // 右下
-                   a.lineTo(f + d / 2 + 3, g + e  + 3),
-                   a.lineTo(f + d / 2, g + e + 8  + 3),
-                   a.lineTo(f + d / 2 - 3, g + e  + 3),
-                   a.lineTo(f - 3, g + e  + 3), // 左下
-                   a.lineTo(f -3, g -3),
-                   a.fill(),
-                   a.stroke(),
-                   a.closePath(),
-                   a.beginPath(),
-                   a.strokeStyle = "rgba(" + this.fontColor + ", " + this.alpha + ")",
-                   a.fillStyle = "rgba(" + this.fontColor + ", " + this.alpha + ")",
-                   (function(a,b,x,y,textArray){
-                        for(var j= 0;j<textArray.length;j++){
-                            var words = textArray[j];
-                            a.fillText(words,x+2 ,y);
-                            y+= lineHeight;
-                        }
-                   })(a,this,f,g+8,textArray),
-                   a.closePath()
-               }
-         }
-         
-         scene.add(circleNode);
-         
+	    
          stage.add(scene);
          
          //居中显示
          scene.centerAndZoom();
-     
-         
-
-//    	 setInterval("refresh()",10000);
-     	
 	})
-	
-/* 	 function refresh(){
- 		$.ajax({ 
- 			url: "/index/testAjax", 
- 			success: function(){
- 				stage.clear();
- 				
- 				 var ps = ['Top_Left', 'Top_Center', 'Top_Right', 'Middle_Left', 'Middle_Center'
- 		             , 'Middle_Right', 'Bottom_Left', 'Bottom_Center', 'Bottom_Right'];
- 		         
- 		         var n = 0;
- 		         for(var i=0; i<3; i++){
- 		             for(var j=0; j<3; j++){
- 		                 var text = position = ps[n++];
- 		                 text=text.split('_')[0];
- 		                 var circleNode = new JTopo.Node(text)
- 		                 circleNode.setSize(40, 40);
- 		                 circleNode.fillColor = '0, 0, 255';
- 		                 circleNode.setLocation(120 + j*140, 50 + i* 140);
- 		                 circleNode.textPosition = position;
- 		                 circleNode.fontColor="255,0,0";
- 		                 scene.add(circleNode);
- 		                 nodeMap[k]=circleNode;
- 		             }
- 		         }
- 		         
- 		         var circleNode =newNode(650, 200, 40, 40,'123456789','clound.png');
- 		         circleNode.fillColor = '0, 0, 0';
- 		         circleNode.textPosition = 'Middle_Center';
- 		         circleNode.fontColor="255,0,0";
- 		         
- 		        scene.add(circleNode);
- 		         
- 		         stage.add(scene);
- 		         
- 		         //居中显示
- 		         scene.centerAndZoom();
- 	      }});
- 		
- 	}  */
 </script>
 </html>

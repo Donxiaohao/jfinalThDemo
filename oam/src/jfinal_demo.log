@@ -1205,3 +1205,11 @@ java.lang.IllegalStateException: port: 8989 already in use!
 	at com.jfinal.server.JettyServerForIDEA.start(JettyServerForIDEA.java:72)
 	at com.jfinal.core.JFinal.start(JFinal.java:174)
 	at com.xxx.oam.test.TestOam.main(TestOam.java:33)
+
+2018-07-19 16:27:42
+[ERROR]-[Thread: main]-[com.jfinal.kit.LogKit.error()]: port: 8989 already in use!
+java.lang.IllegalStateException: port: 8989 already in use!
+	at com.jfinal.server.JettyServerForIDEA.doStart(JettyServerForIDEA.java:89)
+	at com.jfinal.server.JettyServerForIDEA.start(JettyServerForIDEA.java:72)
+	at com.jfinal.core.JFinal.start(JFinal.java:174)
+	at com.xxx.oam.test.TestOam.main(TestOam.java:33)
