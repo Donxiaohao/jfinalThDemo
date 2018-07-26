@@ -73,7 +73,7 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
 	        link.direction = direction || 'horizontal';
 	        link.arrowsRadius = 10;
 	        link.lineWidth = 3; // 线宽
-	        link.offsetGap = 35;
+	        link.offsetGap = 47;
 	        link.bundleGap = 20; // 线条之间的间隔
 	        link.textOffsetY = 10; // 文本偏移量（向下15个像素）
 	        link.strokeColor = '0,250,0';
@@ -96,14 +96,20 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
 	    #end
 	    
 //	    newLink(node1,node30,'test');
-	    newFoldLink(node1,node30,null,'vertical');
-	    newFlexionalLink(node2,node30,null,'horizontal');
-	    newFoldLink(node3,node30,null,'horizontal');
-	    
-	   /*  #for(line:topoLineInfos)
+	 /*    var link1=newFoldLink(node1,node30,null,'horizontal');
+	    var link2=newFlexionalLink(node2,node30,null,'horizontal');
+	    link2.offsetGap=70;
+	    var link3=newFlexionalLink(node3,node30,null,'horizontal');
+	    link3.offsetGap=90; */
+	     
+	    /* #for(line:topoLineInfos)
 	    	var link#(line.id)=newLink(node#(line.src),node#(line.dest),'#(line.text)');
 	    #end */
-	   
+	    newFlexionalLink(node4,node31);
+	    newFlexionalLink(node5,node31);
+	    newFlexionalLink(node6,node31);
+	    newFlexionalLink(node7,node31);
+	    newFlexionalLink(node8,node31);
 	    
          stage.add(scene);
          

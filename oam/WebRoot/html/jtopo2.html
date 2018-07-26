@@ -16,7 +16,8 @@
 </div>
 <a type="button" id="contextmenu"  class="btn btn-default" data-toggle="tooltip" data-placement="left" style='display:none'>
 </a>
-
+<a type="button" id="test" href="www.baidu.com">test
+</a>
 </body>
 <!-- <script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script> -->
 <script src="/js/jtopo-0.4.8new-min.js"></script>
@@ -177,6 +178,9 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
              var node = new JTopo.Node(text);
              node.setLocation(x, y);
              node.setSize(w, h);
+             node.addEventListener("click",function(node){
+ 		    	console.log(node);
+ 		     })
              scene.add(node);
              return node;
          }
@@ -233,7 +237,6 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
              var link = new JTopo.FlexionalLink(nodeA, nodeZ, text);
              link.arrowsRadius = 10;
              link.lineWidth = 3; // 线宽
-  //           link.offsetGap = 20;
              link.bundleGap = 15; // 线条之间的间隔
              link.textOffsetY = 10; // 文本偏移量（向下15个像素）
              link.strokeColor = JTopo.util.randomColor(); // 线条颜色随机
@@ -258,18 +261,33 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
          } */
          
  //        var fromNode = newNode(100, 120, 60, 60, 'from');    
-         var node = newNode(400, 270, 60, 60, 'to');
+         var node = newNode(400, 100, 60, 60, 'to');
         var node2 = newNode(0, 440, 60, 60, 'three');
+        var node3 = newNode(740, 250, 60, 60, '1');
+        var node4 = newNode(400, 440, 60, 60, '2');
+        var node5 = newNode(0, 250, 60, 60, '3');
         /*     var node3 = newNode(200, 420, 60, 60, 'four'); */
 //         var node4 = newNode(300, 320, 60, 60, 'five');
  //    newFlexionalLink(fromNode, node,null,null,'horizontal');//
 //   newFlexionalLink(fromNode, node,null,null,'horizontal'); 
  //        newFlexionalLink(fromNode, node,null,null,'horizontal');
          
-         
-        newFlexionalLink(node2,node);
-        newFlexionalLink(node2,node);
-        newFlexionalLink(node2,node);
+         var link=newFoldLink(node3,node5,null,'vertical');
+/*         var link1=newFlexionalLink(node2,node);
+        link1.nodeIndex=-0.75; */
+     /*    link1.offsetGap=20;
+        var link2=newFlexionalLink(node2,node);
+        link2.offsetGap=50;
+        var link3=newFlexionalLink(node2,node);
+        link3.offsetGap=100;
+        var link4=newFlexionalLink(node2,node);
+        link4.offsetGap=150; */
+      /*   var link2=newFlexionalLink(node3,node);
+        link2.nodeIndex=0.75;
+        var link3=newFlexionalLink(node4,node);
+        
+        var link4=newFlexionalLink(node5,node);
+        link4.nodeIndex=-1.5; */
         /*     newFlexionalLink(node3,node);  */
  //        newFlexionalLink(node4,node,null,null,'horizontal');
          
@@ -289,6 +307,10 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
          } */
      });
 
- 
+ $(function(){
+	 $('#test').click(function(){
+		 alert('test');
+	 })
+ })
 </script>
 </html>
