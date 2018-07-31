@@ -6,8 +6,8 @@ import java.io.LineNumberReader;
 public class TestProccess {
 
 	public static void main(String[] args) {
+		StringBuffer a=new StringBuffer();
 		String result = "";
-		int count=0;
         try {
             Process process = Runtime.getRuntime().exec("python E:/pythonworkspace/test_python/testTime.py" );
             
@@ -17,6 +17,7 @@ public class TestProccess {
             	/*result+=input.readLine();
             	count++;*/
             	System.out.println(result);
+            	a.append(result);
             }
             input.close();
             ir.close();
@@ -25,5 +26,6 @@ public class TestProccess {
             System.out.println("调用python脚本并读取结果时出错：" + e.getMessage());
         }
         System.out.println(result);
+        System.out.println(a);
 	}
 }
