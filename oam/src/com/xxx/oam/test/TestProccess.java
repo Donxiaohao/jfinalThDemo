@@ -9,14 +9,11 @@ public class TestProccess {
 		StringBuffer a=new StringBuffer();
 		String result = "";
         try {
-            Process process = Runtime.getRuntime().exec("python E:/pythonworkspace/test_python/testTime.py" );
+            Process process = Runtime.getRuntime().exec("python E:/pythonworkspace/test_python/testTime.py 1 2" );
             
             InputStreamReader ir = new InputStreamReader(process.getInputStream(),"GBK");
             LineNumberReader input = new LineNumberReader(ir);
             while((result=input.readLine())!=null ) {
-            	/*result+=input.readLine();
-            	count++;*/
-            	System.out.println(result);
             	a.append(result);
             }
             input.close();
@@ -25,7 +22,6 @@ public class TestProccess {
         } catch (Exception e) {
             System.out.println("调用python脚本并读取结果时出错：" + e.getMessage());
         }
-        System.out.println(result);
         System.out.println(a);
 	}
 }
