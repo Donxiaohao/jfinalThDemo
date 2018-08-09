@@ -3,6 +3,7 @@ package com.xxx.oam.controller;
 import java.util.List;
 
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Duang;
 /*import com.jfinal.core.Controller;
 
 public class IndexController extends Controller{
@@ -18,6 +19,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.xxx.oam.entity.TestUser;
 import com.xxx.oam.interceptor.OamInterceptor;
+import com.xxx.oam.service.TestMethodInterceptor;
 import com.xxx.oam.validator.LoginValidator;
 
 
@@ -38,6 +40,8 @@ public class LoginController extends Controller {
 		for (Record record2 : find) {
 			System.out.println(record2.toString());
 		}*/
+		TestMethodInterceptor duang = Duang.duang(TestMethodInterceptor.class);
+		duang.outString();
 		render("/html/login.html");
 	}
 	
