@@ -4,3 +4,5 @@ jdbcUrl = jdbc:mysql://localhost/test?characterEncoding=utf8&zeroDateTimeBehavio
 user = root
 password = root
 devMode = true
+
+test=123

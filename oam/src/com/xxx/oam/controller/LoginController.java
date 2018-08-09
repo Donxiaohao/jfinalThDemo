@@ -20,6 +20,7 @@ import com.jfinal.plugin.activerecord.Record;
 import com.xxx.oam.entity.TestUser;
 import com.xxx.oam.interceptor.OamInterceptor;
 import com.xxx.oam.service.TestMethodInterceptor;
+import com.xxx.oam.test.TestPropKitUpdate;
 import com.xxx.oam.validator.LoginValidator;
 
 
@@ -41,7 +42,9 @@ public class LoginController extends Controller {
 			System.out.println(record2.toString());
 		}*/
 		TestMethodInterceptor duang = Duang.duang(TestMethodInterceptor.class);
-		duang.outString();
+		Integer sd = duang.outString(Integer.parseInt(getPara("number")));
+		System.out.println(sd);
+//		TestPropKitUpdate.updateConfig("mysql_config.txt", "test", "th");
 		render("/html/login.html");
 	}
 	
