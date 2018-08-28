@@ -4,12 +4,41 @@
 <title>登陆丨OAM</title>
 <link rel="stylesheet" href="/css/style.css">
 <style>
-
+#contextmenu {
+		border: 1px solid #aaa;
+		border-bottom: 0;
+		background: #eee;
+		position: absolute;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: none;
+	}
+																			   
+	#contextmenu li a {
+		display: block;
+		padding: 10px;
+		border-bottom: 1px solid #aaa;
+		cursor: pointer;
+	}
+																			   
+	#contextmenu li a:hover {
+		background: #fff;
+	}
 </style>
 
 <body>
-<div id="content">
-	<canvas width="800" height="500" id="canvas" style=" background-color:#EEEEEE; border:1px solid #444;">
+<ul id="contextmenu" style="display:none;">    
+            <li><a>顺时针旋转</a></li>
+            <li><a>逆时针旋转</a></li>    
+            <li><a>更改颜色</a></li>
+            <li><a>放大</a></li>
+            <li><a>缩小</a></li>    
+            <li><a>删除该节点</a></li>
+            <li><a>添加节点信息</a></li>
+            </ul>
+<div id="content" style='width:"auto" height:"auto"'>
+	<canvas width="1200px" height="500px" id="canvas" style=" background-color:#EEEEEE; border:1px solid #444;">
 </div>
 <div onclick='removeSence();'>removeSence</div>
 </body>
@@ -17,7 +46,7 @@
 <script src="/js/jtopo-0.4.8-min.js"></script>
 <script src="/js/toolbar.js"></script>
 <script>
-var canvas = document.getElementById('canvas'); 
+/* var canvas = document.getElementById('canvas'); 
 var stage = new JTopo.Stage(canvas); // 创建一个舞台对象
 var scene = new JTopo.Scene(stage); // 创建一个场景对象
 	$(function (){	
@@ -105,7 +134,7 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
 	    /* #for(line:topoLineInfos)
 	    	var link#(line.id)=newLink(node#(line.src),node#(line.dest),'#(line.text)');
 	    #end */
-	    newFlexionalLink(node4,node31);
+	/*    newFlexionalLink(node4,node31);
 	    newFlexionalLink(node5,node31);
 	    newFlexionalLink(node6,node31);
 	    newFlexionalLink(node7,node31);
@@ -115,6 +144,87 @@ var scene = new JTopo.Scene(stage); // 创建一个场景对象
          
          //居中显示
          scene.centerAndZoom();
-	})
+	}) */
+	
+	  $(document).ready(function(){                    
+          var canvas = document.getElementById('canvas');
+          var stage = new JTopo.Stage(canvas);
+         
+          var scene = new JTopo.Scene();
+          stage.add(scene);
+          
+          
+          function handler(event){
+              if(event.button == 2){// 右键
+                  // 当前位置弹出菜单（div）
+                  $("#contextmenu").css({
+                      top: event.pageY,
+                      left: event.pageX
+                  }).show();    
+              }
+          }
+          
+          
+          var cloudNode = new JTopo.Node('root');
+          cloudNode.setSize(30, 26);
+          cloudNode.setLocation(360,130);            
+          cloudNode.layout = {type: 'tree', width:300, height: 100}
+          
+          scene.add(cloudNode);
+          
+          for(var k=1; k<4; k++){
+              var node = new JTopo.Node('host' + k);
+              node.fillStyle = '200,255,0';
+              node.radius = 15;
+              node.setLocation(scene.width * Math.random(), scene.height * Math.random());
+              node.layout = {type: 'tree', width:100, height: 100};
+              
+              scene.add(node);                                
+              var link = new JTopo.Link(cloudNode, node);
+              scene.add(link);
+              
+              /* for(var j=0; j<4; j++){
+                  var vmNode = new JTopo.CircleNode('vm-' + i + '-' + j);
+                  vmNode.radius = 10;
+                  vmNode.fillStyle = '255,255,0';
+                  vmNode.setLocation(scene.width * Math.random(), scene.height * Math.random());
+                  scene.add(vmNode);                                
+                  scene.add(new JTopo.Link(node, vmNode));      
+              } */
+               for(var i=1; i<3; i++){
+                  var node2 = new JTopo.Node('server' + i);
+                  node2.fillStyle = '200,255,0';
+                  node2.radius = 15;
+                  node2.setLocation(scene.width * Math.random(), scene.height * Math.random());
+                  node2.layout = {type: 'tree', width:50, height: 100};
+                  
+                  scene.add(node2);                                
+                  var link = new JTopo.Link(node, node2);
+                  scene.add(link);
+                  
+                  for(var j=0; j<2; j++){
+                      var vmNode = new JTopo.CircleNode('client-' + i + '-' + j);
+                      vmNode.radius = 10;
+                      vmNode.fillStyle = '255,255,0';
+                      vmNode.setLocation(scene.width * Math.random(), scene.height * Math.random());
+                      scene.add(vmNode);                                
+                      scene.add(new JTopo.Link(node2, vmNode));      
+                  }
+              }
+          }
+          
+          
+          
+          JTopo.layout.layoutNode(scene, cloudNode, true);
+          
+          scene.addEventListener('mouseup', function(e){
+              if(e.target && e.target.layout){
+                  JTopo.layout.layoutNode(scene, e.target, true);    
+              }                
+          });
+          
+          stage.centerAndZoom();
+      });                    
+  
 </script>
 </html>

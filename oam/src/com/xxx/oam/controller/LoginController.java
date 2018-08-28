@@ -41,9 +41,9 @@ public class LoginController extends Controller {
 		for (Record record2 : find) {
 			System.out.println(record2.toString());
 		}*/
-		TestMethodInterceptor duang = Duang.duang(TestMethodInterceptor.class);
+		/*TestMethodInterceptor duang = Duang.duang(TestMethodInterceptor.class);
 		Integer sd = duang.outString(Integer.parseInt(getPara("number")));
-		System.out.println(sd);
+		System.out.println(sd);*/
 //		TestPropKitUpdate.updateConfig("mysql_config.txt", "test", "th");
 		render("/html/login.html");
 	}

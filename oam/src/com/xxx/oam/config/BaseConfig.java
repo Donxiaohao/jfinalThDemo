@@ -11,6 +11,7 @@ import com.jfinal.config.Interceptors;
 import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
+import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.i18n.I18nInterceptor;
 import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
@@ -100,7 +101,7 @@ public class BaseConfig extends JFinalConfig{
 
 	@Override
 	public void configHandler(Handlers me) {
-		// TODO Auto-generated method stub
+		me.add(new ContextPathHandler("ctx"));
 		
 	}
 	
