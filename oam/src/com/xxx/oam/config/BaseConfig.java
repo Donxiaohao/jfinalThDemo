@@ -74,12 +74,19 @@ public class BaseConfig extends JFinalConfig{
 		//设置sqlite驱动程序
 //		dp.setDriverClass("org.sqlite.JDBC");
 	    me.add(dp);
-	    ActiveRecordPlugin arp = new ActiveRecordPlugin(dp);
+	    ActiveRecordPlugin arp = new ActiveRecordPlugin("master",dp);
 	    me.add(arp);
 	    arp.addMapping("user", TestUser.class);
 		arp.addMapping("topo_node_info", TopoNodeInfo.class);
 		arp.addMapping("topo_line_info", TopoLineInfo.class);
 		arp.addMapping("topo_img", TopoImg.class);
+		
+		DruidPlugin dp2 = new DruidPlugin("jdbc:mysql://localhost/test2?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull",
+                "root",
+                "root");
+		me.add(dp2);
+	    ActiveRecordPlugin arp2 = new ActiveRecordPlugin("release",dp2);
+	    me.add(arp2);
 	    //国际化键值对加载
 //	    me.add(new I18NPlugin());
 	    

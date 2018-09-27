@@ -40,18 +40,22 @@
 <div id="content" style='width:"auto" height:"auto"'>
 	<canvas width="1200px" height="500px" id="canvas" style=" background-color:#EEEEEE; border:1px solid #444;">
 </div>
-<input type='text'>
-<div onclick='removeSence();'>removeSence</div>
+<input type='button' onclick='removeSence();' value='removeSence'>
+<input type='button' onclick='addNode();' value='addNode'>
+<input type='button' onclick='testTx();' value='testTx'>
 </body>
 <script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="/js/jtopo-0.4.8-min.js"></script>
 <script src="/js/toolbar.js"></script>
 <script>
+	  var canvas=null;
+	  var stage=null;
+	  var scene=null;
 	  $(document).ready(function(){     
-          var canvas = document.getElementById('canvas');
-          var stage = new JTopo.Stage(canvas);
+          canvas = document.getElementById('canvas');
+          stage = new JTopo.Stage(canvas);
          
-          var scene = new JTopo.Scene();
+          scene = new JTopo.Scene();
           stage.add(scene);
           
           
@@ -69,7 +73,12 @@
           
           var cloudNode = new JTopo.Node('root');
           cloudNode.setSize(30, 26);
-          cloudNode.setLocation(360,130);            
+          cloudNode.setLocation(360,130);     
+          //cloudNode.setImage('http://img5.imgtn.bdimg.com/it/u=437421292,4013778179&fm=200&gp=0.jpg',false);
+         /*  var img = new Image();
+		  img.setAttribute('crossOrigin', 'anonymous');
+		  img.src='http://img5.imgtn.bdimg.com/it/u=437421292,4013778179&fm=200&gp=0.jpg';
+          cloudNode.setImage(img,false); */
           cloudNode.layout = {type: 'tree', width:300, height: 100}
           
           scene.add(cloudNode);
@@ -110,7 +119,10 @@
               }
           }
           
-          
+          scene.addEventListener("click",function(event){
+        	 console.log(event); 
+        	 console.log(event.target.text);
+          });
           
           JTopo.layout.layoutNode(scene, cloudNode, true);
           
@@ -122,6 +134,28 @@
           
           stage.centerAndZoom();
       });                    
-  
+  	function removeSence(){
+  		scene.clear();
+  	}
+  	
+  	function addNode(){
+  		 var cloudNode = new JTopo.Node('root');
+         cloudNode.setSize(30, 26);
+         cloudNode.setLocation(360,130);            
+         cloudNode.layout = {type: 'tree', width:300, height: 100}
+         
+         scene.add(cloudNode);
+  	}
+  	
+  	function testTx(){
+  		/* $.ajax({
+  			type:'get',
+  			url:"/index/testTx",
+  			success:function(res){
+  				console.log(111)
+  			}
+  		}) */
+  		stage.saveImageInfo();
+  	}
 </script>
 </html>
