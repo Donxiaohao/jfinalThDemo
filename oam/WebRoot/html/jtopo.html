@@ -48,114 +48,118 @@
 <script src="/js/jtopo-0.4.8-min.js"></script>
 <script src="/js/toolbar.js"></script>
 <script>
-	  var canvas=null;
-	  var stage=null;
-	  var scene=null;
-	  $(document).ready(function(){     
-          canvas = document.getElementById('canvas');
-          stage = new JTopo.Stage(canvas);
-          scene = new JTopo.Scene();
-          //scene.background = '/image/789.png';
-          stage.add(scene);
-          
-          
-          function handler(e){
-        	  var theEvent=window.event||e;
-              if(theEvent.button == 2){// 右键
-                  // 当前位置弹出菜单（div）
-                  $("#contextmenu").css({
-                      top: theEvent.pageY,
-                      left: theEvent.pageX
-                  }).show();    
-              }
-          }
-          
-          
-          var cloudNode = new JTopo.Node('root');
-          cloudNode.setSize(30, 26);
-          cloudNode.setLocation(360,130);     
-          //cloudNode.setImage('http://img5.imgtn.bdimg.com/it/u=437421292,4013778179&fm=200&gp=0.jpg',false);
-         /*  var img = new Image();
-		  img.setAttribute('crossOrigin', 'anonymous');
-		  img.src='http://img5.imgtn.bdimg.com/it/u=437421292,4013778179&fm=200&gp=0.jpg';
-          cloudNode.setImage(img,false); */
-          cloudNode.layout = {type: 'tree', width:300, height: 100}
-          
-          scene.add(cloudNode);
-          
-          for(var k=1; k<4; k++){
-              var node = new JTopo.Node('host' + k);
-              node.fillStyle = '200,255,0';
-              node.radius = 15;
-              node.setLocation(scene.width * Math.random(), scene.height * Math.random());
-              node.layout = {type: 'tree', width:100, height: 100};
-              node.addEventListener('mouseup',function(event){
-            	  currentNode=this;
-            	  handler(event);
-              })
-              scene.add(node);                                
-              var link = new JTopo.Link(cloudNode, node);
-              scene.add(link);
-           
-               for(var i=1; i<3; i++){
-                  var node2 = new JTopo.Node('server' + i);
-                  node2.fillStyle = '200,255,0';
-                  node2.radius = 15;
-                  node2.setLocation(scene.width * Math.random(), scene.height * Math.random());
-                  node2.layout = {type: 'tree', width:50, height: 100};
-                  
-                  scene.add(node2);                                
-                  var link = new JTopo.Link(node, node2);
-                  scene.add(link);
-                  
-                  for(var j=0; j<2; j++){
-                      var vmNode = new JTopo.CircleNode('client-' + i + '-' + j);
-                      vmNode.radius = 10;
-                      vmNode.fillStyle = '255,255,0';
-                      vmNode.setLocation(scene.width * Math.random(), scene.height * Math.random());
-                      scene.add(vmNode);                                
-                      scene.add(new JTopo.Link(node2, vmNode));      
-                  }
-              }
-          }
-          
-          scene.addEventListener("click",function(event){
-        	 console.log(event); 
-        	 console.log(event.target.text);
-          });
-          
-          JTopo.layout.layoutNode(scene, cloudNode, true);
-          
-          scene.addEventListener('mouseup', function(e){
-              if(e.target && e.target.layout){
-                  JTopo.layout.layoutNode(scene, e.target, true);    
-              }                
-          });
-          
-          stage.centerAndZoom();
-      });                    
-  	function removeSence(){
-  		scene.clear();
-  	}
-  	
-  	function addNode(){
-  		 var cloudNode = new JTopo.Node('root');
-         cloudNode.setSize(30, 26);
-         cloudNode.setLocation(360,130);            
-         cloudNode.layout = {type: 'tree', width:300, height: 100}
-         
-         scene.add(cloudNode);
-  	}
-  	
-  	function testTx(){
-  		/* $.ajax({
-  			type:'get',
-  			url:"/index/testTx",
-  			success:function(res){
-  				console.log(111)
-  			}
-  		}) */
-  		stage.saveImageInfo();
-  	}
+var canvas=null;
+var stage=null;
+var scene=null;
+$(document).ready(function(){     
+    canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext("2d");
+    stage = new JTopo.Stage(canvas);
+    scene = new JTopo.Scene();
+    // scene.background = '/image/789.png';
+    stage.add(scene);
+    stage.eagleEye.visible = true;
+    //stage.eagleEye.eagleImageDatas.width=300;
+    console.log(stage.eagleEye)
+    console.log(stage.eagleEye.eagleImageDatas)
+    function handler(e){
+  	  var theEvent=window.event||e;
+        if(theEvent.button == 2){// 右键
+            // 当前位置弹出菜单（div）
+            $("#contextmenu").css({
+                top: theEvent.pageY,
+                left: theEvent.pageX
+            }).show();    
+        }
+    }
+    
+    
+    var cloudNode = new JTopo.Node('root');
+    cloudNode.setSize(30, 26);
+    cloudNode.setLocation(360,130);     
+    //cloudNode.setImage('http://img5.imgtn.bdimg.com/it/u=437421292,4013778179&fm=200&gp=0.jpg',false);
+   /*  var img = new Image();
+	  img.setAttribute('crossOrigin', 'anonymous');
+	  img.src='http://img5.imgtn.bdimg.com/it/u=437421292,4013778179&fm=200&gp=0.jpg';
+    cloudNode.setImage(img,false); */
+    cloudNode.layout = {type: 'tree', width:300, height: 100}
+    
+    scene.add(cloudNode);
+    
+    for(var k=1; k<4; k++){
+        var node = new JTopo.Node('host' + k);
+        node.fillStyle = '200,255,0';
+        node.radius = 15;
+        node.setLocation(scene.width * Math.random(), scene.height * Math.random());
+        node.layout = {type: 'tree', width:100, height: 100};
+        node.addEventListener('mouseup',function(event){
+      	  currentNode=this;
+      	  handler(event);
+        })
+        scene.add(node);                                
+        var link = new JTopo.Link(cloudNode, node);
+        scene.add(link);
+     
+         for(var i=1; i<3; i++){
+            var node2 = new JTopo.Node('server' + i);
+            node2.fillStyle = '200,255,0';
+            node2.radius = 15;
+            node2.setLocation(scene.width * Math.random(), scene.height * Math.random());
+            node2.layout = {type: 'tree', width:50, height: 100};
+            
+            scene.add(node2);                                
+            var link = new JTopo.Link(node, node2);
+            link.strokeColor = '0,200,255';
+            scene.add(link);
+            
+            for(var j=0; j<2; j++){
+                var vmNode = new JTopo.CircleNode('client-' + i + '-' + j);
+                vmNode.radius = 10;
+                vmNode.fillStyle = '255,255,0';
+                vmNode.setLocation(scene.width * Math.random(), scene.height * Math.random());
+                scene.add(vmNode);                                
+                scene.add(new JTopo.Link(node2, vmNode));      
+            }
+        }
+    }
+    
+    scene.addEventListener("click",function(event){
+  	 console.log(event); 
+  	 console.log(event.target.text);
+    });
+    
+    JTopo.layout.layoutNode(scene, cloudNode, true);
+    
+    scene.addEventListener('mouseup', function(e){
+        if(e.target && e.target.layout){
+            JTopo.layout.layoutNode(scene, e.target, true);    
+        }                
+    });
+    
+    stage.centerAndZoom();
+});                    
+function removeSence(){
+	scene.clear();
+}
+
+function addNode(){
+	 var cloudNode = new JTopo.Node('root');
+   cloudNode.setSize(30, 26);
+   cloudNode.setLocation(360,130);            
+   cloudNode.layout = {type: 'tree', width:300, height: 100}
+   
+   scene.add(cloudNode);
+}
+
+function testTx(){
+	/* $.ajax({
+		type:'get',
+		url:"/index/testTx",
+		success:function(res){
+			console.log(111)
+		}
+	}) */
+	stage.saveImageInfo();
+}
 </script>
 </html>

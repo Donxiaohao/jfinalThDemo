@@ -14,7 +14,7 @@ public class TestInterceptor implements Interceptor{
 
 	@Override
 	public void intercept(Invocation inv) {
-		final ExecutorService exec=Executors.newSingleThreadExecutor();
+		/*final ExecutorService exec=Executors.newSingleThreadExecutor();
 		Future<String> future =null;
 		Callable<String> call=new Callable<String>(){
 			@Override
@@ -32,7 +32,10 @@ public class TestInterceptor implements Interceptor{
 			future.cancel(true);
 		}catch(Exception e){
 			e.printStackTrace();
-		}
+		}*/
+		System.out.println("拦截前~~~~~~~~~~");
+		inv.invoke();
+		System.out.println("拦截后~~~~~~~~~~");
 	}
 
 }
