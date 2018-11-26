@@ -124,8 +124,8 @@ $(document).ready(function(){
     }
     
     scene.addEventListener("click",function(event){
-  	 console.log(event); 
-  	 console.log(event.target.text);
+  	/*  console.log(event); 
+  	 console.log(event.target.text); */
     });
     
     JTopo.layout.layoutNode(scene, cloudNode, true);
@@ -133,7 +133,8 @@ $(document).ready(function(){
     scene.addEventListener('mouseup', function(e){
         if(e.target && e.target.layout){
             JTopo.layout.layoutNode(scene, e.target, true);    
-        }                
+        }      
+        console.log(stage.find('node'))
     });
     
     stage.centerAndZoom();

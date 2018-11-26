@@ -26,7 +26,7 @@ public class IndexController extends Controller{
 		
 		List<TopoLineInfo> topoLineInfos = TopoLineInfo.dao.find("select * from topo_line_info");
 		setAttr("topoLineInfos",topoLineInfos);
-		render("/html/jtopo.html");
+		render("/html/jtopo3.html");
 	}
 	
 	public void link() {
