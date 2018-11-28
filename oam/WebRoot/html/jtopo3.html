@@ -3,8 +3,7 @@
   <head>
 	<!-- <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9"/> -->
-	  <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
-	
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/edit.css">	
 	<link rel="stylesheet" type="text/css" href="/css/base.css">
 	<link rel="stylesheet" type="text/css" href="/css/public.css">	
@@ -16,6 +15,10 @@
 	<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="/js/jtopo-0.4.8new-min.js"></script>
 	<script type="text/javascript" src="/js/toolbar.js"></script>
+	<script type="text/javascript" src="/js/svg.min.js"></script>
+	<script type="text/javascript" src="/js/svg.draggable.min.js"></script>
+	<script type="text/javascript" src="/js/svg.panzoom.js"></script>
+	<script type="text/javascript" src="/js/svg.topoly.js"></script>
   </head>
   <body>
 	<div style='height: 800px;'>
@@ -38,24 +41,16 @@
 						id="findText" value="" onkeydown="findButton.click()"><input
 						type="button" id="findButton" value=" 查 询 ">&nbsp;&nbsp;<!-- <input
 						type="button" id="exportButton" value="导出PNG">  -->
-							<div style='float:inherit;margin-top:-27px;margin-left:630px'>
+							<div style='float:inherit;margin-top:-27px;margin-left:600px'>
 							<ul>
-		                    	<li class="normal"><a class="selected" onclick="switchLineType(this,'NormalLine','')"></a></li>
-		                        <li class="brokenpoly-v"><a onclick="switchLineType(this,'BrokenPolyline','vertical')"></a></li>
-		                        <li class="brokenpoly-h"><a onclick="switchLineType(this,'BrokenPolyline','horizontal')"></a></li>
-		                        <li class="secondarypoly-v"><a onclick="switchLineType(this,'SecondaryPolyline','vertical')"></a></li>
-		                        <li class="secondarypoly-h"><a onclick="switchLineType(this,'SecondaryPolyline','horizontal')"></a></li>
+								<li class="none"><a id='noneLink' class="selected" onclick="switchLineType(this,'NoneLink','')"></a></li>
+		                    	<li class="normal"><a onclick="switchLineType(this,'Link','')"></a></li>
+		                        <li class="brokenpoly-v"><a onclick="switchLineType(this,'FoldLink','vertical')"></a></li>
+		                        <li class="brokenpoly-h"><a onclick="switchLineType(this,'FoldLink','horizontal')"></a></li>
+		                        <li class="secondarypoly-v"><a onclick="switchLineType(this,'FlexionalLink','vertical')"></a></li>
+		                        <li class="secondarypoly-h"><a onclick="switchLineType(this,'FlexionalLink','horizontal')"></a></li>
 	                   		</ul>
 	                   		</div>
-						<!-- <div>
-							<ul>
-		                    	<li class="normal">1<a class="selected" onclick="switchLineType(this,'NormalLine','')"></a></li>
-		                        <li class="brokenpoly-v">2<a onclick="switchLineType(this,'BrokenPolyline','vertical')"></a></li>
-		                        <li class="brokenpoly-h">3<a onclick="switchLineType(this,'BrokenPolyline','horizontal')"></a></li>
-		                        <li class="secondarypoly-v">4<a onclick="switchLineType(this,'SecondaryPolyline','vertical')"></a></li>
-		                        <li class="secondarypoly-h">5<a onclick="switchLineType(this,'SecondaryPolyline','horizontal')"></a></li>
-	                   		</ul>
-						</div> -->
 				</div>
 			</div>
 			<div style='float: left; width: 20%; height: 100%; background-color: white;'>
@@ -92,15 +87,12 @@
 			</div>
 			<div id="main">
 				<div class="content">
-					<canvas width="805" height="800" id="canvas"
+					<canvas width="808" height="800" id="canvas"
 						style="border: 1px solid #444;"><!-- background-color: #EEEEEE;  -->
-			        
 				</div>
 			</div>
 		</div>
 	</div>
-  
-  
 </body>
 
 <script>			
@@ -114,7 +106,7 @@
 	
 	function newNode(x, y, w, h, text,img){
         var node = new JTopo.Node(text);
-        node.setImage("http://localhost:8989"+img,false);
+        node.setImage("http://192.168.11.72:8989"+img,false);
         node.setLocation(x, y);
         node.setSize(w, h);
         node.fontColor="255,0,0";
@@ -165,30 +157,43 @@
         scene.add(link);
         return link;
     }
-    
-	$(document).ready(function(){					
 
-      /*   var node = newNode(400, 100, 60, 60, "\"it's cool\"");
-        var node2 = newNode(0, 440, 60, 60, 'three');
-        var node3 = newNode(740, 250, 60, 60, '1');
-        var node4 = newNode(400, 440, 60, 60, '2');
-        var node5 = newNode(0, 250, 60, 60, '3');
-
-        var link=newFoldLink(node3,node5,null,'vertical'); */
-    });
-
-	
+     // 线条编辑选择相关
+     var beginNode = null;
+     var tempNodeA = new JTopo.Node('tempA');;
+     tempNodeA.setSize(1, 1);
+     var tempNodeZ = new JTopo.Node('tempZ');;
+     tempNodeZ.setSize(1, 1);
+     var link=null;
+     var linkType='';
+     var lineDirection='';
 	 function switchLineType(ele,lineType,direction)
 		{
+		    if(link!=null){
+		    	scene.remove(link);
+		    }
 			$(ele).closest("ul").find("a").removeClass("selected");
 			$(ele).addClass("selected");
-			stage.setLineType(lineType);
+			linkType=lineType;
+		    if(linkType=='FoldLink'){
+		    	link = new JTopo.FoldLink(tempNodeA, tempNodeZ,lineDirection);
+		    	link.direction=direction;
+		    }else if(linkType=='FlexionalLink'){
+		    	link = new JTopo.FlexionalLink(tempNodeA, tempNodeZ,lineDirection);
+		    	link.direction=direction;
+		    }else if(linkType=='Link'){
+		    	link = new JTopo.Link(tempNodeA, tempNodeZ);
+		    	link.direction=direction;
+		    }else{
+		    	link=null;
+		    }
 			if(direction != "")
 			{
-				stage.setLineDirection(direction);
+				lineDirection=direction;
 			}
 		}
 	 
+     // topo图拖拽相关
 	$(function(){
 		 $( "#test div" ).draggable({
 			 appendTo: "body",
@@ -196,22 +201,84 @@
 		     cursor: "pointer",
 		     cursorAt: { top: -5, left: -5 }
 		 });
-		
 		 $("#canvas").droppable({
-	 		  drop: function(event,ui) {
-	 			    console.log(ui);
-	 			   console.log(ui.draggable[0].attributes['topoImg'].value);
-	 			   scene.addEventListener("mousemove",function(e){
-	 	                var mousePos={ // 鼠标在场景的位置
-	 	                    x: e.x,
-	 	                    y: e.y
-	 	                };
-	 	               newNode(mousePos.x,mousePos.y,60,60,null,ui.draggable[0].attributes['topoImg'].value); //添加节点
-	 	               scene.removeEventListener("mousemove"); // 解绑事件
-	 	            });
-	 			  }
-	 			});
+			 drop: function(event,ui) {
+			     scene.addEventListener("mousemove",function(e){
+			         var mousePos={ // 鼠标在场景的位置
+				         x: e.x,
+				         y: e.y
+			         };
+			         newNode(mousePos.x,mousePos.y,60,60,null,ui.draggable[0].attributes['topoImg'].value); //添加节点
+			         scene.removeEventListener("mousemove"); // 解绑事件
+			         scene.mousedown(function(e){
+				    	if(linkType=='NoneLink'||linkType==''){
+			        		return;
+			        	}
+				        if(e.target == null || e.target === beginNode || e.target === link){
+				            scene.remove(link);
+				        }
+				    });
+				    
+				    scene.mousemove(function(e){
+				    	if(linkType=='NoneLink'||linkType==''){
+			        		return;
+			        	}
+				        tempNodeZ.setLocation(e.x, e.y);
+				    });
+				    if(link!=null){
+				    	scene.remove(link);
+				    }
+				    $("#noneLink").click();
+				    beginNode = null;
+	         	 });
+		 	}
+ 	      });
+		 
+		 
+		    // 动态编辑连线相关
+		    scene.mouseup(function(e){
+		    	if(linkType=='NoneLink'||linkType==''){
+	        		return;
+	        	}
+		        if(e.button == 2){
+		            scene.remove(link);
+		            return;
+		        }
+		        if(e.target != null && e.target instanceof JTopo.Node){
+		            if(beginNode == null){
+		                beginNode = e.target;
+		                scene.add(link);
+		                tempNodeA.setLocation(e.x, e.y);
+		                tempNodeZ.setLocation(e.x, e.y);
+		            }else if(beginNode !== e.target){
+		                var endNode = e.target;
+		                var l = null;
+		                console.log(lineDirection)
+		                if(linkType=='FoldLink'){
+		    		    	l = new JTopo.FoldLink(beginNode, endNode);
+		    		    	l.direction=lineDirection;
+		    		    }else if(linkType=='FlexionalLink'){
+		    		    	l = new JTopo.FlexionalLink(beginNode, endNode);
+		    		    	l.direction=lineDirection;
+		    		    }else if(linkType='Link'){
+		    		    	l = new JTopo.Link(beginNode, endNode);
+		    		    	l.direction=lineDirection;
+		    		    }else{
+		    		    	l=null;
+		    		    }
+		                scene.add(l);
+		                beginNode = null;
+		                scene.remove(link);
+		            }else{
+		                beginNode = null;
+		            }
+		        }else{
+		            scene.remove(link);
+	                beginNode = null;
+		        }
+		    });
 	})
+     
 </script>
 
 </html>

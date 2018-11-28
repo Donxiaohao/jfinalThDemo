@@ -30,7 +30,11 @@ public class IndexController extends Controller{
 	}
 	
 	public void link() {
-		render("/html/jtopo2.html");
+		render("/html/jtopo4.html");
+	}
+	
+	public void link2() {
+		render("/html/jtopo5.html");
 	}
 	
 	public void testAjax() {

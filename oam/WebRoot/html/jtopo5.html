@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<!-- <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9"/> -->
+	  <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+	
+	<link rel="stylesheet" type="text/css" href="/css/edit.css">	
+	<link rel="stylesheet" type="text/css" href="/css/base.css">
+	<link rel="stylesheet" type="text/css" href="/css/public.css">	
+	<link rel="stylesheet" type="text/css" href="/css/jquery-ui.css">	
+	<link rel="stylesheet" type="text/css" href="/css/net.topoly.edit.css">	
+	<!-- <script src="/js/jquery.min.js"></script> -->
+	<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+	<!-- <script src="/js/jquery-ui.js"></script> -->
+	<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/js/jtopo-0.4.8new-min.js"></script>
+	<script type="text/javascript" src="/js/toolbar.js"></script>
+  </head>
+  <body>
+	<textarea id="jtopo_textfield" style="display:none;width: 60px;position: absolute;" onkeydown="if(event.keyCode==13)this.blur();"></textarea>
+
+	<div id="content">
+		<canvas width="850" height="550" id="canvas"></canvas>	
+		
+	</div>
+
+<div id='linkStyle' style='display:none'>
+  <input id='linkShu'  type='text' onblur='changeLink()'>线偏转量
+  <input id='color'  type='color'>线条颜色
+  <input id='linkShu3'  type='text' onblur='changeLink3()'>线条宽度
+  <input id='linkShu4'  name='linkTou' type='radio' onClick='changeLink4()' value='1'>有箭头
+  <input id='linkShu5'  name='linkTou' type='radio' onClick='changeLink4()' value='0' checked='checked'>无箭头
+  <span id='testCu' style='display:none' ><input id='linkShu6'  type='text' onblur='changeLink5()'>箭头大小</span>
+  <input id='linkShu7'  type='radio' name='linkSx' onClick='changeLink6()' checked='checked' value='0'>实线
+  <input id='linkShu7'  type='radio' name='linkSx' onClick='changeLink6()' value='1'>虚线
+  <span id='testXu' style='display:none' ><input id='linkShu8'  type='text' onblur='changeLink7()'>虚线大小</span>
+</div>
+  	
+  <input type='radio' value='0' name='link' checked='checked' onblur='changeRv()'>
+  <input type='radio' value='1' name='link' onblur='changeRv()'>
+  <input type='radio' value='2' name='link' onblur='changeRv()'>
+  <input type='radio' value='3' name='link' onblur='changeRv()'>
+ 
+</body>
+
+<script>	
+var dqLink=null;
+var link=null;
+var rv=null;
+var tempNodeA =null;
+var beginNode = null;
+var tempNodeZ = null;
+$(document).ready(function(){                    
+    var canvas = document.getElementById('canvas');            
+    var stage = new JTopo.Stage(canvas);
+    //显示工具栏
+   /*  showJTopoToobar(stage); */
+    var scene = new JTopo.Scene(stage);
+    scene.background = '/image/bg_hover.png';
+    var msgNode = new JTopo.TextNode("双击编辑文字, 点击节点可连线(连个节点)");
+    msgNode.zIndex++;
+    msgNode.setBound(250, 50);
+    scene.add(msgNode);
+    
+    for(var i=0; i<5; i++){
+        var node = new JTopo.Node('Node_' + i);
+        node.setLocation(Math.random() * 600, Math.random() * 400);
+        scene.add(node);        
+    }
+                                            
+    
+    
+    tempNodeA = new JTopo.Node('tempA');;
+    tempNodeA.setSize(1, 1);
+    
+    tempNodeZ = new JTopo.Node('tempZ');;
+    tempNodeZ.setSize(1, 1);
+    
+    scene.mouseup(function(e){
+    	console.log(rv)
+    	if(rv==0||link==null){
+    		return;
+    	}
+        if(e.button == 2){
+        	if(link!=null){
+        		scene.remove(link);
+        	}
+            return;
+        }
+        if(e.target != null && e.target instanceof JTopo.Node){
+            if(beginNode == null){
+                beginNode = e.target;
+                scene.add(link);
+                tempNodeA.setLocation(e.x, e.y);
+                tempNodeZ.setLocation(e.x, e.y);
+            }else if(beginNode !== e.target){
+                var endNode = e.target;
+                var l = null;
+                if(rv==1){
+                	l = new JTopo.Link(beginNode, endNode);
+                }else if(rv==2){
+                	l = new JTopo.FoldLink(beginNode, endNode);
+                }else if(rv==3){
+                	l = new JTopo.FlexionalLink(beginNode, endNode);
+                }else{
+                	l=null;
+                }
+                
+                scene.add(l);
+                beginNode = null;
+                if(link!=null){
+            		scene.remove(link);
+            	}
+            }else{
+                beginNode = null;
+            }
+        }else if(e.target != null && e.target instanceof JTopo.Link){
+            dqLink=e.target;
+            $('#linkStyle').show();
+        }else{
+        	if(link!=null){
+        		scene.remove(link);
+        	}
+        	dqLink=null;
+        }
+    });
+    
+    scene.mousedown(function(e){
+        if(e.target == null || e.target === beginNode || e.target === link){
+        	if(link!=null){
+        		scene.remove(link);
+        	}
+        }
+    });
+    scene.mousemove(function(e){
+        tempNodeZ.setLocation(e.x, e.y);
+    });
+    
+    
+    
+    
+    
+    
+    var textfield = $("#jtopo_textfield");
+    scene.dbclick(function(event){
+        if(event.target == null) return;
+        var e = event.target;
+        textfield.css({
+            top: event.pageY,
+            left: event.pageX - e.width/2
+        }).show().attr('value', e.text).focus().select();
+        e.text = "";
+        textfield[0].JTopoNode = e;
+    });
+    
+    $("#jtopo_textfield").blur(function(){
+        textfield[0].JTopoNode.text = textfield.hide().val();
+    });
+});
+	
+	function changeLink(){
+		var v=$('#linkShu').val();
+		dqLink.nodeIndex=v;
+	}
+	 
+	/* function changeLink2(){
+		$('#linkShu2').click(); 
+		alert(this.value)
+		dqLink.color=this.value;
+	} */
+	
+	document.querySelector("#color").onchange = function () {
+	    document.getElementById('color').click(); // 必须添加触发click事件否则不能通过点击确定按钮触发更改颜色
+	    console.log(hexToRgba(this.value))
+	    dqLink.strokeColor = hexToRgba(this.value).rgb;
+	  }
+
+	
+	
+	function changeLink3(){
+		var v=$('#linkShu3').val();
+		dqLink.lineWidth=v;
+	}
+	
+	function changeLink4(){
+		var v=$('input[name="linkTou"]:checked').val();
+		if(v==0){
+			dqLink.arrowsRadius=null;
+			$('#testCu').hide();
+		}else{
+			$('#testCu').show();
+			dqLink.arrowsRadius=5;
+		}
+	}
+	
+	function changeLink5(){
+		var v=$('#linkShu6').val();
+		dqLink.arrowsRadius=v;
+	}
+	
+	function changeLink6(){
+		var v=$('input[name="linkSx"]:checked').val();
+		if(v==0){
+			$('#testXu').hide();
+			dqLink.dashedPattern=null;
+		}else{
+			$('#testXu').show();
+			dqLink.dashedPattern = 5;
+		}
+	}
+	
+	function changeLink7(){
+		var v=$('#linkShu8').val();
+		dqLink.dashedPattern=v;
+	}
+	
+	
+	function changeRv(){
+		rv=$('input[name="link"]:checked').val();
+		if(rv==1){
+	    	link = new JTopo.Link(tempNodeA, tempNodeZ);
+	    }else if(rv==2){
+	    	link = new JTopo.FoldLink(tempNodeA, tempNodeZ);
+	    }else if(rv==3){
+	    	link = new JTopo.FlexionalLink(tempNodeA, tempNodeZ);
+	    }else{
+	    	link=null;
+	    }
+	}
+	
+	
+	var hexToRgba = function(hex, al) {
+		      var hexColor = /^#/.test(hex) ? hex.slice(1) : hex,
+		          alp = hex === 'transparent' ? 0 : Math.ceil(al),
+		         r, g, b;
+		      hexColor = /^[0-9a-f]{3}|[0-9a-f]{6}$/i.test(hexColor) ? hexColor : 'fffff';
+		     if (hexColor.length === 3) {
+		          hexColor = hexColor.replace(/(\w)(\w)(\w)/gi, '$1$1$2$2$3$3');
+		      }
+		      r = hexColor.slice(0, 2);
+		     g = hexColor.slice(2, 4);
+		     b = hexColor.slice(4, 6);
+		     r = parseInt(r, 16);
+		     g = parseInt(g, 16);
+		     b = parseInt(b, 16);
+		     return {
+		         hex: '#' + hexColor,
+		         alpha: alp,
+		         rgb: r + ', ' + g + ', ' + b
+		     };
+		 };
+</script>
+
+</html>

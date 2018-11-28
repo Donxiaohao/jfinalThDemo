@@ -42,18 +42,21 @@ section.context .container .stage > div .menu{width:150px;height:30px;position:a
 ul{list-style:none;padding:0;margin:0;}
 ul li{float:left;}
 ul li a{display:block;width:30px;height:30px;cursor:pointer;}
+ul li.none a{background:url(../../image/selected-grey.png) center no-repeat;background-size:20px;}
 ul li.normal a{background:url(../../image/line11.png) center no-repeat;background-size:20px;}
 ul li.brokenpoly-v a{background:url(../../image/line13.png) center no-repeat;background-size:20px;}
 ul li.brokenpoly-h a{background:url(../../image/line12.png) center no-repeat;background-size:20px;}
 ul li.secondarypoly-v a{background:url(../../image/line14.png) center no-repeat;background-size:20px;}
 ul li.secondarypoly-h a{background:url(../../image/line15.png) center no-repeat;background-size:20px;}
 
+ul li.none a.selected{background:#666 url(../../image/selected-white.png) center no-repeat;background-size:20px;}
 ul li.normal a.selected{background:#666 url(../../image/line01.png) center no-repeat;background-size:20px;}
 ul li.brokenpoly-v a.selected{background:#666 url(../../image/line03.png) center no-repeat;background-size:20px;}
 ul li.brokenpoly-h a.selected{background:#666 url(../../image/line02.png) center no-repeat;background-size:20px;}
 ul li.secondarypoly-v a.selected{background:#666 url(../../image/line04.png) center no-repeat;background-size:20px;}
 ul li.secondarypoly-h a.selected{background:#666 url(../../image/line05.png) center no-repeat;background-size:20px;}
 
+ul li.none:hover a{background:#666 url(../../image/selected-grey.png) center no-repeat;background-size:20px;}
 ul li.normal:hover a{background:#666 url(../../image/line01.png) center no-repeat;background-size:20px;}
 ul li.brokenpoly-v:hover a{background:#666 url(../../image/line03.png) center no-repeat;background-size:20px;}
 ul li.brokenpoly-h:hover a{background:#666 url(../../image/line02.png) center no-repeat;background-size:20px;}
