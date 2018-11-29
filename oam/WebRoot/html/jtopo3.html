@@ -1,284 +1,504 @@
 <!DOCTYPE html>
 <html>
-  <head>
-	<!-- <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+<head>
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9"/> -->
-	<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
-	<link rel="stylesheet" type="text/css" href="/css/edit.css">	
-	<link rel="stylesheet" type="text/css" href="/css/base.css">
-	<link rel="stylesheet" type="text/css" href="/css/public.css">	
-	<link rel="stylesheet" type="text/css" href="/css/jquery-ui.css">	
-	<link rel="stylesheet" type="text/css" href="/css/net.topoly.edit.css">	
-	<!-- <script src="/js/jquery.min.js"></script> -->
-	<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
-	<!-- <script src="/js/jquery-ui.js"></script> -->
-	<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="/js/jtopo-0.4.8new-min.js"></script>
-	<script type="text/javascript" src="/js/toolbar.js"></script>
-	<script type="text/javascript" src="/js/svg.min.js"></script>
-	<script type="text/javascript" src="/js/svg.draggable.min.js"></script>
-	<script type="text/javascript" src="/js/svg.panzoom.js"></script>
-	<script type="text/javascript" src="/js/svg.topoly.js"></script>
-  </head>
-  <body>
+<link rel="stylesheet"
+	href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="/css/edit.css">
+<link rel="stylesheet" type="text/css" href="/css/base.css">
+<link rel="stylesheet" type="text/css" href="/css/public.css">
+<link rel="stylesheet" type="text/css" href="/css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="/css/net.topoly.edit.css">
+<!-- <script src="/js/jquery.min.js"></script> -->
+<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<!-- <script src="/js/jquery-ui.js"></script> -->
+<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<!-- <script type="text/javascript" src="/js/jtopo-0.4.8-zzd.js"></script> -->
+<script type="text/javascript" src="/js/jtopo-0.4.8new-min.js"></script>
+<script type="text/javascript" src="/js/toolbar.js"></script>
+<script type="text/javascript" src="/js/svg.min.js"></script>
+<script type="text/javascript" src="/js/svg.draggable.min.js"></script>
+<script type="text/javascript" src="/js/svg.panzoom.js"></script>
+<script type="text/javascript" src="/js/svg.topoly.js"></script>
+</head>
+<body>
 	<div style='height: 800px;'>
 		<div id="container" style='float: left; width: 79%; height: 100%;'>
 			<div id="header">
-				<div class="jtopo_toolbar" style='margin-left:20%'>
+				<div class="jtopo_toolbar" style='margin-left: 20%'>
 					<input type="radio" name="modeRadio" value="normal" checked=""
 						id="r1"> <label for="r1"> 默认</label>&nbsp;<input
 						type="radio" name="modeRadio" value="select" id="r2"><label
-						for="r2"> 框选</label>&nbsp;<!-- <input type="radio" name="modeRadio"
+						for="r2"> 框选</label>&nbsp;
+					<!-- <input type="radio" name="modeRadio"
 						value="drag" id="r3"><label for="r3"> 平移</label>&nbsp;<input
 						type="radio" name="modeRadio" value="edit" id="r4"><label
-						for="r4"> 编辑</label>&nbsp;&nbsp; --><input type="button"
-						id="centerButton" value="居中显示"><input type="button"
-						id="fullScreenButton" value="全屏显示"><input type="button"
-						id="zoomOutButton" value=" 放 大 "><input type="button"
-						id="zoomInButton" value=" 缩 小 ">&nbsp;&nbsp;<input
+						for="r4"> 编辑</label>&nbsp;&nbsp; -->
+					<input type="button" id="centerButton" value="居中显示"><input
+						type="button" id="fullScreenButton" value="全屏显示"><input
+						type="button" id="zoomOutButton" value=" 放 大 "><input
+						type="button" id="zoomInButton" value=" 缩 小 ">&nbsp;&nbsp;<input
 						type="checkbox" id="zoomCheckbox"><label
 						for="zoomCheckbox">鼠标缩放</label>&nbsp;&nbsp;<input type="text"
 						id="findText" value="" onkeydown="findButton.click()"><input
-						type="button" id="findButton" value=" 查 询 ">&nbsp;&nbsp;<!-- <input
+						type="button" id="findButton" value=" 查 询 ">&nbsp;&nbsp;
+					<!-- <input
 						type="button" id="exportButton" value="导出PNG">  -->
-							<div style='float:inherit;margin-top:-27px;margin-left:600px'>
-							<ul>
-								<li class="none"><a id='noneLink' class="selected" onclick="switchLineType(this,'NoneLink','')"></a></li>
-		                    	<li class="normal"><a onclick="switchLineType(this,'Link','')"></a></li>
-		                        <li class="brokenpoly-v"><a onclick="switchLineType(this,'FoldLink','vertical')"></a></li>
-		                        <li class="brokenpoly-h"><a onclick="switchLineType(this,'FoldLink','horizontal')"></a></li>
-		                        <li class="secondarypoly-v"><a onclick="switchLineType(this,'FlexionalLink','vertical')"></a></li>
-		                        <li class="secondarypoly-h"><a onclick="switchLineType(this,'FlexionalLink','horizontal')"></a></li>
-	                   		</ul>
-	                   		</div>
+					<div style='float: inherit; margin-top: -27px; margin-left: 600px'>
+						<ul>
+							<li class="none"><a id='noneLink' class="selected"
+								onclick="switchLineType(this,'NoneLink','')"></a></li>
+							<li class="normal"><a
+								onclick="switchLineType(this,'Link','')"></a></li>
+							<li class="brokenpoly-v"><a
+								onclick="switchLineType(this,'FoldLink','vertical')"></a></li>
+							<li class="brokenpoly-h"><a
+								onclick="switchLineType(this,'FoldLink','horizontal')"></a></li>
+							<li class="secondarypoly-v"><a
+								onclick="switchLineType(this,'FlexionalLink','vertical')"></a></li>
+							<li class="secondarypoly-h"><a
+								onclick="switchLineType(this,'FlexionalLink','horizontal')"></a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
-			<div style='float: left; width: 20%; height: 100%; background-color: white;'>
-				<div id='test' class="device_list"> 
-						<div class="device ui-draggable ui-draggable-handle" id="2174" title="ibm3850" topoImg='/image/node1.png'>
-                            <img src="/image/node1.png" width="56" height="56" draggable="false">
-                        	<p class="overflow_text">ibm3850</p>
-                       </div>
-                        <div class="device ui-draggable ui-draggable-handle" id="test2178" title="domain_control" topoImg='/image/node2.png'>
-                            <img src="/image/node2.png" width="56" height="56" draggable="false">
-                        	<p class="overflow_text">domain_control</p>
-                       </div>
-                        <div class="device ui-draggable ui-draggable-handle" id="test2178" title="domain_control" topoImg='/image/node3.png'>
-                            <img src="/image/node3.png" width="56" height="56" draggable="false">
-                        	<p class="overflow_text">domain_control</p>
-                       </div>
-                        <div class="device ui-draggable ui-draggable-handle" id="test2178" title="domain_control" topoImg='/image/node4.png'>
-                            <img src="/image/node4.png" width="56" height="56" draggable="false">
-                        	<p class="overflow_text">domain_control</p>
-                       </div>
-                        <div class="device ui-draggable ui-draggable-handle" id="test2178" title="domain_control" topoImg='/image/node5.png'>
-                            <img src="/image/node5.png" width="56" height="56" draggable="false">
-                        	<p class="overflow_text">domain_control</p>
-                       </div>
-                       <div class="device ui-draggable ui-draggable-handle" id="test2178" title="domain_control" topoImg='/image/node6.png'>
-                            <img src="/image/node6.png" width="56" height="56" draggable="false">
-                        	<p class="overflow_text">domain_control</p>
-                       </div>
-                        <div class="device ui-draggable ui-draggable-handle" id="test2178" title="domain_control" topoImg='/image/node7.png'>
-                            <img src="/image/node7.png" width="56" height="56" draggable="false">
-                        	<p class="overflow_text">domain_control</p>
-                       </div>
+			<div
+				style='float: left; width: 20%; height: 100%; background-color: white;'>
+				<div id='test' class="device_list">
+					<div class="device ui-draggable ui-draggable-handle" id="2174"
+						title="ibm3850" topoImg='/image/node1.png'>
+						<img src="/image/node1.png" width="56" height="56"
+							draggable="false">
+						<p class="overflow_text">ibm3850</p>
+					</div>
+					<div class="device ui-draggable ui-draggable-handle" id="test2178"
+						title="domain_control" topoImg='/image/node2.png'>
+						<img src="/image/node2.png" width="56" height="56"
+							draggable="false">
+						<p class="overflow_text">domain_control</p>
+					</div>
+					<div class="device ui-draggable ui-draggable-handle" id="test2178"
+						title="domain_control" topoImg='/image/node3.png'>
+						<img src="/image/node3.png" width="56" height="56"
+							draggable="false">
+						<p class="overflow_text">domain_control</p>
+					</div>
+					<div class="device ui-draggable ui-draggable-handle" id="test2178"
+						title="domain_control" topoImg='/image/node4.png'>
+						<img src="/image/node4.png" width="56" height="56"
+							draggable="false">
+						<p class="overflow_text">domain_control</p>
+					</div>
+					<div class="device ui-draggable ui-draggable-handle" id="test2178"
+						title="domain_control" topoImg='/image/node5.png'>
+						<img src="/image/node5.png" width="56" height="56"
+							draggable="false">
+						<p class="overflow_text">domain_control</p>
+					</div>
+					<div class="device ui-draggable ui-draggable-handle" id="test2178"
+						title="domain_control" topoImg='/image/node6.png'>
+						<img src="/image/node6.png" width="56" height="56"
+							draggable="false">
+						<p class="overflow_text">domain_control</p>
+					</div>
+					<div class="device ui-draggable ui-draggable-handle" id="test2178"
+						title="domain_control" topoImg='/image/node7.png'>
+						<img src="/image/node7.png" width="56" height="56"
+							draggable="false">
+						<p class="overflow_text">domain_control</p>
+					</div>
 				</div>
 			</div>
 			<div id="main">
 				<div class="content">
 					<canvas width="808" height="800" id="canvas"
-						style="border: 1px solid #444;"><!-- background-color: #EEEEEE;  -->
+						style="border: 1px solid #444;">
+				
 				</div>
+			</div>
+			<div id='linkStyle' style='display: none'>
+				<input id='linkShu' type='text' onblur='changeLink()'>线偏转量 <input
+					id='linkColor' type='color'>线条颜色 <input id='linkShu3'
+					type='text' onblur='changeLink3()'>线条宽度 <input
+					id='linkShu4' name='linkTou' type='radio' onClick='changeLink4()'
+					value='1'>有箭头 <input id='linkShu5' name='linkTou'
+					type='radio' onClick='changeLink4()' value='0' checked='checked'>无箭头
+				<span id='testCu' style='display: none'><input id='linkShu6'
+					type='text' onblur='changeLink5()'>箭头大小</span> <input
+					id='linkShu7' type='radio' name='linkSx' onClick='changeLink6()'
+					checked='checked' value='0'>实线 <input id='linkShu7'
+					type='radio' name='linkSx' onClick='changeLink6()' value='1'>虚线
+				<span id='testXu' style='display: none'><input id='linkShu8'
+					type='text' onblur='changeLink7()'>虚线大小</span>
+				<input id='deleteLink' type='button' onclick='changeLink8()' value='删除当前连线'>
+			</div>
+			<div id='nodeStyle' style='display: none'>
+				<input id='nodeNewName' type='text' onblur='changeNode()'>节点名称
+				<select id='nodePosition' onChange='changeNode8()'>
+					<option value="Middle_Center">居中</option>  
+					<option value="Middle_Left" >中偏左</option>  
+					<option value="Middle_Right" >中偏右</option>  
+					<option value="Bottom_Center" selected='selected'>底部</option>  
+					<option value="Bottom_Left" >底偏左</option>  
+					<option value="Bottom_Right" >底偏右</option>  
+					<option value="Top_Center" >顶部</option>  
+					<option value="Top_Left" >顶偏左</option>  
+					<option value="Top_Right" >顶偏右</option>  
+				</select>节点名称位置
+				<input id='nodeColor' type='color'>字体颜色 
+				<!-- <input id='nodeFont' type='text' onblur='changeNode2()'>字体  -->
+				<input id='nodeWidth' type='text' onblur='changeNode3()'>节点宽度
+				<input id='nodeHeight' type='text' onblur='changeNode4()'>节点高度
+				<input id='nodeX' type='text' onblur='changeNode5()'>节点横坐标
+				<input id='nodeY' type='text' onblur='changeNode6()'>节点纵坐标
+				<!-- <input id='nodeRotate' type='text' onblur='changeNode7()'>旋转 -->
+				<input id='deleteNode' type='button' onclick='changeNode9()' value='删除当前节点'>
 			</div>
 		</div>
 	</div>
+
 </body>
 
-<script>			
-	var canvas = document.getElementById('canvas');			
+<script>
+	var dqLink = null;
+	var dqNode = null;
+	var canvas = document.getElementById('canvas');
 	var stage = new JTopo.Stage(canvas);
-	var scene = new JTopo.Scene(stage);   
+	var scene = new JTopo.Scene(stage);
 	//显示工具栏
 	showJTopoToobar(stage);
 
-	
-	
-	function newNode(x, y, w, h, text,img){
-        var node = new JTopo.Node(text);
-        node.setImage("http://192.168.11.72:8989"+img,false);
-        node.setLocation(x, y);
-        node.setSize(w, h);
-        node.fontColor="255,0,0";
-        node.addEventListener("dbclick",function(node){
-	    	
-	     })
-        scene.add(node);
-        return node;
-    }
-	
-    // 简单连线
-    function newLink(nodeA, nodeZ, text,dashedPattern){
-        var link = new JTopo.Link(nodeA, nodeZ, text);        
-        link.lineWidth = 3; // 线宽
-        link.bundleOffset = 60; // 折线拐角处的长度
-        link.bundleGap = 20; // 线条之间的间隔
-        link.textOffsetY = 3; // 文本偏移量（向下3个像素）
-        link.strokeColor = JTopo.util.randomColor(); // 线条颜色随机
-        link.dashedPattern = dashedPattern; 
-        scene.add(link);
-        return link;
-    }
+	function newNode(x, y, w, h, text, img) {
+		var node = new JTopo.Node(text);
+		node.setImage("http://localhost:8989" + img, false);
+		node.setLocation(x, y);
+		node.setSize(w, h);
+		node.fontColor = "255,0,0";
+		node.addEventListener("mousemove", function(node) {
+			console.log(node);
+	    	$("#nodeX").val(node.target.x);
+	    	$("#nodeY").val(node.target.y);
+	    	$("#nodeWidth").val(node.target.width);
+	    	$("#nodeHeight").val(node.target.height);
+		})
+		scene.add(node);
+		return node;
+	}
 
-    function newFoldLink(nodeA, nodeZ, text, direction, dashedPattern){
-        var link = new JTopo.FoldLink(nodeA, nodeZ, text);
-        link.direction = direction || 'horizontal';
-        link.arrowsRadius = 15; //箭头大小
-        link.lineWidth = 3; // 线宽
-        link.bundleOffset = 40; // 折线拐角处的长度
-        link.bundleGap = 20; // 线条之间的间隔
-        link.textOffsetY = 3; // 文本偏移量（向下3个像素）
-        link.strokeColor = JTopo.util.randomColor(); // 线条颜色随机
-        link.dashedPattern = dashedPattern; 
-        scene.add(link);
-        return link;
-    }
-    
+	// 简单连线
+	function newLink(nodeA, nodeZ, text, dashedPattern) {
+		var link = new JTopo.Link(nodeA, nodeZ, text);
+		link.lineWidth = 3; // 线宽
+		link.bundleOffset = 60; // 折线拐角处的长度
+		link.bundleGap = 20; // 线条之间的间隔
+		link.textOffsetY = 3; // 文本偏移量（向下3个像素）
+		link.strokeColor = JTopo.util.randomColor(); // 线条颜色随机
+		link.dashedPattern = dashedPattern;
+		scene.add(link);
+		return link;
+	}
 
-    function newFlexionalLink(nodeA, nodeZ, text, dashedPattern,direction){
-        var link = new JTopo.FlexionalLink(nodeA, nodeZ, text);
-        link.arrowsRadius = 10;
-        link.lineWidth = 3; // 线宽
-        link.bundleGap = 15; // 线条之间的间隔
-        link.textOffsetY = 10; // 文本偏移量（向下15个像素）
-        link.strokeColor = JTopo.util.randomColor(); // 线条颜色随机
-        link.dashedPattern = dashedPattern; 
-        link.direction=direction||'vertical';
-        scene.add(link);
-        return link;
-    }
+	function newFoldLink(nodeA, nodeZ, text, direction, dashedPattern) {
+		var link = new JTopo.FoldLink(nodeA, nodeZ, text);
+		link.direction = direction || 'horizontal';
+		link.arrowsRadius = 15; //箭头大小
+		link.lineWidth = 3; // 线宽
+		link.bundleOffset = 40; // 折线拐角处的长度
+		link.bundleGap = 20; // 线条之间的间隔
+		link.textOffsetY = 3; // 文本偏移量（向下3个像素）
+		link.strokeColor = JTopo.util.randomColor(); // 线条颜色随机
+		link.dashedPattern = dashedPattern;
+		scene.add(link);
+		return link;
+	}
 
-     // 线条编辑选择相关
-     var beginNode = null;
-     var tempNodeA = new JTopo.Node('tempA');;
-     tempNodeA.setSize(1, 1);
-     var tempNodeZ = new JTopo.Node('tempZ');;
-     tempNodeZ.setSize(1, 1);
-     var link=null;
-     var linkType='';
-     var lineDirection='';
-	 function switchLineType(ele,lineType,direction)
-		{
-		    if(link!=null){
-		    	scene.remove(link);
-		    }
-			$(ele).closest("ul").find("a").removeClass("selected");
-			$(ele).addClass("selected");
-			linkType=lineType;
-		    if(linkType=='FoldLink'){
-		    	link = new JTopo.FoldLink(tempNodeA, tempNodeZ,lineDirection);
-		    	link.direction=direction;
-		    }else if(linkType=='FlexionalLink'){
-		    	link = new JTopo.FlexionalLink(tempNodeA, tempNodeZ,lineDirection);
-		    	link.direction=direction;
-		    }else if(linkType=='Link'){
-		    	link = new JTopo.Link(tempNodeA, tempNodeZ);
-		    	link.direction=direction;
-		    }else{
-		    	link=null;
-		    }
-			if(direction != "")
-			{
-				lineDirection=direction;
-			}
+	function newFlexionalLink(nodeA, nodeZ, text, dashedPattern, direction) {
+		var link = new JTopo.FlexionalLink(nodeA, nodeZ, text);
+		link.arrowsRadius = 10;
+		link.lineWidth = 3; // 线宽
+		link.bundleGap = 15; // 线条之间的间隔
+		link.textOffsetY = 10; // 文本偏移量（向下15个像素）
+		link.strokeColor = JTopo.util.randomColor(); // 线条颜色随机
+		link.dashedPattern = dashedPattern;
+		link.direction = direction || 'vertical';
+		scene.add(link);
+		return link;
+	}
+
+	// 线条编辑选择相关
+	var beginNode = null;
+	var tempNodeA = new JTopo.Node('tempA');
+	;
+	tempNodeA.setSize(1, 1);
+	var tempNodeZ = new JTopo.Node('tempZ');
+	;
+	tempNodeZ.setSize(1, 1);
+	var link = null;
+	var linkType = '';
+	var lineDirection = '';
+	function switchLineType(ele, lineType, direction) {
+		if (link != null) {
+			scene.remove(link);
 		}
-	 
-     // topo图拖拽相关
-	$(function(){
-		 $( "#test div" ).draggable({
-			 appendTo: "body",
-		     helper: "clone",
-		     cursor: "pointer",
-		     cursorAt: { top: -5, left: -5 }
-		 });
-		 $("#canvas").droppable({
-			 drop: function(event,ui) {
-			     scene.addEventListener("mousemove",function(e){
-			         var mousePos={ // 鼠标在场景的位置
-				         x: e.x,
-				         y: e.y
-			         };
-			         newNode(mousePos.x,mousePos.y,60,60,null,ui.draggable[0].attributes['topoImg'].value); //添加节点
-			         scene.removeEventListener("mousemove"); // 解绑事件
-			         scene.mousedown(function(e){
-				    	if(linkType=='NoneLink'||linkType==''){
-			        		return;
-			        	}
-				        if(e.target == null || e.target === beginNode || e.target === link){
-				            scene.remove(link);
-				        }
-				    });
-				    
-				    scene.mousemove(function(e){
-				    	if(linkType=='NoneLink'||linkType==''){
-			        		return;
-			        	}
-				        tempNodeZ.setLocation(e.x, e.y);
-				    });
-				    if(link!=null){
-				    	scene.remove(link);
-				    }
-				    $("#noneLink").click();
-				    beginNode = null;
-	         	 });
-		 	}
- 	      });
-		 
-		 
-		    // 动态编辑连线相关
-		    scene.mouseup(function(e){
-		    	if(linkType=='NoneLink'||linkType==''){
-	        		return;
-	        	}
-		        if(e.button == 2){
-		            scene.remove(link);
-		            return;
-		        }
-		        if(e.target != null && e.target instanceof JTopo.Node){
-		            if(beginNode == null){
-		                beginNode = e.target;
-		                scene.add(link);
-		                tempNodeA.setLocation(e.x, e.y);
-		                tempNodeZ.setLocation(e.x, e.y);
-		            }else if(beginNode !== e.target){
-		                var endNode = e.target;
-		                var l = null;
-		                console.log(lineDirection)
-		                if(linkType=='FoldLink'){
-		    		    	l = new JTopo.FoldLink(beginNode, endNode);
-		    		    	l.direction=lineDirection;
-		    		    }else if(linkType=='FlexionalLink'){
-		    		    	l = new JTopo.FlexionalLink(beginNode, endNode);
-		    		    	l.direction=lineDirection;
-		    		    }else if(linkType='Link'){
-		    		    	l = new JTopo.Link(beginNode, endNode);
-		    		    	l.direction=lineDirection;
-		    		    }else{
-		    		    	l=null;
-		    		    }
-		                scene.add(l);
-		                beginNode = null;
-		                scene.remove(link);
-		            }else{
-		                beginNode = null;
-		            }
-		        }else{
-		            scene.remove(link);
-	                beginNode = null;
-		        }
-		    });
+		$(ele).closest("ul").find("a").removeClass("selected");
+		$(ele).addClass("selected");
+		linkType = lineType;
+		if (linkType == 'FoldLink') {
+			$('#nodeStyle').hide();
+			link = new JTopo.FoldLink(tempNodeA, tempNodeZ, lineDirection);
+			link.direction = direction;
+		} else if (linkType == 'FlexionalLink') {
+			$('#nodeStyle').hide();
+			link = new JTopo.FlexionalLink(tempNodeA, tempNodeZ, lineDirection);
+			link.direction = direction;
+		} else if (linkType == 'Link') {
+			$('#nodeStyle').hide();
+			link = new JTopo.Link(tempNodeA, tempNodeZ);
+			link.direction = direction;
+		} else {
+			link = null;
+		}
+		if (direction != "") {
+			lineDirection = direction;
+		}
+	}
+
+	// topo图拖拽相关
+	$(function() {
+		$("#test div").draggable({
+			appendTo : "body",
+			helper : "clone",
+			cursor : "pointer",
+			cursorAt : {
+				top : -5,
+				left : -5
+			}
+		});
+		$("#canvas").droppable({
+			drop : function(event, ui) {
+			scene.addEventListener("mousemove",function(e) {
+					var mousePos = { // 鼠标在场景的位置
+					x : e.x,
+					y : e.y};
+					newNode(mousePos.x,mousePos.y,60,60,null,ui.draggable[0].attributes['topoImg'].value); //添加节点
+					scene.removeEventListener("mousemove"); // 解绑事件
+					scene.mousedown(function(e) {
+						if (linkType == 'NoneLink'|| linkType == '') {
+							return;
+						}
+						if (e.target == null|| e.target === beginNode|| e.target === link) {
+							scene.remove(link);}
+					});
+
+					scene.mousemove(function(e) {
+						if (linkType == 'NoneLink'|| linkType == '') {
+							return;}
+						tempNodeZ.setLocation(e.x,e.y);});
+						if (link != null) {
+							scene.remove(link);}
+						$("#noneLink").click();
+						beginNode = null;
+						});
+				}
+		});
+
+		// 动态编辑连线相关
+		scene.mouseup(function(e) {
+			$('#linkStyle').hide();
+			if (linkType == 'NoneLink' || linkType == '') {
+				if(e.target != null && e.target instanceof JTopo.Node){
+					dqNode=e.target;
+					console.log(dqNode)
+					$("#nodeX").val(e.target.x);
+					$("#nodeY").val(e.target.y);
+					stage.mode ='edit';
+					$('#nodeStyle').show();
+				}else{
+					stage.mode='normal';
+					$('#nodeStyle').hide();
+				}
+				if (e.target != null && e.target instanceof JTopo.Link) {
+					dqLink = e.target;
+					$('#linkStyle').show();
+					$('#nodeStyle').hide();
+				}  
+				return;
+			}
+			if (e.button == 2) {
+				scene.remove(link);
+				return;
+			}
+			if (e.target != null && e.target instanceof JTopo.Node) {
+				if (beginNode == null) {
+					beginNode = e.target;
+					scene.add(link);
+					tempNodeA.setLocation(e.x, e.y);
+					tempNodeZ.setLocation(e.x, e.y);
+				} else if (beginNode !== e.target) {
+					var endNode = e.target;
+					var l = null;
+					console.log(lineDirection)
+					if (linkType == 'FoldLink') {
+						l = new JTopo.FoldLink(beginNode, endNode);
+						l.direction = lineDirection;
+					} else if (linkType == 'FlexionalLink') {
+						l = new JTopo.FlexionalLink(beginNode, endNode);
+						l.direction = lineDirection;
+					} else if (linkType = 'Link') {
+						l = new JTopo.Link(beginNode, endNode);
+						l.direction = lineDirection;
+					} else {
+						l = null;
+					}
+					scene.add(l);
+					beginNode = null;
+					scene.remove(link);
+				} else {
+					beginNode = null;
+				}
+			} else {
+				if (link != null) {
+					scene.remove(link);
+				}
+				beginNode = null;
+				dqLink = null;
+				$('#nodeStyle').hide();
+			}
+		});
 	})
-     
+
+	function changeLink() {
+		var v = $('#linkShu').val();
+		dqLink.nodeIndex = v;
+	}
+
+	document.querySelector("#linkColor").onchange = function() {
+		document.getElementById('linkColor').click(); // 必须添加触发click事件否则不能通过点击确定按钮触发更改颜色
+		console.log(hexToRgba(this.value))
+		dqLink.strokeColor = hexToRgba(this.value).rgb;
+	}
+
+	function changeLink3() {
+		var v = $('#linkShu3').val();
+		dqLink.lineWidth = v;
+	}
+
+	function changeLink4() {
+		var v = $('input[name="linkTou"]:checked').val();
+		if (v == 0) {
+			dqLink.arrowsRadius = null;
+			$('#testCu').hide();
+		} else {
+			$('#testCu').show();
+			dqLink.arrowsRadius = 5;
+		}
+	}
+
+	function changeLink5() {
+		var v = $('#linkShu6').val();
+		dqLink.arrowsRadius = v;
+	}
+
+	function changeLink6() {
+		var v = $('input[name="linkSx"]:checked').val();
+		if (v == 0) {
+			$('#testXu').hide();
+			dqLink.dashedPattern = null;
+		} else {
+			$('#testXu').show();
+			dqLink.dashedPattern = 5;
+		}
+	}
+
+	function changeLink7() {
+		var v = $('#linkShu8').val();
+		dqLink.dashedPattern = v;
+	}
+
+	function changeLink8() {
+		scene.remove(dqLink);
+		$('#linkStyle').hide();
+	}
+	
+	var hexToRgba = function(hex, al) {
+		var hexColor = /^#/.test(hex) ? hex.slice(1) : hex, alp = hex === 'transparent' ? 0
+				: Math.ceil(al), r, g, b;
+		hexColor = /^[0-9a-f]{3}|[0-9a-f]{6}$/i.test(hexColor) ? hexColor
+				: 'fffff';
+		if (hexColor.length === 3) {
+			hexColor = hexColor.replace(/(\w)(\w)(\w)/gi, '$1$1$2$2$3$3');
+		}
+		r = hexColor.slice(0, 2);
+		g = hexColor.slice(2, 4);
+		b = hexColor.slice(4, 6);
+		r = parseInt(r, 16);
+		g = parseInt(g, 16);
+		b = parseInt(b, 16);
+		return {
+			hex : '#' + hexColor,
+			alpha : alp,
+			rgb : r + ', ' + g + ', ' + b
+		};
+	};
+	
+	function changeNode(){
+		var nodeName=$("#nodeNewName").val();
+		dqNode.text=nodeName;
+	}
+	
+	document.querySelector("#nodeColor").onchange = function() {
+		document.getElementById('nodeColor').click(); // 必须添加触发click事件否则不能通过点击确定按钮触发更改颜色
+		dqNode.fontColor = hexToRgba(this.value).rgb;
+	}
+	
+	function changeNode2(){
+			
+		}
+		
+	function changeNode3(){
+		var nodeWidth=$("#nodeWidth").val();
+		if(nodeWidth==null || nodeWidth==undefined || nodeWidth==''){
+			return;
+		}else{
+			dqNode.width=parseInt(nodeWidth);
+		}
+	}
+	
+	function changeNode4(){
+		var nodeHeight=$("#nodeHeight").val();
+		if(nodeHeight==null || nodeHeight==undefined || nodeHeight==''){
+			return;
+		}else{
+			dqNode.height=parseInt(nodeHeight);
+		}
+	}
+	
+	function changeNode5(){
+		var nodeX=parseInt($("#nodeX").val());
+		var nodeY=parseInt($("#nodeY").val());
+		dqNode.setLocation(nodeX,nodeY);
+	}
+	
+	function changeNode6(){
+		var nodeX=parseInt($("#nodeX").val());
+		var nodeY=parseInt($("#nodeY").val());
+		dqNode.setLocation(nodeX,nodeY);
+	}
+	
+	function changeNode7(){
+		
+	}
+	
+	function changeNode8(){
+		var position=$('#nodePosition').val();
+		dqNode.textPosition=position;
+	}
+	
+	function changeNode9(){
+		scene.remove(dqNode);
+		$('#nodeStyle').hide();
+	}
 </script>
 
 </html>

@@ -2186,7 +2186,7 @@
 				}),
 			a
 		},
-		this.getPath = function () {
+		/*this.getPath = function () {
 			var a = [],
 			b = this.getStartPosition(),
 			c = this.getEndPosition();
@@ -2353,7 +2353,176 @@
 				}
 			}
 			return f
-		}
+		}*/
+		this.getPath = function () {
+            var a = [],
+                b = this.getStartPosition(),
+                c = this.getEndPosition();
+            if (this.nodeA === this.nodeZ)
+                return [b, c];
+            var d = e(this.nodeA, this.nodeZ);//点之间的线的条数
+            if (1 >= d) return [b, c];
+            var f = Math.atan2(c.y - b.y, c.x - b.x);//计算线的角度系数
+            //发出点的拐点坐标
+            var g = {
+                    x: b.x + this.bundleOffset * Math.cos(f),//半径（斜边）* Math.cos(f) = 偏移横坐标  + b.x = 发出点的拐点横坐标
+                    y: b.y + this.bundleOffset * Math.sin(f)//半径（斜边）*Math.sin(f) = 偏移纵坐标   + b.y = 发出点的拐点横坐标
+                },
+                //终止点的拐点坐标
+                h = {
+                    x: c.x + this.bundleOffset * Math.cos(f - Math.PI),//由于-PI 所以角度相反
+                    y: c.y + this.bundleOffset * Math.sin(f - Math.PI)//由于-PI 所以角度相反
+                },
+                i = f - Math.PI / 2,
+                j = f - Math.PI / 2;
+            var k = (d - 1) * this.bundleGap / 2,
+                l = this.bundleGap * this.nodeIndex ,
+                m = {
+                    x: g.x + l * Math.cos(i),
+                    y: g.y + l * Math.sin(i)
+                },
+                n = {
+                    x: h.x + l * Math.cos(j),
+                    y: h.y + l * Math.sin(j)
+                };
+            m = {
+                x: m.x + k * Math.cos(i - Math.PI),
+                y: m.y + k * Math.sin(i - Math.PI)
+            },
+                n = {
+                    x: n.x + k * Math.cos(j - Math.PI),
+                    y: n.y + k * Math.sin(j - Math.PI)
+                };
+            var ft = Math.atan2(b.y - c.y, b.x - c.x);
+            var it = ft - Math.PI / 2;
+            var jt = ft - Math.PI / 2;
+            var temp1x = c.x + this.bundleOffset * Math.cos(ft) + l * Math.cos(it) + k * Math.cos(it - Math.PI);
+            var temp1y = c.y + this.bundleOffset * Math.sin(ft) + l * Math.sin(it) + k * Math.sin(it - Math.PI);
+            var temp2x = b.x + this.bundleOffset * Math.cos(f) + l * Math.cos(jt) + k * Math.cos(jt - Math.PI);
+            var temp2y = b.y + this.bundleOffset * Math.sin(f) + l * Math.sin(jt) + k * Math.sin(jt - Math.PI);
+            a.push({x: b.x, y: b.y});
+            if ((i * f > 0 || i * f === 0) && i < 0) {
+                a.push({x: m.x, y: m.y});
+                a.push({x: n.x, y: n.y});
+            } else {
+                a.push({x: temp2x, y: temp2y});
+                a.push({x: temp1x, y: temp1y});
+            }
+            a.push({x: c.x, y: c.y});
+            return a
+        },
+        this.paintPath = function(a, b) {
+            if (this.nodeA === this.nodeZ) return void this.paintLoop(a);
+            a.beginPath(),
+                a.moveTo(b[0].x, b[0].y);
+            for (var c = 1; c < b.length; c++) null == this.dashedPattern ? a.lineTo(b[c].x, b[c].y) : a.JTopoDashedLineTo(b[c - 1].x, b[c - 1].y, b[c].x, b[c].y, this.dashedPattern);
+            if (a.stroke(), a.closePath(), null != this.arrowsRadius) {
+                var d = b[b.length - 2],
+                    e = b[b.length - 1];
+                this.paintArrow(a, d, e)
+            }
+        },
+        this.paintLoop = function(a) {
+            a.beginPath(); {
+                var b = this.bundleGap * (this.nodeIndex + 1) / 2;
+                Math.PI + Math.PI / 2
+            }
+            a.arc(this.nodeA.x, this.nodeA.y, b, Math.PI / 2, 2 * Math.PI),
+                a.stroke(),
+                a.closePath()
+        },
+        this.paintArrow = function(b, c, d) {
+            var e = this.arrowsOffset,
+                f = this.arrowsRadius / 2,
+                g = c,
+                h = d,
+                i = Math.atan2(h.y - g.y, h.x - g.x),
+                j = a.util.getDistance(g, h) - this.arrowsRadius,
+                k = g.x + (j + e) * Math.cos(i),
+                l = g.y + (j + e) * Math.sin(i),
+                m = h.x + e * Math.cos(i),
+                n = h.y + e * Math.sin(i);
+            i -= Math.PI / 2;
+            var o = {
+                    x: k + f * Math.cos(i),
+                    y: l + f * Math.sin(i)
+                },
+                p = {
+                    x: k + f * Math.cos(i - Math.PI),
+                    y: l + f * Math.sin(i - Math.PI)
+                };
+            b.beginPath(),
+                b.fillStyle = "rgba(" + this.strokeColor + "," + this.alpha + ")",
+                b.moveTo(o.x, o.y),
+                b.lineTo(m, n),
+                b.lineTo(p.x, p.y),
+                b.stroke(),
+                b.closePath()
+        },
+        this.paint = function(a) {
+            if (null != this.nodeA && null != !this.nodeZ) {
+                var b = this.getPath();
+                this.path = b,
+                    a.strokeStyle = "rgba(" + this.strokeColor + "," + this.alpha + ")",
+                    a.lineWidth = this.lineWidth,
+                    this.paintPath(a, b),
+                b && b.length > 0 && this.paintText(a, b)
+            }
+        };
+    var i = -(Math.PI / 2 + Math.PI / 4);
+    this.paintText = function(a, b) {
+        var c = b[0],
+            d = b[b.length - 1];
+        if (4 == b.length && (c = b[1], d = b[2]), this.text && this.text.length > 0) {
+            var e = (d.x + c.x) / 2 + this.textOffsetX,
+                f = (d.y + c.y) / 2 + this.textOffsetY;
+            a.save(),
+                a.beginPath(),
+                a.font = this.font;
+            var g = a.measureText(this.text).width,
+                h = a.measureText("田").width;
+            if (a.fillStyle = "rgba(" + this.fontColor + ", " + this.alpha + ")", this.nodeA === this.nodeZ) {
+                var j = this.bundleGap * (this.nodeIndex + 1) / 2,
+                    e = this.nodeA.x + j * Math.cos(i),
+                    f = this.nodeA.y + j * Math.sin(i);
+                a.fillText(this.text, e, f)
+            } else a.fillText(this.text, e - g / 2, f - h / 2);
+            a.stroke(),
+                a.closePath(),
+                a.restore()
+        }
+    },
+        this.paintSelected = function(a) {
+            a.shadowBlur = 8,
+                a.shadowColor = "rgba(0,0,0,1)",
+               // a.shadowColor = "rgba(255,255,255,1)",
+                a.shadowOffsetX = 0,
+                a.shadowOffsetY = 0
+        },
+        this.isInBound = function(b, c) {
+            if (this.nodeA === this.nodeZ) {
+                var d = this.bundleGap * (this.nodeIndex + 1) / 2,
+                    e = a.util.getDistance(this.nodeA, {
+                        x: b,
+                        y: c
+                    }) - d;
+                return Math.abs(e) <= 3
+            }
+            for (var f = !1,
+                     g = 1; g < this.path.length; g++) {
+                var h = this.path[g - 1],
+                    i = this.path[g];
+                if (1 == a.util.isPointInLine({
+                        x: b,
+                        y: c
+                    },
+                    h, i)) {
+                    f = !0;
+                    break
+                }
+            }
+            return f
+        }
 	}
 	function g(a, b, c) {
 		this.initialize = function () {

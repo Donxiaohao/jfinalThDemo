@@ -21,7 +21,7 @@ function showJTopoToobar(stage){
 	$('#content').prepend(toobarDiv);
 
 	// 工具栏按钮处理
-	$("input[name='modeRadio']").click(function(){			
+	$("input[name='modeRadio']").click(function(){		
 		stage.mode = $("input[name='modeRadio']:checked").val();
 	});
 	$('#centerButton').click(function(){
