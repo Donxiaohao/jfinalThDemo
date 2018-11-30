@@ -4,23 +4,17 @@
 <!-- <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9"/> -->
 <link rel="stylesheet"
-	href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+	href="/js/jquery-ui.min.css">
 <link rel="stylesheet" type="text/css" href="/css/edit.css">
 <link rel="stylesheet" type="text/css" href="/css/base.css">
 <link rel="stylesheet" type="text/css" href="/css/public.css">
 <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="/css/net.topoly.edit.css">
-<!-- <script src="/js/jquery.min.js"></script> -->
-<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
-<!-- <script src="/js/jquery-ui.js"></script> -->
-<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-<!-- <script type="text/javascript" src="/js/jtopo-0.4.8-zzd.js"></script> -->
-<script type="text/javascript" src="/js/jtopo-0.4.8new-min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js/jtopo-0.4.8-zzd.js"></script>
+<script type="text/javascript" src="/js/jtopo-0.4.8-min.js"></script>
 <script type="text/javascript" src="/js/toolbar.js"></script>
-<script type="text/javascript" src="/js/svg.min.js"></script>
-<script type="text/javascript" src="/js/svg.draggable.min.js"></script>
-<script type="text/javascript" src="/js/svg.panzoom.js"></script>
-<script type="text/javascript" src="/js/svg.topoly.js"></script>
 </head>
 <body>
 	<div style='height: 800px;'>
@@ -176,7 +170,6 @@
 		node.setSize(w, h);
 		node.fontColor = "255,0,0";
 		node.addEventListener("mousemove", function(node) {
-			console.log(node);
 	    	$("#nodeX").val(node.target.x);
 	    	$("#nodeY").val(node.target.y);
 	    	$("#nodeWidth").val(node.target.width);
@@ -294,12 +287,14 @@
 					scene.mousemove(function(e) {
 						if (linkType == 'NoneLink'|| linkType == '') {
 							return;}
-						tempNodeZ.setLocation(e.x,e.y);});
-						if (link != null) {
-							scene.remove(link);}
-						$("#noneLink").click();
-						beginNode = null;
-						});
+						tempNodeZ.setLocation(e.x,e.y);
+					});
+					if (link != null) {
+						scene.remove(link);
+					}
+					$("#noneLink").click();
+					beginNode = null;
+					});
 				}
 		});
 
@@ -309,7 +304,6 @@
 			if (linkType == 'NoneLink' || linkType == '') {
 				if(e.target != null && e.target instanceof JTopo.Node){
 					dqNode=e.target;
-					console.log(dqNode)
 					$("#nodeX").val(e.target.x);
 					$("#nodeY").val(e.target.y);
 					stage.mode ='edit';
@@ -338,7 +332,9 @@
 				} else if (beginNode !== e.target) {
 					var endNode = e.target;
 					var l = null;
+					console.log(beginNode)
 					console.log(lineDirection)
+					console.log(linkType)
 					if (linkType == 'FoldLink') {
 						l = new JTopo.FoldLink(beginNode, endNode);
 						l.direction = lineDirection;
@@ -351,6 +347,7 @@
 					} else {
 						l = null;
 					}
+					console.log(l)
 					scene.add(l);
 					beginNode = null;
 					scene.remove(link);
