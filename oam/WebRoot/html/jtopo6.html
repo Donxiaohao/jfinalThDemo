@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<!-- <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9"/> -->
+	  <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+	
+	<link rel="stylesheet" type="text/css" href="/css/edit.css">	
+	<link rel="stylesheet" type="text/css" href="/css/base.css">
+	<link rel="stylesheet" type="text/css" href="/css/public.css">	
+	<link rel="stylesheet" type="text/css" href="/css/jquery-ui.css">	
+	<link rel="stylesheet" type="text/css" href="/css/net.topoly.edit.css">	
+	<!-- <script src="/js/jquery.min.js"></script> -->
+	<script src="/js/jquery.min.js"></script>
+	<!-- <script src="/js/jquery-ui.js"></script> -->
+	<script src="/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/js/jtopo-0.4.8new-min.js"></script>
+	<script type="text/javascript" src="/js/toolbar.js"></script>
+	<script type="text/javascript" src="/js/highcharts.js"></script>
+  </head>
+  <body>
+
+	<div id="content">
+		<canvas width="850" height="550" id="canvas"></canvas>	
+		<input type='button' value='切换单位' onclick='test()'>
+	</div>
+
+</body>
+
+<script>	
+var canvas = document.getElementById('canvas');
+var stage = new JTopo.Stage(canvas);
+var scene = new JTopo.Scene(stage);    
+scene.background = '/image/bg_hover.png';
+
+// 节点
+function newNode(x, y, w, h, text){
+    var node = new JTopo.Node(text);
+    node.setLocation(x, y);
+    node.setSize(w, h);
+    scene.add(node);
+    return node;
+}
+
+// 简单连线
+function newLink(nodeA, nodeZ, text, dashedPattern){
+    var link = new JTopo.Link(nodeA, nodeZ, text);        
+    link.lineWidth = 3; // 线宽
+    link.dashedPattern = dashedPattern; // 虚线
+    link.bundleOffset = 60; // 折线拐角处的长度
+    link.bundleGap = 20; // 线条之间的间隔
+    link.textOffsetY = 3; // 文本偏移量（向下3个像素）
+    link.strokeColor = '0,200,255';
+    scene.add(link);
+    return link;
+}
+
+// 折线
+function newFoldLink(nodeA, nodeZ, text, direction, dashedPattern){
+    var link = new JTopo.FoldLink(nodeA, nodeZ, text);
+    link.direction = direction || 'horizontal';
+    link.arrowsRadius = 15; //箭头大小
+    link.lineWidth = 3; // 线宽
+    link.bundleOffset = 60; // 折线拐角处的长度
+    link.bundleGap = 20; // 线条之间的间隔
+    link.textOffsetY = 3; // 文本偏移量（向下3个像素）
+    link.strokeColor = JTopo.util.randomColor(); // 线条颜色随机
+    link.dashedPattern = dashedPattern;
+    scene.add(link);
+    return link;
+}
+
+// 二次折线
+function newFlexionalLink(nodeA, nodeZ, text, direction, dashedPattern){
+    var link = new JTopo.FlexionalLink(nodeA, nodeZ, text);
+    link.direction = direction || 'horizontal';
+    link.arrowsRadius = 10;
+    link.lineWidth = 3; // 线宽
+    link.offsetGap = 35;
+    link.bundleGap = 15; // 线条之间的间隔
+    link.textOffsetY = 10; // 文本偏移量（向下15个像素）
+    link.strokeColor = '0,250,0';
+    link.dashedPattern = dashedPattern; 
+    scene.add(link);
+    return link;
+}
+
+// 曲线
+function newCurveLink(nodeA, nodeZ, text){
+    var link = new JTopo.CurveLink(nodeA, nodeZ, text);
+    link.lineWidth = 3; // 线宽
+    scene.add(link);
+    return link;
+}
+    
+
+$(document).ready(function(){                                        
+   
+    var from = newNode(100, 120, 30, 30);
+    from.layout = {type: 'tree', width:100, height: 100}
+    var to2 = newNode(100, 220, 30, 30);
+    var to3 = newNode(40, 220, 30, 30);
+    var to4 = newNode(150, 220, 30, 30);
+    var link2= newLink(from, to2, 'Link');
+    var link3= newLink(from, to3, 'Link');
+    var link4= newLink(from, to4, 'Link');
+    JTopo.layout.layoutNode(scene, from, true);
+    
+    scene.addEventListener('mouseup', function(e){
+        if(e.target && e.target.layout){
+            JTopo.layout.layoutNode(scene, e.target, true);    
+        }                
+    });
+    stage.centerAndZoom();
+
+});
+
+function test(){
+	var from = newNode(400, 120, 30, 30);
+	from.layout = {type: 'tree', width:100, height: 100}
+    var to2 = newNode(400, 220, 30, 30);
+    var to3 = newNode(160, 220, 30, 30);
+    var to4 = newNode(600, 220, 30, 30);
+    var link2= newLink(from, to2, 'Link');
+    var link3= newLink(from, to3, 'Link');
+    var link4= newLink(from, to4, 'Link');
+    JTopo.layout.layoutNode(scene, from, true);
+    
+    scene.addEventListener('mouseup', function(e){
+        if(e.target && e.target.layout){
+            JTopo.layout.layoutNode(scene, e.target, true);    
+        }                
+    });
+    stage.centerAndZoom();
+}
+</script>
+
+</html>

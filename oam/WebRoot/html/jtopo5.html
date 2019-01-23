@@ -16,6 +16,7 @@
 	<script src="/js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="/js/jtopo-0.4.8new-min.js"></script>
 	<script type="text/javascript" src="/js/toolbar.js"></script>
+	<script type="text/javascript" src="/js/highcharts.js"></script>
   </head>
   <body>
 	<textarea id="jtopo_textfield" style="display:none;width: 60px;position: absolute;" onkeydown="if(event.keyCode==13)this.blur();"></textarea>
@@ -41,7 +42,6 @@
   <input type='radio' value='1' name='link' onblur='changeRv()'>
   <input type='radio' value='2' name='link' onblur='changeRv()'>
   <input type='radio' value='3' name='link' onblur='changeRv()'>
- 
 </body>
 
 <script>	
@@ -63,13 +63,12 @@ $(document).ready(function(){
     msgNode.setBound(250, 50);
     scene.add(msgNode);
     
-    for(var i=0; i<5; i++){
+ 	for(var i=0; i<5; i++){
         var node = new JTopo.Node('Node_' + i);
         node.setLocation(Math.random() * 600, Math.random() * 400);
         scene.add(node);        
     }
-                                            
-    
+         
     
     tempNodeA = new JTopo.Node('tempA');;
     tempNodeA.setSize(1, 1);
@@ -157,6 +156,7 @@ $(document).ready(function(){
     $("#jtopo_textfield").blur(function(){
         textfield[0].JTopoNode.text = textfield.hide().val();
     });
+    
 });
 	
 	function changeLink(){

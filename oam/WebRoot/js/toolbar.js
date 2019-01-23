@@ -79,7 +79,7 @@ function showJTopoToobar(stage){
 			// 查询到的节点居中显示
 			stage.setCenter(location.x, location.y);
 			
-			function nodeFlash(node, n){
+			/*function nodeFlash(node, n){
 				if(n == 0) {
 					node.selected = false;
 					return;
@@ -88,10 +88,12 @@ function showJTopoToobar(stage){
 				setTimeout(function(){
 					nodeFlash(node, n-1);
 				}, 300);
-			}
+			}*/
 			
 			// 闪烁几下
-			nodeFlash(node, 6);
+			//nodeFlash(node, 6);
+			console.log(node)
+			scene.remove(node)
 		}
 	});
 }
